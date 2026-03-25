@@ -1,5 +1,20 @@
 @import "tailwindcss";
 
+/* Loader – DecryptedText styles */
+.loader-quote {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(1rem, 2.6vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}
+.loader-quote-revealed {
+  color: rgba(255, 255, 255, 0.9);
+}
+.loader-quote-encrypted {
+  color: rgba(255, 255, 255, 0.2);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

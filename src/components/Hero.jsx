@@ -1,5 +1,15 @@
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import profileImg from '../assets/profile.jpeg'
+import CardSwap, { Card } from './CardSwap'
+
+const TAGLINES = [
+  'I love crafting clean, meaningful digital experiences',
+  'I turn complex problems into intuitive interfaces',
+  'I bridge the gap between design and development',
+  'I build scalable design systems that teams love',
+  'I design with empathy and ship with precision',
+]
 
 /* ─── SVG Mockup Thumbnails ─────────────────────────────────────── */
 
@@ -207,115 +217,64 @@ function MockupFlutterApp() {
   )
 }
 
-const MOCKUPS = [MockupFintech, MockupAIDashboard, MockupMobileApp, MockupDesignSystem, MockupEcommerce, MockupFlutterApp]
+const FALLBACK_MOCKUPS = [MockupFintech, MockupAIDashboard, MockupMobileApp, MockupDesignSystem, MockupEcommerce, MockupFlutterApp]
 
 const projects = [
   {
     id: 0,
     title: 'Fintech SaaS Platform',
-    badge: 'CASE STUDY',
-    company: '7EDGE',
-    year: '2025',
-    description: 'End-to-end UX for a fintech platform — research, IA, wireframing, and high-fidelity prototypes for complex transaction dashboards.',
+    meta: 'Figma · 7EDGE · 2025',
+    badge: 'Case Study',
+    description: 'End-to-end UX for a fintech platform — research, IA, wireframing, and high-fidelity prototypes for complex dashboards.',
   },
   {
     id: 1,
     title: 'AI-Driven Dashboard',
-    badge: 'CASE STUDY',
-    company: '7EDGE',
-    year: '2025',
-    description: 'Redesigned IA and user flows for an AI SaaS product. Focused on accessibility, responsiveness, and cross-platform consistency.',
+    meta: 'Figma · 7EDGE · 2025',
+    badge: 'Case Study',
+    description: 'Redesigned IA and user flows for an AI SaaS product. Focused on accessibility and cross-platform consistency.',
   },
   {
     id: 2,
     title: 'Mobile App UI/UX',
-    badge: 'FREELANCE',
-    company: 'Freelance',
-    year: '2024',
+    meta: 'Figma · Freelance · 2024',
+    badge: 'Freelance',
     description: 'Branding and UI/UX for mobile apps across freelance clients. Logos, marketing assets, and user interfaces.',
   },
   {
     id: 3,
     title: 'Design System',
-    badge: 'SYSTEM DESIGN',
-    company: '7EDGE',
-    year: '2024',
-    description: 'Built and maintained a reusable design system for visual consistency and dev efficiency across product modules.',
+    meta: 'Figma · 7EDGE · 2024',
+    badge: 'System Design',
+    description: 'Built and maintained a reusable design system for visual consistency and development efficiency across modules.',
   },
   {
     id: 4,
     title: 'E-Commerce Redesign',
-    badge: 'FREELANCE',
-    company: 'Freelance',
-    year: '2023',
-    description: 'Full UX audit and redesign of an e-commerce platform, focusing on checkout flow and conversion optimization.',
+    meta: 'Figma · Freelance · 2023',
+    badge: 'Freelance',
+    description: 'Full UX audit and redesign of an e-commerce platform, focusing on checkout flow and conversion optimisation.',
   },
   {
     id: 5,
     title: 'Flutter App — NeST',
-    badge: 'SHIPPED',
-    company: 'NeST Digital',
-    year: '2023',
-    description: 'Designed and shipped a cross-platform Flutter app with a focus on performance and intuitive navigation patterns.',
+    meta: 'Flutter · NeST Digital · 2023',
+    badge: 'Shipped',
+    description: 'Designed and shipped a cross-platform Flutter app with a focus on performance and intuitive navigation.',
   },
 ]
 
-function ProjectCard({ project, index }) {
-  const Mockup = MOCKUPS[project.id]
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.05 + index * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -4, boxShadow: '0 16px 40px rgba(0,0,0,0.1)' }}
-      style={{
-        borderRadius: '12px', overflow: 'hidden',
-        background: 'rgba(255,255,255,0.04)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        cursor: 'pointer',
-        transition: 'box-shadow 0.25s',
-      }}
-    >
-      {/* Mockup thumbnail */}
-      <div style={{ height: '180px', overflow: 'hidden', display: 'block', lineHeight: 0 }}>
-        <Mockup />
-      </div>
-
-      {/* Info */}
-      <div style={{ padding: '1rem 1.1rem 1.2rem' }}>
-        <h3 style={{
-          fontSize: '0.92rem', fontWeight: 600, color: 'rgba(255,255,255,0.88)',
-          marginBottom: '0.35rem', letterSpacing: '-0.01em',
-          fontFamily: "'Inter', sans-serif",
-        }}>
-          {project.title}
-        </h3>
-        <p style={{
-          fontSize: '0.78rem', color: 'rgba(255,255,255,0.3)', lineHeight: 1.6,
-          marginBottom: '0.8rem', fontFamily: "'Inter', sans-serif",
-        }}>
-          {project.description}
-        </p>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{
-            padding: '0.14rem 0.6rem', fontSize: '0.62rem', fontWeight: 600,
-            letterSpacing: '0.06em', background: 'rgba(255,255,255,0.08)',
-            color: 'rgba(255,255,255,0.5)', borderRadius: '100px', fontFamily: "'Inter', sans-serif",
-          }}>
-            {project.badge}
-          </span>
-          <span style={{ fontSize: '0.72rem', color: 'rgba(255,255,255,0.25)', fontFamily: "'Inter', sans-serif" }}>
-            {project.company} · {project.year}
-          </span>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
 
 export default function Hero() {
+  const [taglineIdx, setTaglineIdx] = useState(0)
+
+  useEffect(() => {
+    const t = setInterval(() => setTaglineIdx(i => (i + 1) % TAGLINES.length), 3800)
+    return () => clearInterval(t)
+  }, [])
+
   return (
-    <main style={{ minHeight: '100vh', background: '#0a0a0b', paddingTop: '68px' }}>
+    <main style={{ minHeight: '100vh', background: '#0f0f11', paddingTop: '64px' }}>
 
       {/* Hero section */}
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '3.5rem 2.5rem 4rem' }}>
@@ -345,19 +304,33 @@ export default function Hero() {
               </span>
             </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.18, duration: 0.55 }}
-              style={{
-                fontFamily: "'DM Serif Display', serif",
-                fontSize: 'clamp(1.25rem, 2.8vw, 2rem)',
-                color: 'rgba(255,255,255,0.35)', fontWeight: 400,
-                letterSpacing: '-0.01em', lineHeight: 1.2,
-                marginBottom: '3.5rem',
-              }}
-            >
-              I love crafting clean, meaningful digital experiences
-            </motion.p>
+            <div style={{
+              height: 'clamp(2.6rem, 5vw, 3.8rem)',
+              overflow: 'hidden',
+              marginBottom: '3.5rem',
+              marginTop: '0.75rem',
+              display: 'flex',
+              alignItems: 'flex-start',
+            }}>
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={taglineIdx}
+                  initial={{ opacity: 0, y: 12, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -8, filter: 'blur(4px)' }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  style={{
+                    fontFamily: "'DM Serif Display', serif",
+                    fontSize: 'clamp(1.25rem, 2.8vw, 2rem)',
+                    color: 'rgba(255,255,255,0.4)', fontWeight: 400,
+                    letterSpacing: '-0.01em', lineHeight: 1.2,
+                    margin: 0,
+                  }}
+                >
+                  {TAGLINES[taglineIdx]}
+                </motion.p>
+              </AnimatePresence>
+            </div>
 
             <motion.div
               initial={{ opacity: 0 }} animate={{ opacity: 1 }}
@@ -377,7 +350,7 @@ export default function Hero() {
                   }}>
                     {label}
                   </p>
-                  <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.85)', fontWeight: 600, fontFamily: "'Inter', sans-serif" }}>
+                  <p style={{ fontSize: '0.875rem', color: '#ffffff', fontWeight: 600, fontFamily: "'Inter', sans-serif" }}>
                     {value}
                   </p>
                 </div>
@@ -400,7 +373,7 @@ export default function Hero() {
               }}
             />
             <p style={{
-              fontSize: '0.875rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.8,
+              fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)', lineHeight: 1.8,
               marginBottom: '1.4rem', maxWidth: '272px',
               fontFamily: "'Inter', sans-serif",
             }}>
@@ -437,13 +410,92 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Project cards grid */}
-      <div id="work" style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 2.5rem 6rem' }}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {projects.map((p, i) => (
-            <ProjectCard key={p.id} project={p} index={i} />
-          ))}
+      {/* Selected Work — CardSwap */}
+      <div id="work" style={{ padding: '0 2.5rem 8rem' }}>
+
+        {/* Section label */}
+        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '4rem' }}>
+          <span style={{
+            fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.18em',
+            textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)',
+            fontFamily: "'Inter', sans-serif",
+          }}>
+            Selected Work
+          </span>
+          <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.07)' }} />
+          <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.2)', fontFamily: "'Inter', sans-serif" }}>
+            {projects.length} projects
+          </span>
         </div>
+
+        {/* CardSwap centered */}
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '460px' }}>
+          <CardSwap
+            width={480}
+            height={380}
+            cardDistance={64}
+            verticalDistance={56}
+            delay={3500}
+            pauseOnHover
+            skewAmount={4}
+            easing="elastic"
+          >
+            {projects.map((p) => {
+              const Mockup = FALLBACK_MOCKUPS[p.id]
+              return (
+                <Card
+                  key={p.id}
+                  style={{
+                    background: '#0f0f11',
+                    border: '1px solid rgba(255,255,255,0.09)',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  {/* Mockup area */}
+                  <div style={{ flex: '0 0 58%', overflow: 'hidden', lineHeight: 0 }}>
+                    <Mockup />
+                  </div>
+
+                  {/* Info area */}
+                  <div style={{ flex: 1, padding: '1.1rem 1.4rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.45rem' }}>
+                      <span style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.28)', fontFamily: "'Inter', sans-serif", letterSpacing: '0.02em' }}>
+                        {p.meta}
+                      </span>
+                      <span style={{
+                        fontSize: '0.55rem', fontWeight: 600, letterSpacing: '0.08em',
+                        textTransform: 'uppercase', padding: '0.15rem 0.55rem',
+                        background: 'rgba(255,255,255,0.07)',
+                        color: 'rgba(255,255,255,0.35)',
+                        borderRadius: '100px', fontFamily: "'Inter', sans-serif",
+                      }}>
+                        {p.badge}
+                      </span>
+                    </div>
+                    <h3 style={{
+                      fontSize: '1rem', fontWeight: 600, color: 'rgba(255,255,255,0.9)',
+                      fontFamily: "'Inter', sans-serif", letterSpacing: '-0.01em',
+                      lineHeight: 1.3, marginBottom: '0.35rem',
+                    }}>
+                      {p.title}
+                    </h3>
+                    <p style={{
+                      fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)',
+                      lineHeight: 1.6, fontFamily: "'Inter', sans-serif",
+                      display: '-webkit-box', WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical', overflow: 'hidden',
+                    }}>
+                      {p.description}
+                    </p>
+                  </div>
+                </Card>
+              )
+            })}
+          </CardSwap>
+        </div>
+
       </div>
 
     </main>

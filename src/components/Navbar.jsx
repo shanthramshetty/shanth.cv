@@ -27,7 +27,7 @@ export default function Navbar({ page, setPage }) {
     }}>
       <div style={{
         maxWidth: '1100px', margin: '0 auto',
-        padding: '0.85rem 2.5rem',
+        height: '64px', padding: '0 2.5rem',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         {/* Logo */}

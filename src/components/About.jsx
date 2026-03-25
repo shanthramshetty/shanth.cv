@@ -2,23 +2,23 @@ import { motion } from 'framer-motion'
 import profileImg from '../assets/profile.jpeg'
 
 const fade = (delay = 0) => ({
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0 },
-  transition: { delay, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { delay, duration: 0.5, ease: 'easeOut' },
 })
 
 export default function About() {
   return (
-    <main style={{ minHeight: '100vh', background: '#f0eeea', paddingTop: '68px' }}>
+    <main style={{ minHeight: '100vh', background: '#f0eeea', paddingTop: '64px' }}>
       <div style={{
-        maxWidth: '1100px', margin: '0 auto', padding: '4rem 2.5rem 6rem',
+        maxWidth: '1100px', margin: '0 auto', padding: '3.5rem 2.5rem 5rem',
       }}>
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-20 items-start">
 
           {/* Left: portrait */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             <img
               src={profileImg} alt="Shanthram Shetty"
