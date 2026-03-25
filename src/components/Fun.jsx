@@ -52,18 +52,50 @@ const GRAIN = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'
 const inView = { once: true, amount: 0.12 }
 const ease   = [0.16, 1, 0.3, 1]
 
-function SectionRule({ label }) {
+function SectionTitle({ number, title }) {
+  const words = title.split(' ')
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={inView}
-      transition={{ duration: 0.65 }}
-      style={{ marginBottom: '3rem', display: 'flex', alignItems: 'center', gap: '1.5rem' }}
-    >
-      <p style={{ fontFamily:"'Inter',sans-serif", fontSize:'0.56rem', letterSpacing:'0.26em', textTransform:'uppercase', color:'rgba(255,255,255,0.22)', whiteSpace:'nowrap' }}>
-        {label}
-      </p>
-      <div style={{ height:1, flex:1, background:'rgba(255,255,255,0.07)' }} />
-    </motion.div>
+    <div style={{ marginBottom: '3.5rem' }}>
+      {/* Number tag */}
+      <motion.span
+        initial={{ opacity: 0, y: 6 }} whileInView={{ opacity: 1, y: 0 }} viewport={inView}
+        transition={{ duration: 0.5 }}
+        style={{ display: 'block', fontFamily:"'Inter',sans-serif", fontSize:'0.54rem', letterSpacing:'0.3em', textTransform:'uppercase', color:'rgba(255,255,255,0.28)', marginBottom:'0.7rem' }}
+      >
+        {number}
+      </motion.span>
+
+      {/* Big title — word-by-word stack reveal */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0 0.3em', overflow: 'hidden', paddingBottom: '0.06em' }}>
+        {words.map((word, i) => (
+          <span key={i} style={{ display: 'inline-block', overflow: 'hidden', lineHeight: 1.15 }}>
+            <motion.span
+              initial={{ y: '105%', opacity: 0 }}
+              whileInView={{ y: '0%', opacity: 1 }}
+              viewport={inView}
+              transition={{ duration: 0.62, delay: 0.08 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                display: 'inline-block',
+                fontFamily: "'Cormorant Garamond',serif",
+                fontStyle: 'italic', fontWeight: 300,
+                fontSize: 'clamp(2.2rem, 4vw, 3.2rem)',
+                color: 'rgba(255,255,255,0.9)',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              {word}
+            </motion.span>
+          </span>
+        ))}
+      </div>
+
+      {/* Rule draws in after text */}
+      <motion.div
+        initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={inView}
+        transition={{ duration: 0.7, delay: 0.08 + words.length * 0.1, ease: [0.16, 1, 0.3, 1] }}
+        style={{ height: 1, background: 'rgba(255,255,255,0.1)', transformOrigin: 'left', marginTop: '1.1rem' }}
+      />
+    </div>
   )
 }
 
@@ -423,7 +455,7 @@ export default function Fun() {
       {/* ── PHOTOGRAPHY ──────────────────────────────────────────────────────── */}
       <section style={{ background:'#0a0a0a', padding:'6rem 2.5rem 3rem' }}>
         <div style={{ maxWidth:1100, margin:'0 auto' }}>
-          <SectionRule label="01 — Photography" />
+          <SectionTitle number="01" title="Photography" />
           <div style={{ columns:3, columnGap:12 }}>
             {PHOTOS.map((p, i) => (
               <PhotoCard key={p.id} photo={p} delay={i * 0.045} onClick={() => setLightbox(i)} />
@@ -440,7 +472,7 @@ export default function Fun() {
       {/* ── EXPERIMENTS ─────────────────────────────────────────────────────── */}
       <section style={{ background:'#050505', padding:'4rem 2.5rem 5.5rem' }}>
         <div style={{ maxWidth:1100, margin:'0 auto' }}>
-          <SectionRule label="02 — Creative Experiments" />
+          <SectionTitle number="02" title="Creative Experiments" />
           <div className="fun-scroll" style={{ display:'flex', gap:14, overflowX:'auto', paddingBottom:'0.5rem' }}>
             {EXPERIMENTS.map((exp, i) => <ExperimentCard key={exp.id} exp={exp} index={i} />)}
           </div>
@@ -455,7 +487,7 @@ export default function Fun() {
       {/* ── MOTION / ANIMATION ──────────────────────────────────────────────── */}
       <section style={{ background:'#0a0a0a', padding:'4rem 2.5rem 6rem' }}>
         <div style={{ maxWidth:1100, margin:'0 auto' }}>
-          <SectionRule label="03 — Motion & Animation" />
+          <SectionTitle number="03" title="Motion & Animation" />
           <div style={{ display:'flex', gap:16 }}>
             {MOTION_ITEMS.map((item, i) => <MotionCard key={item.id} item={item} index={i} />)}
           </div>
