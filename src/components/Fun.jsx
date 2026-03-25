@@ -1,22 +1,22 @@
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { mat4, quat, vec2, vec3 } from 'gl-matrix'
 
 // ─── Photo data ────────────────────────────────────────────────────────────────
 // Replace `image` with your actual photo paths, e.g. '/photos/street-01.jpg'
 const PHOTOS = [
-  { id: 1,  image: 'https://picsum.photos/seed/ss01/900/900', title: 'Street',       description: 'Mumbai, 2024'   },
-  { id: 2,  image: 'https://picsum.photos/seed/ss02/900/900', title: 'Nature',        description: 'Western Ghats'  },
-  { id: 3,  image: 'https://picsum.photos/seed/ss03/900/900', title: 'Portrait',      description: 'Candid Light'   },
-  { id: 4,  image: 'https://picsum.photos/seed/ss04/900/900', title: 'Street',        description: 'Old City'       },
-  { id: 5,  image: 'https://picsum.photos/seed/ss05/900/900', title: 'Landscape',     description: 'Golden Hour'    },
-  { id: 6,  image: 'https://picsum.photos/seed/ss06/900/900', title: 'Portrait',      description: 'Shadow Play'    },
-  { id: 7,  image: 'https://picsum.photos/seed/ss07/900/900', title: 'Architecture',  description: 'Geometry'       },
-  { id: 8,  image: 'https://picsum.photos/seed/ss08/900/900', title: 'Street',        description: 'Night Walk'     },
-  { id: 9,  image: 'https://picsum.photos/seed/ss09/900/900', title: 'Nature',        description: 'After Rain'     },
-  { id: 10, image: 'https://picsum.photos/seed/ss10/900/900', title: 'Portrait',      description: 'Still'          },
-  { id: 11, image: 'https://picsum.photos/seed/ss11/900/900', title: 'Architecture',  description: 'Symmetry'       },
-  { id: 12, image: 'https://picsum.photos/seed/ss12/900/900', title: 'Nature',        description: 'Solitude'       },
+  { id: 1,  image: 'https://picsum.photos/seed/ss01/900/900', category: 'Street',       title: 'Monsoon Street',    description: 'Caught between two rain showers, the city paused.',        date: 'Aug 2024' },
+  { id: 2,  image: 'https://picsum.photos/seed/ss02/900/900', category: 'Nature',        title: 'Western Ghats',     description: 'Mist and silence — nature at its most honest.',            date: 'Jun 2024' },
+  { id: 3,  image: 'https://picsum.photos/seed/ss03/900/900', category: 'Portrait',      title: 'Candid Light',      description: 'An unguarded moment, frozen in soft afternoon sun.',       date: 'Mar 2024' },
+  { id: 4,  image: 'https://picsum.photos/seed/ss04/900/900', category: 'Street',        title: 'Old City',          description: 'Ancient walls still standing against the new.',            date: 'Jan 2024' },
+  { id: 5,  image: 'https://picsum.photos/seed/ss05/900/900', category: 'Landscape',     title: 'Golden Hour',       description: 'The last ten minutes before dark — nothing compares.',     date: 'Nov 2023' },
+  { id: 6,  image: 'https://picsum.photos/seed/ss06/900/900', category: 'Portrait',      title: 'Shadow Play',       description: 'Light bends itself into architecture.',                    date: 'Sep 2023' },
+  { id: 7,  image: 'https://picsum.photos/seed/ss07/900/900', category: 'Architecture',  title: 'Geometry',          description: 'Cities are just shapes waiting to be noticed.',           date: 'Jul 2023' },
+  { id: 8,  image: 'https://picsum.photos/seed/ss08/900/900', category: 'Street',        title: 'Night Walk',        description: 'The streets speak differently after midnight.',            date: 'May 2023' },
+  { id: 9,  image: 'https://picsum.photos/seed/ss09/900/900', category: 'Nature',        title: 'After Rain',        description: 'Everything is sharper once the clouds clear.',            date: 'Apr 2023' },
+  { id: 10, image: 'https://picsum.photos/seed/ss10/900/900', category: 'Portrait',      title: 'Still',             description: 'Presence, without the need to perform.',                  date: 'Feb 2023' },
+  { id: 11, image: 'https://picsum.photos/seed/ss11/900/900', category: 'Architecture',  title: 'Symmetry',          description: 'Human hands built this, but nature corrected it.',        date: 'Dec 2022' },
+  { id: 12, image: 'https://picsum.photos/seed/ss12/900/900', category: 'Nature',        title: 'Solitude',          description: 'Distance is not empty — it is full of quiet.',           date: 'Oct 2022' },
 ]
 
 const GRAIN_BG = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")`
@@ -458,6 +458,79 @@ class SphereGallery {
   #vertexWorld(i) { return vec3.transformQuat(vec3.create(), this.instancePos[i], this.ctrl.orientation) }
 }
 
+// ─── ScrambleText ──────────────────────────────────────────────────────────────
+// Splits text into individual <span> chars. On mount: staggered scramble reveal.
+// On hover: proximity-based scramble (like ReactBits ScrambledText, no premium GSAP needed).
+const SCRAMBLE_CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+
+function ScrambleText({ text, style, className, stagger = 30, hoverRadius = 90 }) {
+  const ref    = useRef(null)
+  const active = useRef(new Set())
+
+  const run = useCallback((span) => {
+    const idx  = span.dataset.idx
+    const orig = span.dataset.char
+    if (active.current.has(idx) || orig === ' ') return
+    active.current.add(idx)
+    let count = 0
+    const max = 4 + Math.floor(Math.random() * 5)
+    const id  = setInterval(() => {
+      if (count++ < max) {
+        span.textContent = SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+      } else {
+        span.textContent = orig
+        clearInterval(id)
+        active.current.delete(idx)
+      }
+    }, 48)
+  }, [])
+
+  // Auto-play staggered scramble on mount (re-runs when text changes via key)
+  useEffect(() => {
+    if (!ref.current) return
+    active.current.clear()
+    const spans   = Array.from(ref.current.querySelectorAll('[data-idx]'))
+    const timers  = spans.map((span, i) => setTimeout(() => run(span), Math.min(i * stagger, 600)))
+    return () => { timers.forEach(clearTimeout); active.current.clear() }
+  }, [text, stagger, run])
+
+  // Hover proximity scramble
+  useEffect(() => {
+    const el = ref.current; if (!el) return
+    const onMove = e => {
+      el.querySelectorAll('[data-idx]').forEach(span => {
+        const r = span.getBoundingClientRect()
+        if (Math.hypot(e.clientX - r.left - r.width / 2, e.clientY - r.top - r.height / 2) < hoverRadius) {
+          run(span)
+        }
+      })
+    }
+    el.addEventListener('pointermove', onMove)
+    return () => el.removeEventListener('pointermove', onMove)
+  }, [text, hoverRadius, run])
+
+  return (
+    <span ref={ref} className={className} style={{ ...style, display: 'block' }}>
+      {text.split(' ').map((word, wi) => (
+        <span key={wi} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+          {word.split('').map((char, ci) => {
+            // compute a flat index across the whole string
+            const flat = text.split(' ').slice(0, wi).reduce((a, w) => a + w.length + 1, 0) + ci
+            return (
+              <span key={ci} data-idx={String(flat)} data-char={char} style={{ display: 'inline-block' }}>
+                {char}
+              </span>
+            )
+          })}
+          {wi < text.split(' ').length - 1 && (
+            <span style={{ display: 'inline-block', width: '0.28em' }}> </span>
+          )}
+        </span>
+      ))}
+    </span>
+  )
+}
+
 // ─── Fun page ──────────────────────────────────────────────────────────────────
 export default function Fun() {
   const canvasRef   = useRef(null)
@@ -545,53 +618,112 @@ export default function Fun() {
           </span>
         </motion.div>
 
-        {/* Active photo info — bottom left, fades when moving */}
+        {/* ── LEFT — Category + Title (scrambled) ── */}
         <AnimatePresence mode="wait">
-          <motion.div
-            key={`info-${activeIdx}`}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: isMoving ? 0 : 1, y: isMoving ? 6 : 0, transition: { duration: isMoving ? 0.15 : 0.5, delay: isMoving ? 0 : 0.25 } }}
-            exit={{ opacity: 0, y: -6, transition: { duration: 0.2 } }}
-            style={{ position: 'absolute', bottom: '2.5rem', left: '2.5rem', zIndex: 10, pointerEvents: 'none' }}
-          >
-            <span style={{ display: 'block', fontFamily: "'Inter', sans-serif", fontSize: '0.58rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: '0.3rem' }}>
-              {activePhoto.title}
-            </span>
-            <span style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.2rem', fontWeight: 300, color: 'rgba(255,255,255,0.78)', letterSpacing: '0.04em' }}>
-              {activePhoto.description}
-            </span>
-          </motion.div>
+          {!isMoving && (
+            <motion.div
+              key={`left-${activeIdx}`}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8, transition: { duration: 0.18 } }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              style={{ position: 'absolute', bottom: '3rem', left: '2.5rem', zIndex: 10, pointerEvents: 'auto' }}
+            >
+              {/* Category tag */}
+              <span style={{
+                display: 'block', fontFamily: "'Inter', sans-serif",
+                fontSize: '0.58rem', letterSpacing: '0.22em', textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.3)', marginBottom: '0.55rem',
+              }}>
+                {activePhoto.category}
+              </span>
+              {/* Title — scramble reveal */}
+              <ScrambleText
+                key={`title-${activeIdx}`}
+                text={activePhoto.title}
+                stagger={38}
+                hoverRadius={100}
+                style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: 'clamp(2rem, 3.5vw, 3rem)',
+                  fontWeight: 300, fontStyle: 'italic',
+                  color: 'rgba(255,255,255,0.9)',
+                  letterSpacing: '0.03em', lineHeight: 1.05,
+                }}
+              />
+            </motion.div>
+          )}
         </AnimatePresence>
 
-        {/* Photo counter — bottom right */}
-        <div style={{ position: 'absolute', bottom: '2.75rem', right: '2.5rem', zIndex: 10, pointerEvents: 'none' }}>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6rem', letterSpacing: '0.16em', color: 'rgba(255,255,255,0.18)' }}>
+        {/* ── RIGHT — Description + Date (scrambled) ── */}
+        <AnimatePresence mode="wait">
+          {!isMoving && (
+            <motion.div
+              key={`right-${activeIdx}`}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8, transition: { duration: 0.18 } }}
+              transition={{ duration: 0.45, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                position: 'absolute', bottom: '3rem', right: '2.5rem', zIndex: 10,
+                pointerEvents: 'auto', textAlign: 'right', maxWidth: '260px',
+              }}
+            >
+              {/* Description — scramble reveal */}
+              <ScrambleText
+                key={`desc-${activeIdx}`}
+                text={activePhoto.description}
+                stagger={14}
+                hoverRadius={90}
+                style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '0.76rem', lineHeight: 1.65,
+                  color: 'rgba(255,255,255,0.45)',
+                  letterSpacing: '0.015em',
+                  marginBottom: '0.6rem',
+                  display: 'block', textAlign: 'right',
+                }}
+              />
+              {/* Date */}
+              <span style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: '0.58rem', letterSpacing: '0.16em',
+                color: 'rgba(255,255,255,0.22)',
+              }}>
+                {activePhoto.date}
+              </span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* ── Counter — top right below drag hint ── */}
+        <div style={{ position: 'absolute', top: '4rem', right: '2.5rem', zIndex: 10, pointerEvents: 'none' }}>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.58rem', letterSpacing: '0.16em', color: 'rgba(255,255,255,0.15)' }}>
             {String(activeIdx + 1).padStart(2, '0')} / {String(PHOTOS.length).padStart(2, '0')}
           </span>
         </div>
 
-        {/* View button — appears when stopped, centred */}
+        {/* ── View button — centre bottom, appears when settled ── */}
         <AnimatePresence>
           {!isMoving && (
             <motion.button
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              initial={{ opacity: 0, scale: 0.8, y: 16 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.85, y: 10, transition: { duration: 0.15 } }}
-              transition={{ duration: 0.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, scale: 0.85, y: 8, transition: { duration: 0.15 } }}
+              transition={{ duration: 0.4, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
               onClick={() => setLightbox(activeIdx)}
               style={{
-                position: 'absolute', bottom: '3.5rem', left: '50%', transform: 'translateX(-50%)',
+                position: 'absolute', bottom: '2.75rem', left: '50%', transform: 'translateX(-50%)',
                 zIndex: 10, background: 'none',
-                border: '1px solid rgba(255,255,255,0.22)', borderRadius: '999px',
-                color: 'rgba(255,255,255,0.6)', cursor: 'pointer',
-                padding: '0.55rem 1.75rem',
-                fontFamily: "'Inter', sans-serif", fontSize: '0.68rem',
+                border: '1px solid rgba(255,255,255,0.2)', borderRadius: '999px',
+                color: 'rgba(255,255,255,0.55)', cursor: 'pointer',
+                padding: '0.5rem 1.6rem',
+                fontFamily: "'Inter', sans-serif", fontSize: '0.66rem',
                 letterSpacing: '0.16em', textTransform: 'uppercase',
-                backdropFilter: 'blur(8px)',
-                transition: 'border-color 0.2s, color 0.2s',
+                backdropFilter: 'blur(8px)', transition: 'border-color 0.2s, color 0.2s',
               }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.6)'; e.currentTarget.style.color = '#fff' }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.22)'; e.currentTarget.style.color = 'rgba(255,255,255,0.6)' }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.55)'; e.currentTarget.style.color = '#fff' }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.2)';  e.currentTarget.style.color = 'rgba(255,255,255,0.55)' }}
             >
               View ↗
             </motion.button>
