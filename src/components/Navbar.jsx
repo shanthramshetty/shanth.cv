@@ -14,7 +14,7 @@ export default function Navbar({ page, setPage }) {
     page === 'fun' ? 'Fun' :
     page === 'contact' ? 'Contact' : ''
 
-  const dark = page === 'home'
+  const dark = page === 'home' || page === 'fun'
 
   return (
     <header style={{

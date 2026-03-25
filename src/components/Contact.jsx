@@ -43,7 +43,8 @@ export default function Contact() {
 
         <motion.div {...fade(0.3)} style={{ marginBottom: '2.5rem' }}>
           <motion.a
-            href="mailto:shanthram.shetty98@gmail.com"
+            href="https://www.linkedin.com/in/shanthram-shetty-6a26a6376"
+            target="_blank" rel="noopener noreferrer"
             whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
             style={{
               display: 'inline-block',
@@ -62,7 +63,7 @@ export default function Contact() {
         <motion.div {...fade(0.4)} style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem' }}>
           {[
             { label: 'LinkedIn', href: 'https://www.linkedin.com/in/shanthram-shetty-6a26a6376', target: '_blank' },
-            { label: 'Email', href: 'mailto:shanthram.shetty98@gmail.com' },
+            { label: 'Email', href: 'https://mail.google.com/mail/?view=cm&fs=1&to=shanthram.shetty98@gmail.com', target: '_blank' },
           ].map(s => (
             <a key={s.label} href={s.href} target={s.target} rel={s.target ? 'noopener noreferrer' : undefined}
               style={{

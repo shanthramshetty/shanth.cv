@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Navbar from './components/Navbar'
-import Home from './components/Hero'
+import Work from './components/Work'
 import AboutPage from './components/About'
 import FunPage from './components/Fun'
 import ContactPage from './components/Contact'
@@ -23,11 +23,11 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            style={{ background: '#f0eeea', minHeight: '100vh' }}
+            style={{ background: page === 'fun' ? '#0a0a0a' : '#f0eeea', minHeight: '100vh', transition: 'background 0.5s' }}
           >
             <Navbar page={page} setPage={setPage} />
             {page === 'about' && <AboutPage />}
-            {page === 'home' && <Home />}
+            {page === 'home' && <Work />}
             {page === 'fun' && <FunPage />}
             {page === 'contact' && <ContactPage />}
           </motion.div>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import profileImg from '../assets/profile.jpeg'
+import profileImg from '../assets/images/profile.jpeg'
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0 },
@@ -126,7 +126,7 @@ export default function About() {
                 </svg>
               </a>
               <a
-                href="mailto:shanthram.shetty98@gmail.com" aria-label="Email"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=shanthram.shetty98@gmail.com" target="_blank" rel="noopener noreferrer" aria-label="Email"
                 style={{ color: '#555', display: 'flex', transition: 'color 0.2s' }}
                 onMouseEnter={e => e.currentTarget.style.color = '#111'}
                 onMouseLeave={e => e.currentTarget.style.color = '#555'}
