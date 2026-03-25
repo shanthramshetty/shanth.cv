@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import Lenis from 'lenis'
 import Navbar from './components/Navbar'
 import Work from './components/Work'
 import AboutPage from './components/About'
@@ -11,6 +12,20 @@ import './App.css'
 export default function App() {
   const [page, setPage] = useState('about')
   const [loaded, setLoaded] = useState(false)
+  const lenisRef = useRef(null)
+
+  useEffect(() => {
+    const lenis = new Lenis({ duration: 1.15, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) })
+    lenisRef.current = lenis
+    let rafId
+    const raf = time => { lenis.raf(time); rafId = requestAnimationFrame(raf) }
+    rafId = requestAnimationFrame(raf)
+    return () => { cancelAnimationFrame(rafId); lenis.destroy() }
+  }, [])
+
+  useEffect(() => {
+    lenisRef.current?.scrollTo(0, { immediate: true })
+  }, [page])
 
   return (
     <>
