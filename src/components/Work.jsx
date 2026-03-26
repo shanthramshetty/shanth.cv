@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 
 /* ─── SVG Mockup Previews ───────────────────────────────────────── */
 
@@ -330,213 +330,235 @@ const PROJECTS = [
   },
 ]
 
-/* ─── Work Listing — Card Style ─────────────────────────────────── */
+/* ─── Floating Preview (cursor-following stacked cards) ─────────── */
 
-function ProjectCard({ project, index, onClick }) {
-  const [hovered, setHovered] = useState(false)
-  const Mockup = MOCKUP_COMPONENTS[project.id]
-  const isLive = !!project.url
-  const tags = project.category.split('·').map(t => t.trim())
+function FloatingPreview({ hoveredProject }) {
+  const cursorX = useMotionValue(-500)
+  const cursorY = useMotionValue(-500)
+  const springX = useSpring(cursorX, { stiffness: 160, damping: 24, mass: 0.6 })
+  const springY = useSpring(cursorY, { stiffness: 160, damping: 24, mass: 0.6 })
+
+  useEffect(() => {
+    const onMove = (e) => {
+      cursorX.set(e.clientX + 32)
+      cursorY.set(e.clientY - 100)
+    }
+    window.addEventListener('mousemove', onMove)
+    return () => window.removeEventListener('mousemove', onMove)
+  }, [cursorX, cursorY])
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 32 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       style={{
-        position: 'relative',
-        borderRadius: '20px',
-        overflow: 'hidden',
-        cursor: 'pointer',
-        background: `linear-gradient(135deg, ${project.accent}18 0%, #111114 60%)`,
-        border: `1px solid ${hovered ? project.accent + '40' : 'rgba(255,255,255,0.07)'}`,
-        transition: 'border-color 0.35s',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
-        minHeight: '340px',
+        position: 'fixed',
+        left: springX,
+        top: springY,
+        width: 300,
+        height: 200,
+        pointerEvents: 'none',
+        zIndex: 200,
       }}
     >
-      {/* Left — content */}
-      <div style={{
-        padding: 'clamp(2rem, 4vw, 3rem)',
-        display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
-        zIndex: 1,
-      }}>
-        <div>
-          {/* Tags */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '1.5rem' }}>
-            {tags.map(tag => (
-              <span key={tag} style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '0.62rem', fontWeight: 600,
-                letterSpacing: '0.06em', textTransform: 'uppercase',
-                color: project.accent,
-                background: project.accent + '18',
-                border: `1px solid ${project.accent}35`,
-                borderRadius: '100px',
-                padding: '0.3rem 0.75rem',
-              }}>{tag}</span>
-            ))}
-            {isLive && (
-              <span style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '0.62rem', fontWeight: 600,
-                letterSpacing: '0.06em', textTransform: 'uppercase',
-                color: '#22c55e',
-                background: '#22c55e18',
-                border: '1px solid #22c55e35',
-                borderRadius: '100px',
-                padding: '0.3rem 0.75rem',
-                display: 'flex', alignItems: 'center', gap: '0.3rem',
+      <AnimatePresence mode="wait">
+        {hoveredProject && (() => {
+          const Mockup = MOCKUP_COMPONENTS[hoveredProject.id]
+          return (
+            <motion.div
+              key={hoveredProject.id}
+              initial={{ opacity: 0, scale: 0.88, y: 14 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: -8 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                width: '100%', height: '100%',
+                borderRadius: '14px', overflow: 'hidden',
+                border: `1px solid ${hoveredProject.accent}33`,
+                boxShadow: '0 24px 64px rgba(0,0,0,0.85), 0 4px 16px rgba(0,0,0,0.5)',
+                background: '#0f0f11',
+                position: 'relative',
+              }}
+            >
+              <Mockup />
+              <div style={{
+                position: 'absolute', bottom: 0, left: 0, right: 0,
+                padding: '0.6rem 0.85rem',
+                background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)',
               }}>
-                <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
-                Live
-              </span>
-            )}
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.68rem', fontWeight: 600, color: 'rgba(255,255,255,0.9)', letterSpacing: '0.01em' }}>
+                  {hoveredProject.title}
+                </p>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.58rem', color: hoveredProject.accent, letterSpacing: '0.06em', marginTop: '1px' }}>
+                  {hoveredProject.category}
+                </p>
+              </div>
+            </motion.div>
+          )
+        })()}
+      </AnimatePresence>
+    </motion.div>
+  )
+}
+
+/* ─── Work Listing ──────────────────────────────────────────────── */
+
+function ProjectRow({ project, index, onClick, onHover }) {
+  const [hovered, setHovered] = useState(false)
+
+  const handleEnter = () => { setHovered(true); onHover(project) }
+  const handleLeave = () => { setHovered(false); onHover(null) }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 18 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.06 + index * 0.07, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      onClick={onClick}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      style={{
+        position: 'relative',
+        padding: '2.25rem 0',
+        cursor: 'pointer',
+        borderBottom: '1px solid rgba(255,255,255,0.05)',
+      }}
+    >
+      {/* Accent bar */}
+      <motion.div
+        animate={{ scaleY: hovered ? 1 : 0, opacity: hovered ? 1 : 0 }}
+        initial={{ scaleY: 0, opacity: 0 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          position: 'absolute', left: 0, top: 0, bottom: 0,
+          width: '2px', background: project.accent,
+          transformOrigin: 'bottom', borderRadius: '0 2px 2px 0',
+        }}
+      />
+
+      <div style={{ paddingLeft: '1.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '1.75rem', marginBottom: '0.55rem' }}>
+            <span style={{
+              fontSize: '0.6rem', letterSpacing: '0.12em',
+              fontFamily: "'Inter', sans-serif", fontWeight: 500, flexShrink: 0,
+              color: hovered ? project.accent : 'rgba(255,255,255,0.18)',
+              transition: 'color 0.3s',
+            }}>
+              {project.number}
+            </span>
+            <motion.h2
+              animate={{ x: hovered ? 8 : 0 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                fontFamily: "'DM Serif Display', serif",
+                fontSize: 'clamp(1.75rem, 3.8vw, 3rem)',
+                fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1,
+                color: hovered ? '#ffffff' : 'rgba(255,255,255,0.7)',
+                transition: 'color 0.3s',
+              }}
+            >
+              {project.title}
+            </motion.h2>
           </div>
-
-          {/* Headline */}
-          <h2 style={{
-            fontFamily: "'DM Serif Display', serif",
-            fontSize: 'clamp(1.6rem, 2.8vw, 2.4rem)',
-            fontWeight: 400, lineHeight: 1.15,
-            letterSpacing: '-0.02em',
-            color: '#fff',
-            marginBottom: '0.85rem',
+          <p className="project-row-meta" style={{
+            marginLeft: 'calc(1.75rem + 2.25rem)',
+            fontSize: '0.75rem', fontFamily: "'Inter', sans-serif", letterSpacing: '0.02em',
+            color: hovered ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.25)',
+            transition: 'color 0.3s',
           }}>
-            {project.tagline}
-          </h2>
-
-          {/* Meta */}
-          <p style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '0.75rem',
-            color: 'rgba(255,255,255,0.3)',
-            letterSpacing: '0.02em',
-          }}>
-            {project.client} &nbsp;·&nbsp; {project.year}
+            {project.category} &nbsp;·&nbsp; {project.client} &nbsp;·&nbsp; {project.year}
           </p>
         </div>
 
-        {/* CTA */}
-        <div style={{ marginTop: '2rem' }}>
-          <motion.button
-            animate={{ x: hovered ? 5 : 0 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              background: 'none', border: 'none', cursor: 'pointer', padding: 0,
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '0.78rem', fontWeight: 500,
-              color: hovered ? project.accent : 'rgba(255,255,255,0.45)',
-              letterSpacing: '0.02em',
-              transition: 'color 0.25s',
-            }}
-          >
-            {isLive ? 'View Live →' : 'Read Case Study →'}
-          </motion.button>
-        </div>
-      </div>
-
-      {/* Right — mockup */}
-      <div style={{
-        position: 'relative', overflow: 'hidden',
-        borderLeft: `1px solid ${project.accent}18`,
-      }}>
         <motion.div
-          animate={{ scale: hovered ? 1.03 : 1 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          style={{ width: '100%', height: '100%' }}
+          animate={{ x: hovered ? 5 : 0, borderColor: hovered ? project.accent : 'rgba(255,255,255,0.1)' }}
+          transition={{ duration: 0.35 }}
+          style={{
+            flexShrink: 0, width: '42px', height: '42px',
+            border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
         >
-          <Mockup />
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke={hovered ? project.accent : 'rgba(255,255,255,0.4)'}
+            strokeWidth="2" style={{ transition: 'stroke 0.3s' }}
+          >
+            <path d="M7 17L17 7M17 7H7M17 7v10"/>
+          </svg>
         </motion.div>
-        {/* inner vignette */}
-        <div style={{
-          position: 'absolute', inset: 0, pointerEvents: 'none',
-          background: `linear-gradient(to right, ${project.accent}10 0%, transparent 30%)`,
-        }} />
-      </div>
-
-      {/* Project number watermark */}
-      <div style={{
-        position: 'absolute', top: '1.25rem', right: '1.5rem',
-        fontFamily: "'Inter', sans-serif",
-        fontSize: '0.6rem', letterSpacing: '0.14em',
-        color: 'rgba(255,255,255,0.12)',
-        zIndex: 2,
-      }}>
-        {project.number}
       </div>
     </motion.div>
   )
 }
 
 function WorkListing({ onSelect }) {
-  return (
-    <motion.div
-      key="listing"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0, y: -16, transition: { duration: 0.35 } }}
-      style={{ maxWidth: '1200px', margin: '0 auto', padding: 'clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2.5rem) 7rem' }}
-    >
-      {/* Header */}
-      <div className="work-header" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '3rem' }}>
-        <div>
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{
-              fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase',
-              color: 'rgba(255,255,255,0.2)', fontFamily: "'Inter', sans-serif",
-              fontWeight: 600, marginBottom: '0.75rem',
-            }}
-          >
-            Selected Work
-          </motion.p>
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              fontFamily: "'Caveat', cursive",
-              fontSize: 'clamp(2.75rem, 6vw, 5rem)',
-              color: '#ffffff', lineHeight: 0.95, margin: 0,
-            }}
-          >
-            Case Studies
-          </motion.h1>
-        </div>
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.25, duration: 0.5 }}
-          style={{
-            fontSize: '0.7rem', color: 'rgba(255,255,255,0.15)',
-            fontFamily: "'Inter', sans-serif", letterSpacing: '0.06em',
-            paddingBottom: '0.4rem',
-          }}
-        >
-          0{PROJECTS.length} projects
-        </motion.span>
-      </div>
+  const [hoveredProject, setHoveredProject] = useState(null)
 
-      {/* Cards */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+  return (
+    <>
+      <FloatingPreview hoveredProject={hoveredProject} />
+
+      <motion.div
+        key="listing"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0, y: -16, transition: { duration: 0.35 } }}
+        style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2.5rem) 7rem' }}
+      >
+        {/* Header */}
+        <div className="work-header" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '3.5rem' }}>
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              style={{
+                fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.2)', fontFamily: "'Inter', sans-serif",
+                fontWeight: 600, marginBottom: '0.75rem',
+              }}
+            >
+              Selected Work
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: 'clamp(2.75rem, 6vw, 5rem)',
+                color: '#ffffff', lineHeight: 0.95, margin: 0,
+              }}
+            >
+              Case Studies
+            </motion.h1>
+          </div>
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.25, duration: 0.5 }}
+            style={{
+              fontSize: '0.7rem', color: 'rgba(255,255,255,0.15)',
+              fontFamily: "'Inter', sans-serif", letterSpacing: '0.06em',
+              paddingBottom: '0.4rem',
+            }}
+          >
+            0{PROJECTS.length} projects
+          </motion.span>
+        </div>
+
+        <div style={{ height: '1px', background: 'rgba(255,255,255,0.05)' }} />
+
         {PROJECTS.map((project, i) => (
-          <ProjectCard
+          <ProjectRow
             key={project.id}
             project={project}
             index={i}
             onClick={() => onSelect(project.id)}
+            onHover={setHoveredProject}
           />
         ))}
-      </div>
-    </motion.div>
+      </motion.div>
+    </>
   )
 }
 
