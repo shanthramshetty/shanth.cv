@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion'
 import LightRays from './LightRays'
 
@@ -364,8 +364,8 @@ export default function FunSection() {
         </motion.blockquote>
       </section>
 
-      {/* ── Design Experiments Slider ── */}
-      <ExperimentSlider />
+      {/* ── Design Experiments ── */}
+      <ExperimentCards />
 
       {/* ── Lightbox ── */}
       <AnimatePresence>
@@ -437,169 +437,176 @@ export default function FunSection() {
   )
 }
 
-function ExperimentSlider() {
-  const [current, setCurrent] = useState(0)
-  const [dir, setDir] = useState(1)
-  const dragStart = useRef(null)
-  const total = EXPERIMENTS.length
+/* ── Aceternity 3D Card primitives ── */
+const MouseEnterContext = React.createContext([false, () => {}])
 
-  const go = (next) => {
-    setDir(next > current ? 1 : -1)
-    setCurrent((next + total) % total)
+function CardContainer({ children, style = {} }) {
+  const containerRef = useRef(null)
+  const [isMouseEntered, setIsMouseEntered] = useState(false)
+
+  const handleMouseMove = (e) => {
+    if (!containerRef.current) return
+    const { left, top, width, height } = containerRef.current.getBoundingClientRect()
+    const x = (e.clientX - left - width / 2) / 18
+    const y = (e.clientY - top - height / 2) / 18
+    containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`
   }
 
-  const handleDragStart = (e) => {
-    dragStart.current = e.clientX ?? e.touches?.[0]?.clientX
-  }
-  const handleDragEnd = (e) => {
-    const end = e.clientX ?? e.changedTouches?.[0]?.clientX
-    if (dragStart.current === null || end === undefined) return
-    const diff = dragStart.current - end
-    if (Math.abs(diff) > 50) go(diff > 0 ? current + 1 : current - 1)
-    dragStart.current = null
+  const handleMouseEnter = () => {
+    setIsMouseEntered(true)
   }
 
-  const exp = EXPERIMENTS[current]
+  const handleMouseLeave = () => {
+    setIsMouseEntered(false)
+    if (containerRef.current) {
+      containerRef.current.style.transform = 'rotateY(0deg) rotateX(0deg)'
+    }
+  }
 
   return (
-    <section style={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
-      {/* Label */}
-      <div style={{
-        position: 'absolute', top: '2.5rem', left: '2.5rem', zIndex: 10,
-        display: 'flex', alignItems: 'center', gap: '0.5rem',
-      }}>
+    <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
+      <div
+        style={{ perspective: '1000px', ...style }}
+        onMouseEnter={handleMouseEnter}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div
+          ref={containerRef}
+          style={{
+            width: '100%', height: '100%',
+            transformStyle: 'preserve-3d',
+            transition: 'transform 0.15s ease-out',
+          }}
+        >
+          {children}
+        </div>
+      </div>
+    </MouseEnterContext.Provider>
+  )
+}
+
+function CardBody({ children, style = {} }) {
+  return (
+    <div style={{ transformStyle: 'preserve-3d', width: '100%', height: '100%', ...style }}>
+      {children}
+    </div>
+  )
+}
+
+function CardItem({ children, translateZ = 0, translateX = 0, translateY = 0, as: Tag = 'div', style = {}, ...props }) {
+  const [isMouseEntered] = React.useContext(MouseEnterContext)
+  const tz = isMouseEntered ? translateZ : 0
+  const tx = isMouseEntered ? translateX : 0
+  const ty = isMouseEntered ? translateY : 0
+  return (
+    <Tag
+      style={{
+        transform: `translateZ(${tz}px) translateX(${tx}px) translateY(${ty}px)`,
+        transition: 'transform 0.25s ease-out',
+        ...style,
+      }}
+      {...props}
+    >
+      {children}
+    </Tag>
+  )
+}
+
+/* ── Design Experiments 3D Card Grid ── */
+function ExperimentCards() {
+  return (
+    <section style={{ padding: 'clamp(3rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem) 8rem', maxWidth: '1280px', margin: '0 auto' }}>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+        style={{ marginBottom: '2.5rem' }}
+      >
         <p style={{ fontSize: '0.65rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.28)' }}>
           02 — Design Experiments
         </p>
-      </div>
+      </motion.div>
 
-      {/* Slide */}
-      <AnimatePresence mode="wait" custom={dir}>
-        <motion.div
-          key={exp.id}
-          custom={dir}
-          initial={{ opacity: 0, x: dir * 80 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: dir * -80 }}
-          transition={{ duration: 0.55, ease: [0.32, 0, 0.18, 1] }}
-          style={{
-            width: '100%', height: '88vh', minHeight: '520px',
-            background: exp.bg,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            position: 'relative', cursor: 'grab', userSelect: 'none',
-          }}
-          onMouseDown={handleDragStart}
-          onMouseUp={handleDragEnd}
-          onTouchStart={handleDragStart}
-          onTouchEnd={handleDragEnd}
-        >
-          {/* Visual */}
-          <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
-            <SlideVisual type={exp.visual} accent={exp.accent} />
-          </div>
-
-          {/* Vignette */}
-          <div style={{
-            position: 'absolute', inset: 0, pointerEvents: 'none',
-            background: 'radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%)',
-          }} />
-
-          {/* Bottom info bar */}
-          <div style={{
-            position: 'absolute', bottom: 0, left: 0, right: 0,
-            padding: '2.5rem 3rem',
-            display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
-            background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)',
-          }}>
-            <div>
-              <p style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                fontWeight: 300, fontStyle: 'italic',
-                color: '#fff', lineHeight: 1.1,
-                marginBottom: '0.4rem',
-              }}>
-                {exp.title}
-              </p>
-              <p style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '0.75rem', letterSpacing: '0.1em',
-                textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)',
-              }}>
-                {exp.subtitle}
-              </p>
-            </div>
-
-            {/* Counter */}
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '0.7rem', letterSpacing: '0.12em',
-              color: 'rgba(255,255,255,0.3)',
-            }}>
-              {String(current + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
-            </p>
-          </div>
-
-          {/* Accent tag */}
-          <div style={{
-            position: 'absolute', top: '2.5rem', right: '3rem',
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '0.6rem', letterSpacing: '0.2em',
-            color: exp.accent, opacity: 0.6,
-            textTransform: 'uppercase',
-          }}>
-            {exp.tag}
-          </div>
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Nav arrows */}
-      <button
-        onClick={() => go(current - 1)}
-        style={{
-          position: 'absolute', left: '1.5rem', top: '50%', transform: 'translateY(-50%)',
-          zIndex: 10, background: 'rgba(255,255,255,0.06)',
-          border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)',
-          width: '48px', height: '48px', borderRadius: '50%',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          cursor: 'pointer', fontSize: '1.2rem',
-          transition: 'background 0.2s, border-color 0.2s',
-        }}
-        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)' }}
-        onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)' }}
-      >‹</button>
-      <button
-        onClick={() => go(current + 1)}
-        style={{
-          position: 'absolute', right: '1.5rem', top: '50%', transform: 'translateY(-50%)',
-          zIndex: 10, background: 'rgba(255,255,255,0.06)',
-          border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)',
-          width: '48px', height: '48px', borderRadius: '50%',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          cursor: 'pointer', fontSize: '1.2rem',
-          transition: 'background 0.2s, border-color 0.2s',
-        }}
-        onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)' }}
-        onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)' }}
-      >›</button>
-
-      {/* Dots */}
       <div style={{
-        position: 'absolute', bottom: '1.2rem', left: '50%', transform: 'translateX(-50%)',
-        display: 'flex', gap: '6px', zIndex: 10,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+        gap: '1.5rem',
       }}>
-        {EXPERIMENTS.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => go(i)}
-            style={{
-              width: i === current ? '20px' : '6px', height: '6px',
-              borderRadius: '3px', border: 'none', cursor: 'pointer',
-              background: i === current ? '#fff' : 'rgba(255,255,255,0.25)',
-              transition: 'width 0.3s ease, background 0.3s ease',
-              padding: 0,
-            }}
-          />
+        {EXPERIMENTS.map((exp, i) => (
+          <motion.div
+            key={exp.id}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.07 }}
+          >
+            <CardContainer style={{ width: '100%', height: '340px' }}>
+              <CardBody style={{
+                background: exp.bg,
+                border: `1px solid ${exp.accent}28`,
+                borderRadius: '16px',
+                overflow: 'hidden',
+                position: 'relative',
+                cursor: 'pointer',
+              }}>
+                {/* Background visual — deepest layer */}
+                <CardItem translateZ={0} style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+                  <SlideVisual type={exp.visual} accent={exp.accent} />
+                </CardItem>
+
+                {/* Vignette */}
+                <CardItem translateZ={0} style={{
+                  position: 'absolute', inset: 0, pointerEvents: 'none',
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)',
+                }} />
+
+                {/* Tag — floats at mid depth */}
+                <CardItem translateZ={40} style={{
+                  position: 'absolute', top: '1.25rem', right: '1.25rem',
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '0.58rem', letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  color: exp.accent,
+                  background: exp.accent + '18',
+                  border: `1px solid ${exp.accent}30`,
+                  borderRadius: '100px',
+                  padding: '0.3rem 0.7rem',
+                }}>
+                  {exp.tag}
+                </CardItem>
+
+                {/* Title — highest floating layer */}
+                <CardItem translateZ={70} translateY={-4} style={{
+                  position: 'absolute', bottom: '1.5rem', left: '1.5rem', right: '1.5rem',
+                }}>
+                  <p style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: '1.6rem', fontWeight: 300, fontStyle: 'italic',
+                    color: '#fff', lineHeight: 1.15, marginBottom: '0.3rem',
+                  }}>
+                    {exp.title}
+                  </p>
+                  <p style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '0.65rem', letterSpacing: '0.1em',
+                    textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)',
+                  }}>
+                    {exp.subtitle}
+                  </p>
+                </CardItem>
+
+                {/* Accent glow at bottom */}
+                <CardItem translateZ={20} style={{
+                  position: 'absolute', bottom: 0, left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: '60%', height: '1px',
+                  background: `linear-gradient(to right, transparent, ${exp.accent}60, transparent)`,
+                }} />
+              </CardBody>
+            </CardContainer>
+          </motion.div>
         ))}
       </div>
     </section>
