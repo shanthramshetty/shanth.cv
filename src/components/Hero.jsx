@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import profileImg from '../assets/images/profile.jpeg'
+import FlipWords from './FlipWords'
 
 const TAGLINES = [
   'I love crafting clean, meaningful digital experiences',
@@ -48,6 +49,16 @@ export default function Hero() {
                 letterSpacing: '-0.025em', lineHeight: 1.05,
               }}>
                 I'm Shanthram
+              </span>
+              <span style={{
+                fontFamily: "'DM Serif Display', serif",
+                fontSize: 'clamp(22px, 3.5vw, 44px)',
+                fontWeight: 400, display: 'block',
+                letterSpacing: '-0.01em', lineHeight: 1.2,
+                marginTop: '0.25rem',
+                color: 'rgba(255,255,255,0.55)',
+              }}>
+                <FlipWords words={["Designer","Builder","Thinker","Creator"]} color="rgba(255,255,255,0.55)" />
               </span>
             </motion.h1>
 

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion'
 import LightRays from './LightRays'
+import FlipWords from './FlipWords'
 
 const PHOTOS = [
   {
@@ -259,7 +260,9 @@ export default function FunSection() {
               color: '#fff',
               marginBottom: '2rem',
             }}>
-              This is where I explore, experiment, and capture moments.
+              This is where I{' '}
+              <FlipWords words={["explore","experiment","capture","create"]} color="#fff" interval={2200} />
+              {' '}moments.
             </h1>
             <p style={{
               fontFamily: "'Inter', sans-serif",

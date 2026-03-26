@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import FlipWords from './FlipWords'
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0 },
@@ -29,7 +30,7 @@ export default function Contact() {
             fontWeight: 700, color: '#111', display: 'block',
             letterSpacing: '-0.02em', lineHeight: 1.15,
           }}>
-            let's create something meaningful
+            let's create something <FlipWords words={["meaningful","impactful","beautiful","powerful"]} color="#111" interval={2600} />
           </span>
         </motion.h1>
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
+import FlipWords from './FlipWords'
 
 /* ─── SVG Mockup Previews ───────────────────────────────────────── */
 
@@ -531,6 +532,19 @@ function WorkListing({ onSelect }) {
             >
               Case Studies
             </motion.h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              style={{
+                fontFamily: "'DM Serif Display', serif",
+                fontSize: 'clamp(1rem, 2vw, 1.4rem)',
+                color: 'rgba(255,255,255,0.35)',
+                marginTop: '0.4rem', fontWeight: 400,
+              }}
+            >
+              <FlipWords words={["Fintech","SaaS","AI","Product"]} color="rgba(255,255,255,0.35)" interval={2800} />
+            </motion.p>
           </div>
           <motion.span
             initial={{ opacity: 0 }}
