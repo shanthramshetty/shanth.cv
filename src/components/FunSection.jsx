@@ -182,6 +182,7 @@ function ParallaxLayer({ children, speed = 0.4, style = {} }) {
 
 export default function FunSection() {
   const [lightboxIdx, setLightboxIdx] = useState(null)
+  const [hoveredPhotoIdx, setHoveredPhotoIdx] = useState(null)
   const heroRef = useRef(null)
 
   // Hero parallax — text drifts up, rays drift slower
@@ -307,25 +308,37 @@ export default function FunSection() {
           </p>
         </motion.div>
 
-        {/* Masonry grid — alternating parallax speeds */}
+        {/* Masonry grid — alternating parallax speeds + Focus Cards effect */}
         <div className="photo-masonry">
           <ParallaxLayer speed={-0.08} style={{ gridRow: 'span 2' }}>
-            <PhotoTile photo={PHOTOS[0]} className="photo-tall" style={{ height: '100%' }} onClick={() => setLightboxIdx(0)} />
+            <PhotoTile photo={PHOTOS[0]} className="photo-tall" style={{ height: '100%' }} onClick={() => setLightboxIdx(0)}
+              isFocused={hoveredPhotoIdx === 0} isAnyHovered={hoveredPhotoIdx !== null}
+              onFocus={() => setHoveredPhotoIdx(0)} onBlur={() => setHoveredPhotoIdx(null)} />
           </ParallaxLayer>
           <ParallaxLayer speed={0.06}>
-            <PhotoTile photo={PHOTOS[1]} onClick={() => setLightboxIdx(1)} />
+            <PhotoTile photo={PHOTOS[1]} onClick={() => setLightboxIdx(1)}
+              isFocused={hoveredPhotoIdx === 1} isAnyHovered={hoveredPhotoIdx !== null}
+              onFocus={() => setHoveredPhotoIdx(1)} onBlur={() => setHoveredPhotoIdx(null)} />
           </ParallaxLayer>
           <ParallaxLayer speed={-0.05}>
-            <PhotoTile photo={PHOTOS[2]} onClick={() => setLightboxIdx(2)} />
+            <PhotoTile photo={PHOTOS[2]} onClick={() => setLightboxIdx(2)}
+              isFocused={hoveredPhotoIdx === 2} isAnyHovered={hoveredPhotoIdx !== null}
+              onFocus={() => setHoveredPhotoIdx(2)} onBlur={() => setHoveredPhotoIdx(null)} />
           </ParallaxLayer>
           <ParallaxLayer speed={0.09}>
-            <PhotoTile photo={PHOTOS[3]} onClick={() => setLightboxIdx(3)} />
+            <PhotoTile photo={PHOTOS[3]} onClick={() => setLightboxIdx(3)}
+              isFocused={hoveredPhotoIdx === 3} isAnyHovered={hoveredPhotoIdx !== null}
+              onFocus={() => setHoveredPhotoIdx(3)} onBlur={() => setHoveredPhotoIdx(null)} />
           </ParallaxLayer>
           <ParallaxLayer speed={-0.04}>
-            <PhotoTile photo={PHOTOS[4]} onClick={() => setLightboxIdx(4)} />
+            <PhotoTile photo={PHOTOS[4]} onClick={() => setLightboxIdx(4)}
+              isFocused={hoveredPhotoIdx === 4} isAnyHovered={hoveredPhotoIdx !== null}
+              onFocus={() => setHoveredPhotoIdx(4)} onBlur={() => setHoveredPhotoIdx(null)} />
           </ParallaxLayer>
           <ParallaxLayer speed={0.05} style={{ gridColumn: 'span 3' }}>
-            <PhotoTile photo={PHOTOS[5]} className="photo-wide" onClick={() => setLightboxIdx(5)} />
+            <PhotoTile photo={PHOTOS[5]} className="photo-wide" onClick={() => setLightboxIdx(5)}
+              isFocused={hoveredPhotoIdx === 5} isAnyHovered={hoveredPhotoIdx !== null}
+              onFocus={() => setHoveredPhotoIdx(5)} onBlur={() => setHoveredPhotoIdx(null)} />
           </ParallaxLayer>
         </div>
       </section>
@@ -616,8 +629,9 @@ function ExperimentCards() {
   )
 }
 
-function PhotoTile({ photo, style = {}, className = '', onClick }) {
-  const [hovered, setHovered] = useState(false)
+function PhotoTile({ photo, style = {}, className = '', onClick, isFocused = false, isAnyHovered = false, onFocus, onBlur }) {
+  // Focus Cards: dim + blur siblings; keep own hover effects when focused
+  const blurred = isAnyHovered && !isFocused
 
   return (
     <motion.div
@@ -626,9 +640,14 @@ function PhotoTile({ photo, style = {}, className = '', onClick }) {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
       onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={onFocus}
+      onMouseLeave={onBlur}
       className={className}
+      animate={{
+        filter: blurred ? 'blur(3px) brightness(0.55)' : 'blur(0px) brightness(1)',
+        scale: isFocused ? 1.02 : 1,
+      }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       style={{
         borderRadius: '6px',
         overflow: 'hidden',
@@ -647,20 +666,20 @@ function PhotoTile({ photo, style = {}, className = '', onClick }) {
           objectFit: 'cover',
           display: 'block',
           transition: 'transform 0.6s cubic-bezier(0.22,1,0.36,1)',
-          transform: hovered ? 'scale(1.04)' : 'scale(1)',
+          transform: isFocused ? 'scale(1.04)' : 'scale(1)',
         }}
       />
       <div style={{
         position: 'absolute', inset: 0,
         background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%)',
-        opacity: hovered ? 1 : 0,
+        opacity: isFocused ? 1 : 0,
         transition: 'opacity 0.35s ease',
         pointerEvents: 'none',
       }} />
       <div style={{
         position: 'absolute', bottom: '1rem', left: '1rem',
-        opacity: hovered ? 1 : 0,
-        transform: hovered ? 'translateY(0)' : 'translateY(6px)',
+        opacity: isFocused ? 1 : 0,
+        transform: isFocused ? 'translateY(0)' : 'translateY(6px)',
         transition: 'opacity 0.35s ease, transform 0.35s ease',
         pointerEvents: 'none',
       }}>
