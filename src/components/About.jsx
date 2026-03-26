@@ -11,7 +11,7 @@ export default function About() {
   return (
     <main style={{ minHeight: '100vh', background: '#f0eeea', paddingTop: '64px' }}>
       <div style={{
-        maxWidth: '1100px', margin: '0 auto', padding: '3.5rem 2.5rem 5rem',
+        maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2.5rem) 5rem',
       }}>
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-20 items-start">
 
@@ -67,10 +67,7 @@ export default function About() {
               bringing order to chaos.
             </motion.p>
 
-            <motion.div {...fade(0.36)} style={{
-              display: 'grid', gridTemplateColumns: '1fr 1fr',
-              gap: '2rem 2.5rem', marginBottom: '2.5rem',
-            }}>
+            <motion.div {...fade(0.36)} className="about-stats">
               <div>
                 <p style={{
                   fontSize: '0.62rem', letterSpacing: '0.14em', textTransform: 'uppercase',

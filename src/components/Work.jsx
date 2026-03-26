@@ -459,7 +459,7 @@ function ProjectRow({ project, index, onClick, onHover }) {
               {project.title}
             </motion.h2>
           </div>
-          <p style={{
+          <p className="project-row-meta" style={{
             marginLeft: 'calc(1.75rem + 2.25rem)',
             fontSize: '0.75rem', fontFamily: "'Inter', sans-serif", letterSpacing: '0.02em',
             color: hovered ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.25)',
@@ -502,10 +502,10 @@ function WorkListing({ onSelect }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0, y: -16, transition: { duration: 0.35 } }}
-        style={{ maxWidth: '1100px', margin: '0 auto', padding: '4rem 2.5rem 7rem' }}
+        style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2.5rem) 7rem' }}
       >
         {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '3.5rem' }}>
+        <div className="work-header" style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginBottom: '3.5rem' }}>
           <div>
             <motion.p
               initial={{ opacity: 0, y: 8 }}

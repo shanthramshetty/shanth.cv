@@ -27,7 +27,7 @@ export default function Navbar({ page, setPage }) {
     }}>
       <div style={{
         maxWidth: '1100px', margin: '0 auto',
-        height: '64px', padding: '0 2.5rem',
+        height: '64px', padding: '0 clamp(1rem, 3.5vw, 2.5rem)',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         {/* Logo */}
@@ -64,9 +64,9 @@ export default function Navbar({ page, setPage }) {
               onClick={() => setPage(link.page)}
               style={{
                 position: 'relative',
-                padding: '0.38rem 1.1rem',
+                padding: 'clamp(0.3rem, 1vw, 0.38rem) clamp(0.6rem, 2.2vw, 1.1rem)',
                 borderRadius: '999px',
-                fontSize: '0.85rem', fontWeight: 500,
+                fontSize: 'clamp(0.75rem, 2.2vw, 0.85rem)', fontWeight: 500,
                 fontFamily: "'Inter', sans-serif",
                 background: 'none', border: 'none', cursor: 'pointer',
                 color: active === link.label ? (dark ? '#000' : '#fff') : (dark ? 'rgba(255,255,255,0.45)' : '#666'),

@@ -204,7 +204,7 @@ export default function FunSection() {
       </section>
 
       {/* ── Photography ── */}
-      <section style={{ padding: '4rem 2.5rem 6rem', maxWidth: '1280px', margin: '0 auto' }}>
+      <section style={{ padding: 'clamp(2.5rem, 5vw, 4rem) clamp(1rem, 4vw, 2.5rem) 6rem', maxWidth: '1280px', margin: '0 auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -221,14 +221,9 @@ export default function FunSection() {
         </motion.div>
 
         {/* Masonry grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gridTemplateRows: '280px 280px 320px',
-          gap: '6px',
-        }}>
+        <div className="photo-masonry">
           {/* Photo 1 — tall, spans 2 rows */}
-          <PhotoTile photo={PHOTOS[0]} style={{ gridRow: 'span 2' }} onClick={() => setLightboxIdx(0)} />
+          <PhotoTile photo={PHOTOS[0]} className="photo-tall" style={{ gridRow: 'span 2' }} onClick={() => setLightboxIdx(0)} />
           {/* Photo 2 */}
           <PhotoTile photo={PHOTOS[1]} onClick={() => setLightboxIdx(1)} />
           {/* Photo 3 */}
@@ -238,7 +233,7 @@ export default function FunSection() {
           {/* Photo 5 */}
           <PhotoTile photo={PHOTOS[4]} onClick={() => setLightboxIdx(4)} />
           {/* Photo 6 — wide, spans all 3 cols */}
-          <PhotoTile photo={PHOTOS[5]} style={{ gridColumn: 'span 3' }} onClick={() => setLightboxIdx(5)} />
+          <PhotoTile photo={PHOTOS[5]} className="photo-wide" style={{ gridColumn: 'span 3' }} onClick={() => setLightboxIdx(5)} />
         </div>
       </section>
 
@@ -279,7 +274,7 @@ export default function FunSection() {
       </section>
 
       {/* ── Design Experiments ── */}
-      <section style={{ padding: '5rem 2.5rem 8rem', maxWidth: '1280px', margin: '0 auto' }}>
+      <section style={{ padding: 'clamp(3rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem) 8rem', maxWidth: '1280px', margin: '0 auto' }}>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -295,11 +290,7 @@ export default function FunSection() {
           </p>
         </motion.div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(5, 1fr)',
-          gap: '10px',
-        }}>
+        <div className="experiment-grid">
           {EXPERIMENTS.map((exp, i) => (
             <motion.div
               key={exp.id}
@@ -412,7 +403,7 @@ export default function FunSection() {
   )
 }
 
-function PhotoTile({ photo, style = {}, onClick }) {
+function PhotoTile({ photo, style = {}, className = '', onClick }) {
   const [hovered, setHovered] = useState(false)
 
   return (
@@ -424,6 +415,7 @@ function PhotoTile({ photo, style = {}, onClick }) {
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      className={className}
       style={{
         borderRadius: '6px',
         overflow: 'hidden',
