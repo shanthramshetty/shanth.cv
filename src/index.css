@@ -71,6 +71,38 @@
   }
 }
 
+/* Work showcase shimmer skeleton */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #1c1c1f 25%, #262629 50%, #1c1c1f 75%);
+  background-size: 600px 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: 6px;
+}
+.skeleton-pulse {
+  animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Horizontal scroll snap */
+.work-scroll {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  scrollbar-width: none;
+}
+.work-scroll::-webkit-scrollbar { display: none; }
+.work-scroll > * { scroll-snap-align: start; flex-shrink: 0; }
+
 /* Loader – DecryptedText styles */
 .loader-quote {
   font-family: 'Space Mono', monospace;

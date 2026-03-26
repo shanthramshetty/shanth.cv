@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
+import WorkShowcase from './WorkShowcase'
 
 /* ─── SVG Mockup Previews ───────────────────────────────────────── */
 
@@ -817,7 +818,10 @@ export default function Work() {
     <main style={{ minHeight: '100vh', background: '#0f0f11', paddingTop: '64px' }}>
       <AnimatePresence mode="wait">
         {!active ? (
-          <WorkListing key="listing" onSelect={handleSelect} />
+          <>
+            <WorkShowcase key="showcase" onSelectProject={null} />
+            <WorkListing key="listing" onSelect={handleSelect} />
+          </>
         ) : (
           <CaseStudyView
             key={active.id}
