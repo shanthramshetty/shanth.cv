@@ -41,6 +41,7 @@ export default function DecryptedText({
   const [isDecrypted, setIsDecrypted] = useState(false)
   const [charColors, setCharColors] = useState([])
   const containerRef = useRef(null)
+  const revealedRef = useRef(new Set())
 
   const availableChars = useMemo(() => (
     useOriginalCharsOnly
@@ -66,6 +67,7 @@ export default function DecryptedText({
   }, [colorized, randomColor, revealedColor])
 
   const triggerDecrypt = useCallback(() => {
+    revealedRef.current = new Set()
     setRevealedIndices(new Set())
     setIsDecrypted(false)
     setIsAnimating(true)
@@ -90,38 +92,34 @@ export default function DecryptedText({
     }
 
     const interval = setInterval(() => {
-      setRevealedIndices(prev => {
-        if (sequential) {
-          if (prev.size < text.length) {
-            const next = getNextIndex(prev)
-            const newSet = new Set(prev)
-            newSet.add(next)
-            const newText = shuffleText(text, newSet)
-            setDisplayText(newText)
-            randomizeColors(newSet, text.length)
-            return newSet
-          } else {
-            clearInterval(interval)
-            setIsAnimating(false)
-            setIsDecrypted(true)
-            onComplete?.()
-            return prev
-          }
+      const prev = revealedRef.current
+      if (sequential) {
+        if (prev.size < text.length) {
+          const next = getNextIndex(prev)
+          const newSet = new Set(prev)
+          newSet.add(next)
+          revealedRef.current = newSet
+          setRevealedIndices(newSet)
+          setDisplayText(shuffleText(text, newSet))
+          randomizeColors(newSet, text.length)
         } else {
-          const newText = shuffleText(text, prev)
-          setDisplayText(newText)
-          randomizeColors(prev, text.length)
-          currentIteration++
-          if (currentIteration >= maxIterations) {
-            clearInterval(interval)
-            setIsAnimating(false)
-            setDisplayText(text)
-            setIsDecrypted(true)
-            onComplete?.()
-          }
-          return prev
+          clearInterval(interval)
+          setIsAnimating(false)
+          setIsDecrypted(true)
+          onComplete?.()
         }
-      })
+      } else {
+        setDisplayText(shuffleText(text, prev))
+        randomizeColors(prev, text.length)
+        currentIteration++
+        if (currentIteration >= maxIterations) {
+          clearInterval(interval)
+          setIsAnimating(false)
+          setDisplayText(text)
+          setIsDecrypted(true)
+          onComplete?.()
+        }
+      }
     }, speed)
 
     return () => clearInterval(interval)
@@ -143,6 +141,7 @@ export default function DecryptedText({
   }, [animateOn, hasAnimated, triggerDecrypt])
 
   useEffect(() => {
+    revealedRef.current = new Set()
     setDisplayText(text)
     setIsDecrypted(false)
     setRevealedIndices(new Set())
