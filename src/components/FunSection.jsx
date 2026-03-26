@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion'
 import LightRays from './LightRays'
 
 const PHOTOS = [
@@ -167,8 +167,27 @@ function SlideVisual({ type, accent }) {
   return null
 }
 
+function ParallaxLayer({ children, speed = 0.4, style = {} }) {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const rawY = useTransform(scrollYProgress, [0, 1], ['0%', `${speed * 100}%`])
+  const y = useSpring(rawY, { stiffness: 80, damping: 20, mass: 0.4 })
+  return (
+    <motion.div ref={ref} style={{ y, ...style }}>
+      {children}
+    </motion.div>
+  )
+}
+
 export default function FunSection() {
   const [lightboxIdx, setLightboxIdx] = useState(null)
+  const heroRef = useRef(null)
+
+  // Hero parallax — text drifts up, rays drift slower
+  const { scrollYProgress: heroScroll } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
+  const heroTextY = useTransform(heroScroll, [0, 1], ['0%', '35%'])
+  const heroRaysY = useTransform(heroScroll, [0, 1], ['0%', '15%'])
+  const heroOpacity = useTransform(heroScroll, [0, 0.7], [1, 0])
 
   const handleKeyDown = (e) => {
     if (lightboxIdx === null) return
@@ -184,7 +203,7 @@ export default function FunSection() {
       tabIndex={-1}
     >
       {/* ── Hero ── */}
-      <section style={{
+      <section ref={heroRef} style={{
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
@@ -193,9 +212,10 @@ export default function FunSection() {
         padding: '6rem 2rem',
         position: 'relative',
         textAlign: 'center',
+        overflow: 'hidden',
       }}>
-        {/* Light Rays background */}
-        <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+        {/* Light Rays — slow parallax layer */}
+        <motion.div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', y: heroRaysY }}>
           <LightRays
             raysOrigin="top-center"
             raysColor="#ffffff"
@@ -208,7 +228,7 @@ export default function FunSection() {
             mouseInfluence={0.08}
             pulsating={false}
           />
-        </div>
+        </motion.div>
 
         {/* breadcrumb */}
         <div style={{
@@ -221,44 +241,50 @@ export default function FunSection() {
           <span style={{ fontSize: '0.65rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)' }}>Creative Playground</span>
         </div>
 
+        {/* Hero text — faster parallax + fade */}
         <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          style={{ maxWidth: '720px', position: 'relative', zIndex: 1 }}
+          style={{ maxWidth: '720px', position: 'relative', zIndex: 1, y: heroTextY, opacity: heroOpacity }}
         >
-          <h1 style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: 'clamp(2.8rem, 6vw, 5.5rem)',
-            fontWeight: 300,
-            fontStyle: 'italic',
-            lineHeight: 1.15,
-            color: '#fff',
-            marginBottom: '2rem',
-          }}>
-            This is where I explore, experiment, and capture moments.
-          </h1>
-          <p style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '0.875rem',
-            color: 'rgba(255,255,255,0.38)',
-            lineHeight: 1.75,
-            maxWidth: '400px',
-            margin: '0 auto',
-          }}>
-            The quintessential taste of design in photography, random experiments, and visual explorations that live outside the brief.
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 32 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h1 style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: 'clamp(2.8rem, 6vw, 5.5rem)',
+              fontWeight: 300,
+              fontStyle: 'italic',
+              lineHeight: 1.15,
+              color: '#fff',
+              marginBottom: '2rem',
+            }}>
+              This is where I explore, experiment, and capture moments.
+            </h1>
+            <p style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '0.875rem',
+              color: 'rgba(255,255,255,0.38)',
+              lineHeight: 1.75,
+              maxWidth: '400px',
+              margin: '0 auto',
+            }}>
+              The quintessential taste of design in photography, random experiments, and visual explorations that live outside the brief.
+            </p>
+          </motion.div>
         </motion.div>
 
         {/* scroll indicator */}
-        <div style={{
-          position: 'absolute', bottom: '2.5rem',
-          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
-          zIndex: 1,
-        }}>
+        <motion.div
+          style={{
+            position: 'absolute', bottom: '2.5rem',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
+            zIndex: 1, opacity: heroOpacity,
+          }}
+        >
           <span style={{ fontSize: '0.6rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)' }}>scroll</span>
           <div style={{ height: '28px', width: '1px', background: 'rgba(255,255,255,0.15)' }} />
-        </div>
+        </motion.div>
       </section>
 
       {/* ── Photography ── */}
@@ -278,20 +304,26 @@ export default function FunSection() {
           </p>
         </motion.div>
 
-        {/* Masonry grid */}
+        {/* Masonry grid — alternating parallax speeds */}
         <div className="photo-masonry">
-          {/* Photo 1 — tall, spans 2 rows */}
-          <PhotoTile photo={PHOTOS[0]} className="photo-tall" style={{ gridRow: 'span 2' }} onClick={() => setLightboxIdx(0)} />
-          {/* Photo 2 */}
-          <PhotoTile photo={PHOTOS[1]} onClick={() => setLightboxIdx(1)} />
-          {/* Photo 3 */}
-          <PhotoTile photo={PHOTOS[2]} onClick={() => setLightboxIdx(2)} />
-          {/* Photo 4 */}
-          <PhotoTile photo={PHOTOS[3]} onClick={() => setLightboxIdx(3)} />
-          {/* Photo 5 */}
-          <PhotoTile photo={PHOTOS[4]} onClick={() => setLightboxIdx(4)} />
-          {/* Photo 6 — wide, spans all 3 cols */}
-          <PhotoTile photo={PHOTOS[5]} className="photo-wide" style={{ gridColumn: 'span 3' }} onClick={() => setLightboxIdx(5)} />
+          <ParallaxLayer speed={-0.08} style={{ gridRow: 'span 2' }}>
+            <PhotoTile photo={PHOTOS[0]} className="photo-tall" style={{ height: '100%' }} onClick={() => setLightboxIdx(0)} />
+          </ParallaxLayer>
+          <ParallaxLayer speed={0.06}>
+            <PhotoTile photo={PHOTOS[1]} onClick={() => setLightboxIdx(1)} />
+          </ParallaxLayer>
+          <ParallaxLayer speed={-0.05}>
+            <PhotoTile photo={PHOTOS[2]} onClick={() => setLightboxIdx(2)} />
+          </ParallaxLayer>
+          <ParallaxLayer speed={0.09}>
+            <PhotoTile photo={PHOTOS[3]} onClick={() => setLightboxIdx(3)} />
+          </ParallaxLayer>
+          <ParallaxLayer speed={-0.04}>
+            <PhotoTile photo={PHOTOS[4]} onClick={() => setLightboxIdx(4)} />
+          </ParallaxLayer>
+          <ParallaxLayer speed={0.05} style={{ gridColumn: 'span 3' }}>
+            <PhotoTile photo={PHOTOS[5]} className="photo-wide" onClick={() => setLightboxIdx(5)} />
+          </ParallaxLayer>
         </div>
       </section>
 
@@ -300,6 +332,7 @@ export default function FunSection() {
         padding: '6rem 2rem',
         background: '#050505',
         textAlign: 'center',
+        overflow: 'hidden',
       }}>
         <motion.blockquote
           initial={{ opacity: 0, y: 24 }}
