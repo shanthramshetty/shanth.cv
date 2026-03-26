@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import LightRays from './LightRays'
 
 const PHOTOS = [
   {
@@ -154,10 +155,27 @@ export default function FunSection() {
         position: 'relative',
         textAlign: 'center',
       }}>
+        {/* Light Rays background */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
+          <LightRays
+            raysOrigin="top-center"
+            raysColor="#ffffff"
+            raysSpeed={0.6}
+            lightSpread={1.2}
+            rayLength={1.8}
+            fadeDistance={0.85}
+            saturation={0.6}
+            followMouse={true}
+            mouseInfluence={0.08}
+            pulsating={false}
+          />
+        </div>
+
         {/* breadcrumb */}
         <div style={{
           position: 'absolute', top: '2rem', left: '2.5rem',
           display: 'flex', gap: '0.4rem', alignItems: 'center',
+          zIndex: 1,
         }}>
           <span style={{ fontSize: '0.65rem', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)' }}>Fun</span>
           <span style={{ color: 'rgba(255,255,255,0.15)', fontSize: '0.7rem' }}>›</span>
@@ -168,7 +186,7 @@ export default function FunSection() {
           initial={{ opacity: 0, y: 32 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          style={{ maxWidth: '720px' }}
+          style={{ maxWidth: '720px', position: 'relative', zIndex: 1 }}
         >
           <h1 style={{
             fontFamily: "'Cormorant Garamond', serif",
@@ -197,6 +215,7 @@ export default function FunSection() {
         <div style={{
           position: 'absolute', bottom: '2.5rem',
           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem',
+          zIndex: 1,
         }}>
           <span style={{ fontSize: '0.6rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.2)' }}>scroll</span>
           <div style={{ height: '28px', width: '1px', background: 'rgba(255,255,255,0.15)' }} />
