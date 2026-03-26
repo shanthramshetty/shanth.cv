@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 
 /* ─── SVG Mockup Previews ───────────────────────────────────────── */
@@ -345,7 +345,7 @@ function FloatingPreview({ hoveredProject }) {
     }
     window.addEventListener('mousemove', onMove)
     return () => window.removeEventListener('mousemove', onMove)
-  }, [])
+  }, [cursorX, cursorY])
 
   return (
     <motion.div

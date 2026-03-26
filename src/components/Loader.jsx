@@ -92,8 +92,13 @@ export default function Loader({ onDone, onStart }) {
   const [decryptDone, setDecryptDone] = useState(false)
   const colorIdxRef = useRef(0)
   const intervalRef = useRef(null)
+  const onStartRef = useRef(onStart)
 
-  const quote = useRef(QUOTES[Math.floor(Math.random() * QUOTES.length)]).current
+  const [quote] = useState(() => QUOTES[Math.floor(Math.random() * QUOTES.length)])
+
+  useEffect(() => {
+    onStartRef.current = onStart
+  }, [onStart])
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
@@ -101,7 +106,7 @@ export default function Loader({ onDone, onStart }) {
       setGlowColor(LIGHT_COLORS[colorIdxRef.current])
     }, 280)
 
-    const hard = setTimeout(() => setVisible(false), 7000)
+    const hard = setTimeout(() => { onStartRef.current?.(); setVisible(false) }, 7000)
     return () => {
       clearInterval(intervalRef.current)
       clearTimeout(hard)

@@ -4,7 +4,7 @@ import Lenis from 'lenis'
 import Navbar from './components/Navbar'
 import Work from './components/Work'
 import AboutPage from './components/About'
-import FunPage from './components/Fun'
+import FunSection from './components/FunSection'
 import ContactPage from './components/Contact'
 import Loader from './components/Loader'
 import './App.css'
@@ -43,7 +43,7 @@ export default function App() {
             <Navbar page={page} setPage={setPage} />
             {page === 'about' && <AboutPage />}
             {page === 'home' && <Work />}
-            {page === 'fun' && <FunPage />}
+            {page === 'fun' && <FunSection />}
             {page === 'contact' && <ContactPage />}
           </motion.div>
         )}
