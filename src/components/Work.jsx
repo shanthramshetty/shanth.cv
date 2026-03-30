@@ -245,10 +245,10 @@ const PROJECTS = [
     tools: 'Figma · FigJam · Notion',
     duration: '4 months',
     hideFields: ['Role', 'Client'],
-    tagline: 'Rebuilding how finance teams see, decide, and act — at enterprise scale.',
-    problem: 'Finance teams, operations leads, and administrators at mid-market companies were stitching together three to five disconnected tools to do work that should be fluid — an ERP for records, a separate approval system, spreadsheets for reconciliation, and email for exceptions. The result: over 40% of working time lost to navigation and manual cross-referencing, core tasks requiring six or more steps, and no unified view of where anything stood. The product had all the data. It just couldn\'t communicate it. The core problem wasn\'t missing features — it was missing clarity, hierarchy, and trust.',
-    approach: 'The first week was deliberately screen-free. I ran user shadowing sessions with finance managers, operations leads, and administrators to observe real workflows — not the documented ones, which bore little resemblance to how work actually happened. From those sessions I built a current-state service blueprint mapping every step, handoff, and failure point across the full transaction lifecycle. The blueprint made the dysfunction legible in a way that verbal descriptions couldn\'t: the sheer volume of context switches was striking when laid end-to-end. I rebuilt the IA around role-based task frequency rather than system modules, restructured the payment and approval flow from six steps to two, and established a component system early — before any high-fidelity screens — so that consistency was built in by default. High-stakes actions (bulk approvals, transaction voids) were designed with two-step confirmation, inline validation, and plain-language error states to reduce both errors and anxiety. Every trade-off between ideal design and engineering constraints was documented and resolved in weekly cross-functional critique sessions.',
-    outcome: 'FluxPay shipped to internal teams and early enterprise clients with zero critical usability issues in the first month of deployment — a direct result of the validation and confirmation architecture. Task completion time dropped by 63%. Satisfaction scores climbed from 2.9 to 4.8 out of 5. The design system became the shared foundation across three product teams. The deeper result: finance teams stopped navigating around the product and started relying on it — the difference between a tool people tolerate and one they trust.',
+    tagline: 'Rebuilding how finance teams see, decide, and act. At enterprise scale.',
+    problem: 'Finance teams, operations leads, and administrators at mid-market companies were stitching together three to five disconnected tools to do work that should be fluid: an ERP for records, a separate approval system, spreadsheets for reconciliation, and email for exceptions. Over 40% of working time was lost to navigation and manual cross-referencing, core tasks required six or more steps, and nobody had a unified view of where anything stood. The product had all the data. It just couldn\'t communicate it. The core problem wasn\'t missing features. It was missing clarity, hierarchy, and trust.',
+    approach: 'The first week was deliberately screen-free. I ran user shadowing sessions with finance managers, operations leads, and administrators to observe real workflows, not the documented ones, which bore little resemblance to how work actually happened. From those sessions I built a current-state service blueprint mapping every step, handoff, and failure point across the full transaction lifecycle. The blueprint made the dysfunction legible in a way verbal descriptions couldn\'t. I rebuilt the IA around role-based task frequency rather than system modules, restructured the payment and approval flow from six steps to two, and established a component system early, before any high-fidelity screens, so consistency was built in by default. High-stakes actions (bulk approvals, transaction voids) were designed with two-step confirmation, inline validation, and plain-language error states to reduce both errors and anxiety. Every trade-off between ideal design and engineering constraints was documented and resolved in weekly cross-functional critique sessions.',
+    outcome: 'FluxPay shipped to internal teams and early enterprise clients with zero critical usability issues in the first month of deployment, a direct result of the validation and confirmation architecture. Task completion time dropped by 63%. Satisfaction scores climbed from 2.9 to 4.8 out of 5. The design system became the shared foundation across three product teams. Finance teams stopped navigating around the product and started relying on it. The difference between a tool people tolerate and one they trust.',
     metrics: [
       { value: '63%', label: 'Task completion time reduced' },
       { value: '4.8', label: 'Satisfaction score (up from 2.9)' },
@@ -265,10 +265,10 @@ const PROJECTS = [
     role: 'Designer & Developer',
     tools: 'Flutter · Figma · Firebase',
     duration: '5 months',
-    tagline: 'Designed and built end-to-end — a turf booking platform that eliminates the friction between finding a sports venue and walking onto the pitch.',
-    problem: 'Sports and recreational infrastructure is abundant — but booking it is broken. Players looking for turf time face a fragmented reality: venues share availability via WhatsApp groups, manually updated social posts, or not at all. There is no reliable way to know whether a slot is free, what it costs, or whether a booking is confirmed until someone picks up a phone. For turf owners, the problem exists in reverse — no visibility into real-time occupancy, no structured payment flow, and high no-show rates because there is no formal confirmation system. The booking experience was not just inconvenient — it was fundamentally untrustworthy.',
-    approach: 'Before designing a single screen, I mapped the full booking lifecycle from both sides of the platform — player intent to turf owner confirmation — through interviews with players and venue owners. The central finding: the problem was not the number of steps, it was the uncertainty embedded in each one. Players did not know if a slot was genuinely available, what the confirmed price would be, or whether their booking was real. The design solution focused on eliminating ambiguity at every touchpoint: real-time availability states, inline pricing that never changed at checkout, and immediate booking confirmations with clear next steps. Flutter was selected to deliver native-quality performance on iOS and Android from a single codebase — ensuring design decisions were never constrained by platform fragmentation.',
-    outcome: 'PlayConnect shipped as a fully functional cross-platform mobile application. The real-time availability system eliminated the primary source of booking abandonment. The guided booking flow — discovery through confirmation in five steps — reduced the cognitive load that caused drop-off in comparable booking experiences. As a solo end-to-end project, PlayConnect is the clearest demonstration of my ability to own a product from first-principle research through shipped Flutter code — bridging design thinking and engineering execution without losing quality on either side.',
+    tagline: 'Designed and built end-to-end. A turf booking platform that eliminates the friction between finding a sports venue and walking onto the pitch.',
+    problem: 'Sports and recreational infrastructure is abundant, but booking it is broken. Players looking for turf time face a fragmented reality: venues share availability via WhatsApp groups, manually updated social posts, or not at all. There is no reliable way to know whether a slot is free, what it costs, or whether a booking is confirmed until someone picks up a phone. For turf owners, the problem exists in reverse: no visibility into real-time occupancy, no structured payment flow, and high no-show rates because there is no formal confirmation system. The booking experience was not just inconvenient. It was fundamentally untrustworthy.',
+    approach: 'Before designing a single screen, I mapped the full booking lifecycle from both sides of the platform, from player intent to turf owner confirmation, through interviews with players and venue owners. The central finding: the problem was not the number of steps, it was the uncertainty embedded in each one. Players did not know if a slot was genuinely available, what the confirmed price would be, or whether their booking was real. The design solution focused on eliminating ambiguity at every touchpoint: real-time availability states, inline pricing that never changed at checkout, and immediate booking confirmations with clear next steps. Flutter was selected to deliver native-quality performance on iOS and Android from a single codebase, ensuring design decisions were never constrained by platform fragmentation.',
+    outcome: 'PlayConnect shipped as a fully functional cross-platform mobile application. The real-time availability system eliminated the primary source of booking abandonment. The guided booking flow, from discovery through confirmation in five steps, reduced the cognitive load that caused drop-off in comparable booking experiences. As a solo end-to-end project, PlayConnect is the clearest demonstration of my ability to own a product from first-principle research through shipped Flutter code, bridging design thinking and engineering execution without losing quality on either side.',
     metrics: [
       { value: '5 steps', label: 'Discovery to confirmed booking' },
       { value: 'Flutter', label: 'Cross-platform — iOS & Android, single codebase' },
@@ -286,9 +286,9 @@ const PROJECTS = [
     tools: 'Figma · Maze · Miro',
     duration: '3 months',
     tagline: 'Making AI outputs legible, trustworthy, and actionable.',
-    problem: 'Users of the AI analytics product were overwhelmed by dense, unexplained data outputs with no narrative structure or progressive disclosure. Trust in the system was critically low — users couldn\'t understand why the AI made certain recommendations, so they ignored them entirely. The product had strong ML infrastructure but a broken human layer.',
-    approach: 'Rather than jumping to visual redesign, I started by mapping the specific moments where trust collapsed — using Maze unmoderated tests and async interview recordings. The core insight: users needed to understand confidence, not just conclusions. I introduced a tiered confidence indicator system, contextual tooltips tied to model decisions, and a layered disclosure model that let power users drill down without overwhelming casual users. Data visualisation was rebuilt with narrative hierarchy as the primary goal, not data density.',
-    outcome: 'Feature adoption increased by 47% within six weeks of launch. Support tickets related to AI confusion dropped by 38%. Users reported a 2× improvement in perceived understanding of AI recommendations — turning a trust problem into a product differentiator.',
+    problem: 'Users of the AI analytics product were overwhelmed by dense, unexplained data outputs with no narrative structure or progressive disclosure. Trust in the system was critically low. Users couldn\'t understand why the AI made certain recommendations, so they ignored them entirely. The product had strong ML infrastructure but a broken human layer.',
+    approach: 'Rather than jumping to visual redesign, I started by mapping the specific moments where trust collapsed, using Maze unmoderated tests and async interview recordings. The core insight: users needed to understand confidence, not just conclusions. I introduced a tiered confidence indicator system, contextual tooltips tied to model decisions, and a layered disclosure model that let power users drill down without overwhelming casual users. Data visualisation was rebuilt with narrative hierarchy as the primary goal, not data density.',
+    outcome: 'Feature adoption increased by 47% within six weeks of launch. Support tickets related to AI confusion dropped by 38%. Users reported a 2× improvement in perceived understanding of AI recommendations, turning a trust problem into a product differentiator.',
     metrics: [
       { value: '+47%', label: 'Feature adoption increase' },
       { value: '−38%', label: 'Support ticket reduction' },
@@ -306,8 +306,8 @@ const PROJECTS = [
     tools: 'Figma · Storybook · Confluence',
     duration: '5 months',
     tagline: 'One source of truth for a multi-product organisation.',
-    problem: 'Five product teams were designing and shipping in silos — inconsistent UI patterns, duplicated effort, and no shared vocabulary between design and engineering. Users who moved across products encountered jarring inconsistencies, and designers were spending a significant portion of each sprint rebuilding components that already existed elsewhere.',
-    approach: 'I ran a comprehensive UI audit across all five products to inventory what existed, what overlapped, and what contradicted. From there I defined a full token architecture — colour, typography, spacing, elevation, and motion — as the foundation before touching any components. Built a living Figma library of 200+ components with explicit usage guidelines, then mirrored the system in Storybook so engineering had a single documented reference. Adoption was rolled out product-by-product with embedded support to prevent the "we\'ll migrate later" trap.',
+    problem: 'Five product teams were designing and shipping in silos, with inconsistent UI patterns, duplicated effort, and no shared vocabulary between design and engineering. Users who moved across products encountered jarring inconsistencies, and designers were spending a significant portion of each sprint rebuilding components that already existed elsewhere.',
+    approach: 'I ran a comprehensive UI audit across all five products to inventory what existed, what overlapped, and what contradicted. From there I defined a full token architecture, covering colour, typography, spacing, elevation, and motion, as the foundation before touching any components. Built a living Figma library of 200+ components with explicit usage guidelines, then mirrored the system in Storybook so engineering had a single documented reference. Adoption was rolled out product-by-product with embedded support to prevent the "we\'ll migrate later" trap.',
     outcome: 'Design-to-dev handoff time reduced by 50%. Cross-team design consistency score reached 94%. Eight designers across five products now work from a single shared library, with zero drift between Figma and production components.',
     metrics: [
       { value: '50%', label: 'Handoff time reduction' },
@@ -326,9 +326,9 @@ const PROJECTS = [
     tools: 'Figma · Hotjar · Maze',
     duration: '8 weeks',
     tagline: 'Turning a leaky checkout funnel into a conversion engine.',
-    problem: 'The client\'s e-commerce store had a 78% cart abandonment rate — significantly above the category average. Hotjar session recordings pointed to the same two moments: the address step and the payment stage. Users were hitting cognitive overload and bailing, not because they didn\'t want to buy, but because the product was failing them at the moment of highest intent.',
-    approach: 'I began with a full heuristic evaluation and reviewed 120+ hours of session recordings to map exactly where attention fragmented. The diagnosis: too many fields on a single screen, no sense of progress, missing trust signals at the highest-anxiety touchpoints. I redesigned checkout as a linear, single-focus journey — one task per screen — with progress indicators, smart autofill, real-time inline validation, and trust signals placed precisely at the moments users hesitated. Each screen was tested with Maze before finalising.',
-    outcome: 'Cart abandonment dropped from 78% to 41%. Revenue per session increased by 29%. Average time-to-checkout reduced by 35% — turning the highest-friction part of the product into a genuine competitive advantage.',
+    problem: 'The client\'s e-commerce store had a 78% cart abandonment rate, significantly above the category average. Hotjar session recordings pointed to the same two moments: the address step and the payment stage. Users were hitting cognitive overload and bailing, not because they didn\'t want to buy, but because the product was failing them at the moment of highest intent.',
+    approach: 'I began with a full heuristic evaluation and reviewed 120+ hours of session recordings to map exactly where attention fragmented. The diagnosis: too many fields on a single screen, no sense of progress, missing trust signals at the highest-anxiety touchpoints. I redesigned checkout as a linear, single-focus journey, one task per screen, with progress indicators, smart autofill, real-time inline validation, and trust signals placed precisely at the moments users hesitated. Each screen was tested with Maze before finalising.',
+    outcome: 'Cart abandonment dropped from 78% to 41%. Revenue per session increased by 29%. Average time-to-checkout reduced by 35%, turning the highest-friction part of the product into a genuine competitive advantage.',
     metrics: [
       { value: '−37pp', label: 'Cart abandonment reduction' },
       { value: '+29%', label: 'Revenue per session increase' },
@@ -346,8 +346,8 @@ const PROJECTS = [
     tools: 'Figma · Flutter · Firebase',
     duration: '3 months',
     tagline: 'A cross-platform internal tool that field teams actually use.',
-    problem: 'NeST\'s field operations team relied on spreadsheets and WhatsApp to coordinate daily tasks. Information was scattered across channels, critical updates were missed with no accountability mechanism, and supervisors had no real-time visibility into field status. The team needed a real product — not a form repackaged as an app.',
-    approach: 'Before opening Figma, I spent two weeks embedded with the field team — riding along on daily routes, observing handoff moments, and documenting the exact information flows that happened informally. I identified three core jobs-to-be-done and designed a minimal, task-first interface around them. Offline-first support was treated as a non-negotiable from day one given field connectivity. I collaborated directly with the Flutter developers throughout — designing within component feasibility constraints rather than handing off aspirational specs they couldn\'t build.',
+    problem: 'NeST\'s field operations team relied on spreadsheets and WhatsApp to coordinate daily tasks. Information was scattered across channels, critical updates were missed with no accountability mechanism, and supervisors had no real-time visibility into field status. The team needed a real product, not a form repackaged as an app.',
+    approach: 'Before opening Figma, I spent two weeks embedded with the field team, riding along on daily routes, observing handoff moments, and documenting the exact information flows that happened informally. I identified three core jobs-to-be-done and designed a minimal, task-first interface around them. Offline-first support was treated as a non-negotiable from day one given field connectivity. I collaborated directly with the Flutter developers throughout, designing within component feasibility constraints rather than handing off aspirational specs they couldn\'t build.',
     outcome: 'Adopted by 120+ field staff within two months. Spreadsheet and WhatsApp dependency eliminated across three departments. Won the internal recognition award for best tooling project of the year.',
     metrics: [
       { value: '120+', label: 'Field staff adopted the app' },
@@ -366,10 +366,10 @@ const PROJECTS = [
     tools: 'React · Node.js · Figma',
     duration: 'Ongoing',
     url: 'https://www.eventurox.in/',
-    tagline: 'A fully live event discovery and booking platform — designed and built end to end.',
-    problem: 'Discovering and booking local events was fragmented across Instagram, word of mouth, and outdated listing pages. Independent organisers had no clean, credible channel to reach their audience, and potential attendees had no reliable way to find what was happening nearby — especially for niche communities. The gap was clear, and no one had closed it well.',
-    approach: 'I treated this as a real product, not a portfolio piece. Started with user interviews across two sides of the marketplace — event-goers and organisers — to define the minimum viable flows for both. Designed the full product in Figma: IA, user flows, brand identity, and UI system. Then built it end to end — React on the frontend, Node.js on the backend, with a mobile-first responsive layout as the baseline. Shipping decisions were driven by real usage data, not assumptions.',
-    outcome: 'Eventurox is live at eventurox.in and actively used. The platform supports event creation, discovery, filtering, and registration. Built solo from zero to production — the clearest evidence I have of owning a product from first principles to final delivery.',
+    tagline: 'A fully live event discovery and booking platform, designed and built end to end.',
+    problem: 'Discovering and booking local events was fragmented across Instagram, word of mouth, and outdated listing pages. Independent organisers had no clean, credible channel to reach their audience, and potential attendees had no reliable way to find what was happening nearby, especially for niche communities. The gap was clear, and no one had closed it well.',
+    approach: 'I treated this as a real product, not a portfolio piece. Started with user interviews across two sides of the marketplace, event-goers and organisers, to define the minimum viable flows for both. Designed the full product in Figma: IA, user flows, brand identity, and UI system. Then built it end to end. React on the frontend, Node.js on the backend, with a mobile-first responsive layout as the baseline. Shipping decisions were driven by real usage data, not assumptions.',
+    outcome: 'Eventurox is live at eventurox.in and actively used. The platform supports event creation, discovery, filtering, and registration. Built solo from zero to production, the clearest evidence I have of owning a product from first principles to final delivery.',
     metrics: [
       { value: '100%', label: 'Designed & built solo' },
       { value: 'Live', label: 'Production deployment' },
@@ -940,8 +940,8 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
           <div style={CENTER}>
             <p style={LABEL}>The Problem</p>
             <h2 style={H2}>Fragmented systems, high stakes, zero clarity</h2>
-            <p style={BODY}>Finance teams at mid-market companies typically operate across three to five disconnected tools — an ERP for records, a separate approval system, spreadsheets for reconciliation, and email for exceptions. Critical information lives everywhere, approval bottlenecks go undetected until they become emergencies, and nobody has a reliable view of where anything stands.</p>
-            <p style={{ ...BODY, marginBottom: 0 }}>The product had all the data. It just couldn't communicate it. The problem wasn't missing features — it was missing <strong style={{ color: '#1a1a1a', fontWeight: 600 }}>clarity, hierarchy, and trust</strong>.</p>
+            <p style={BODY}>Finance teams at mid-market companies typically operate across three to five disconnected tools: an ERP for records, a separate approval system, spreadsheets for reconciliation, and email for exceptions. Critical information lives everywhere, approval bottlenecks go undetected until they become emergencies, and nobody has a reliable view of where anything stands.</p>
+            <p style={{ ...BODY, marginBottom: 0 }}>The product had all the data. It just couldn't communicate it. The problem wasn't missing features. It was missing <strong style={{ color: '#1a1a1a', fontWeight: 600 }}>clarity, hierarchy, and trust</strong>.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginTop: '3.5rem' }}>
             {[
@@ -964,12 +964,12 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
           <div style={CENTER}>
             <p style={LABEL}>Users & Insights</p>
             <h2 style={H2}>Three roles, one broken workflow</h2>
-            <p style={{ ...BODY, marginBottom: '3.5rem' }}>Research ran across three distinct roles through stakeholder interviews, user shadowing, and task analysis. Each had different goals and different failure points — but all were being failed by the same root cause: not a lack of data, but a lack of structured hierarchy that made the right data surfaceable at the right moment.</p>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>Research ran across three distinct roles through stakeholder interviews, user shadowing, and task analysis. Each had different goals and different failure points, but all were being failed by the same root cause: not a lack of data, but a lack of structured hierarchy that made the right data surfaceable at the right moment.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
             {[
               { role: 'Finance Managers', goal: 'Real-time visibility into cash flow, pending approvals, and flagged transactions.', pain: 'Spent more time finding information than acting on it.', color: '#3b82f6' },
-              { role: 'Operations Leads', goal: 'Submit, track, and escalate requests without chasing email threads.', pain: 'The approval process was a black box — requests disappeared with no status update.', color: '#8b5cf6' },
+              { role: 'Operations Leads', goal: 'Submit, track, and escalate requests without chasing email threads.', pain: 'The approval process was a black box. Requests disappeared with no status update.', color: '#8b5cf6' },
               { role: 'Administrators', goal: 'Configure workflows, manage permissions, and generate compliance reports.', pain: 'Every configuration change required IT involvement. No recovery path for mistakes.', color: '#0ea5e9' },
             ].map(({ role, goal, pain, color }) => (
               <div key={role} style={{ background: '#fafafa', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
@@ -993,8 +993,8 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
           <div style={CENTER}>
             <p style={LABEL}>The Approach</p>
             <h2 style={H2}>Problem before pixels</h2>
-            <p style={BODY}>The first week was deliberately screen-free. I ran shadowing sessions with each user group to observe real workflows — not the documented ones, which bore little resemblance to how work actually happened. From those sessions I built a current-state service blueprint mapping every step, handoff, and failure point across the full transaction lifecycle.</p>
-            <p style={{ ...BODY, marginBottom: '3.5rem' }}>The IA was rebuilt around role-based task frequency rather than system modules. The design process ran in parallel with engineering — weekly critique sessions pressure-tested trade-offs between ideal UX and technical constraints. A component system was built before any high-fidelity screens, so consistency was structural rather than enforced after the fact.</p>
+            <p style={BODY}>The first week was deliberately screen-free. I ran shadowing sessions with each user group to observe real workflows, not the documented ones, which bore little resemblance to how work actually happened. From those sessions I built a current-state service blueprint mapping every step, handoff, and failure point across the full transaction lifecycle.</p>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>The IA was rebuilt around role-based task frequency rather than system modules. The design process ran in parallel with engineering. Weekly critique sessions pressure-tested trade-offs between ideal UX and technical constraints. A component system was built before any high-fidelity screens, so consistency was structural rather than enforced after the fact.</p>
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: '0' }}>
             {['User Shadowing', 'Service Blueprint', 'IA Rebuild', 'Component System', 'Prototype & Test', 'Ship'].map((step, i, arr) => (
@@ -1017,12 +1017,12 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
             <p style={LABEL}>Workflow Simplification</p>
             <h2 style={H2}>From six steps to two</h2>
             <p style={BODY}>The most impactful change was restructuring the payment request and approval flow. In the original system, submitting a request required navigating three separate screens, manually cross-referencing a budget code in a separate module, and awaiting email confirmation before an approver could even begin their process.</p>
-            <p style={{ ...BODY, marginBottom: '3.5rem' }}>The redesigned flow consolidates everything into a single progressive form — budget data surfaces inline, smart validation catches errors before submission, and the approval interface presents all necessary context at the point of decision. The guiding principle: <em style={{ color: '#1a1a1a', fontStyle: 'italic' }}>reduce the distance between intent and action</em>.</p>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>The redesigned flow consolidates everything into a single progressive form. Budget data surfaces inline, smart validation catches errors before submission, and the approval interface presents all necessary context at the point of decision. The guiding principle: <em style={{ color: '#1a1a1a', fontStyle: 'italic' }}>reduce the distance between intent and action</em>.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
             <div style={{ background: '#fff5f5', border: '1px solid #fecdd3', borderRadius: '10px', padding: '2rem 1.75rem' }}>
               <p style={{ fontSize: '0.6rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#e11d48', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1.25rem' }}>Before</p>
-              {['Navigate to the correct module', 'Locate the right form', 'Open budget tool in a separate tab', 'Cross-reference and fill manually', 'Submit — await email confirmation', 'Approver re-logs in separately to action'].map((s, i) => (
+              {['Navigate to the correct module', 'Locate the right form', 'Open budget tool in a separate tab', 'Cross-reference and fill manually', 'Submit, await email confirmation', 'Approver re-logs in separately to action'].map((s, i) => (
                 <div key={s} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.7rem' }}>
                   <div style={{ minWidth: '20px', height: '20px', borderRadius: '50%', background: '#fee2e2', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '1px' }}>
                     <span style={{ fontSize: '0.58rem', color: '#e11d48', fontWeight: 700 }}>{i + 1}</span>
@@ -1036,7 +1036,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
             </div>
             <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '10px', padding: '2rem 1.75rem' }}>
               <p style={{ fontSize: '0.6rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#16a34a', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1.25rem' }}>After</p>
-              {['Open progressive form — budget data surfaces inline', 'Review summary & confirm'].map((s, i) => (
+              {['Open progressive form, budget data surfaces inline', 'Review summary & confirm'].map((s, i) => (
                 <div key={s} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.7rem' }}>
                   <div style={{ minWidth: '20px', height: '20px', borderRadius: '50%', background: '#dcfce7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '1px' }}>
                     <span style={{ fontSize: '0.58rem', color: '#16a34a', fontWeight: 700 }}>{i + 1}</span>
@@ -1062,9 +1062,9 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
             {[
-              { title: 'Dashboard Architecture', body: 'Designed as a role-aware command centre — the most time-sensitive items (pending approvals, flagged transactions, budget alerts) surface first. Every widget is actionable, not decorative.', tradeoff: 'Scoped to 3 pre-set role views for v1. Fully dynamic personalisation deferred to phase 2, with architecture designed to support it.' },
-              { title: 'Navigation Model', body: 'Persistent left-rail replaced a top-nav/breadcrumb hybrid with no clear hierarchy. Finance tools are used in extended sessions — persistent nav reduces reorientation cost across a long working day.', tradeoff: 'Mobile collapses to a drawer pattern. Optimised explicitly for the approval flow on mobile, not full feature parity.' },
-              { title: 'Data Presentation', body: 'Strict hierarchy: primary metrics in large high-contrast type, supporting context in secondary weight. Tables show only the most task-relevant columns by default.', tradeoff: 'Power users wanted more data visible by default. Saved views were introduced — individual column configurations persisted per user — rather than increasing default density.' },
+              { title: 'Dashboard Architecture', body: 'Designed as a role-aware command centre. The most time-sensitive items (pending approvals, flagged transactions, budget alerts) surface first. Every widget is actionable, not decorative.', tradeoff: 'Scoped to 3 pre-set role views for v1. Fully dynamic personalisation deferred to phase 2, with architecture designed to support it.' },
+              { title: 'Navigation Model', body: 'Persistent left-rail replaced a top-nav/breadcrumb hybrid with no clear hierarchy. Finance tools are used in extended sessions, so persistent nav reduces reorientation cost across a long working day.', tradeoff: 'Mobile collapses to a drawer pattern. Optimised explicitly for the approval flow on mobile, not full feature parity.' },
+              { title: 'Data Presentation', body: 'Strict hierarchy: primary metrics in large high-contrast type, supporting context in secondary weight. Tables show only the most task-relevant columns by default.', tradeoff: 'Power users wanted more data visible by default. Saved views were introduced, with individual column configurations persisted per user, rather than increasing default density.' },
             ].map(({ title, body, tradeoff }) => (
               <div key={title} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
                 <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.25rem', color: '#1a1a1a', marginBottom: '0.85rem', lineHeight: 1.2 }}>{title}</p>
@@ -1115,7 +1115,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
           <div style={CENTER}>
             <p style={LABEL}>Impact & Outcomes</p>
             <h2 style={H2}>What shipped, and what it delivered</h2>
-            <p style={{ ...BODY, marginBottom: '3.5rem' }}>FluxPay shipped to internal teams and early enterprise clients. Zero critical usability issues in the first month of deployment — a direct result of the validation and confirmation architecture built into every high-stakes flow.</p>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>FluxPay shipped to internal teams and early enterprise clients. Zero critical usability issues in the first month of deployment, a direct result of the validation and confirmation architecture built into every high-stakes flow.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginBottom: '3.5rem' }}>
             {project.metrics.map(({ value, label }) => (
@@ -1141,10 +1141,10 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
             {[
-              { title: 'Complexity isn\'t the enemy', body: 'Unexplained complexity is. Finance teams don\'t need simpler data — they need better-structured data. The designer\'s job here is not to remove information, but to make it navigable.' },
-              { title: 'Trust is a design output', body: 'Every micro-decision — confirmation copy, error messages, feedback states — contributes to whether users trust the system enough to depend on it. Trust is accumulated across thousands of consistent small decisions.' },
+              { title: 'Complexity isn\'t the enemy', body: 'Unexplained complexity is. Finance teams don\'t need simpler data. They need better-structured data. The designer\'s job here is not to remove information, but to make it navigable.' },
+              { title: 'Trust is a design output', body: 'Every micro-decision, from confirmation copy to error messages and feedback states, contributes to whether users trust the system enough to depend on it. Trust is accumulated across thousands of consistent small decisions.' },
               { title: 'Constraints produce better design', body: 'Technical and timeline limitations forced prioritisation that resulted in a more focused, coherent product. Real constraints are the closest proxy to the conditions under which great products are actually built.' },
-              { title: 'Design systems are product decisions', body: 'Building the component system before high-fidelity work began meant every screen was consistent by default. The engineering handoff had near-zero ambiguity — which compounds directly into shipping velocity.' },
+              { title: 'Design systems are product decisions', body: 'Building the component system before high-fidelity work began meant every screen was consistent by default. The engineering handoff had near-zero ambiguity, which compounds directly into shipping velocity.' },
             ].map(({ title, body }, i) => (
               <div key={title} style={{ padding: '2.25rem', borderBottom: i < 2 ? '1px solid #eee' : 'none', borderRight: i % 2 === 0 ? '1px solid #eee' : 'none' }}>
                 <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.2rem', color: '#1a1a1a', marginBottom: '0.65rem', lineHeight: 1.25 }}>{title}</p>
@@ -1262,8 +1262,8 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
           <div style={CENTER}>
             <p style={LABEL}>The Problem</p>
             <h2 style={H2}>Booking a turf should not require a phone call</h2>
-            <p style={BODY}>Sports and recreational infrastructure is abundant — but booking it is broken. Players looking for turf time face a fragmented reality: venues share availability via WhatsApp groups, manually updated social posts, or not at all. There is no reliable way to know whether a slot is free, what it costs, or whether a booking is confirmed.</p>
-            <p style={{ ...BODY, marginBottom: 0 }}>For turf owners, the problem exists in reverse — no visibility into real-time occupancy, no structured payment flow, and high no-show rates because there is no formal confirmation system. The booking experience is not just inconvenient — it is <strong style={{ color: '#1a1a1a', fontWeight: 600 }}>fundamentally untrustworthy</strong>.</p>
+            <p style={BODY}>Sports and recreational infrastructure is abundant, but booking it is broken. Players looking for turf time face a fragmented reality: venues share availability via WhatsApp groups, manually updated social posts, or not at all. There is no reliable way to know whether a slot is free, what it costs, or whether a booking is confirmed.</p>
+            <p style={{ ...BODY, marginBottom: 0 }}>For turf owners, the problem exists in reverse: no visibility into real-time occupancy, no structured payment flow, and high no-show rates because there is no formal confirmation system. The booking experience is not just inconvenient. It is <strong style={{ color: '#1a1a1a', fontWeight: 600 }}>fundamentally untrustworthy</strong>.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginTop: '3.5rem' }}>
             {[
@@ -1286,7 +1286,7 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
           <div style={CENTER}>
             <p style={LABEL}>Users & Pain Points</p>
             <h2 style={H2}>Two sides of the same broken system</h2>
-            <p style={{ ...BODY, marginBottom: '3.5rem' }}>Research surfaced two distinct user groups with mirrored problems. Players could not find or trust available slots. Turf owners could not communicate availability or confirm bookings reliably. Every pain point traced back to the same root cause: the absence of a single shared, real-time truth about slot availability.</p>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>Research surfaced two distinct user groups with mirrored problems. Players could not find or trust available slots. Turf owners could not communicate availability or confirm bookings reliably. Every pain point traced back to the same root: the absence of a single shared, real-time truth about slot availability.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
             {[
@@ -1338,8 +1338,8 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
           <div style={CENTER}>
             <p style={LABEL}>The Approach</p>
             <h2 style={H2}>Remove uncertainty before reducing steps</h2>
-            <p style={BODY}>Before designing a single screen, I mapped the full booking lifecycle from both sides — player intent to turf owner confirmation — through user interviews. The central finding: the problem was not the number of steps, it was the uncertainty embedded in each one. Players did not know if a slot was genuinely available, what the confirmed price would be, or whether their booking was real.</p>
-            <p style={{ ...BODY, marginBottom: '3.5rem' }}>The design solution focused on eliminating ambiguity at every touchpoint. Flutter was selected to deliver native-quality performance on both iOS and Android from a single codebase — ensuring the design was never compromised by platform-specific fragmentation.</p>
+            <p style={BODY}>Before designing a single screen, I mapped the full booking lifecycle from both sides, from player intent to turf owner confirmation, through user interviews. The finding was consistent: the problem was not the number of steps, it was the uncertainty embedded in each one. Players did not know if a slot was genuinely available, what the confirmed price would be, or whether their booking was real.</p>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>The design focused on eliminating ambiguity at every touchpoint. Flutter was selected to deliver native-quality performance on both iOS and Android from a single codebase, so design decisions were never constrained by platform fragmentation.</p>
           </div>
           {/* User flow */}
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: 0 }}>
@@ -1366,10 +1366,10 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.25rem' }}>
             {[
-              { title: 'Real-Time Slot Visibility', body: 'Slots update live — booked slots appear greyed out and non-interactive immediately after a booking completes. Players never navigate through a flow only to find their chosen slot is unavailable at the point of payment.', why: 'Eliminated the primary cause of booking abandonment: discovering unavailability after intent and effort had already been invested.' },
-              { title: 'Simplified Booking Flow', body: 'The full booking journey — discovery to confirmation — completes in five steps with a single, focused screen per decision. No account required to browse; payment is the only friction gate.', why: 'Reduced cognitive load by scoping each screen to one decision, eliminating the paralysis of too many simultaneous choices.' },
+              { title: 'Real-Time Slot Visibility', body: 'Slots update live. Booked slots appear greyed out and non-interactive immediately after a booking completes. Players never navigate through a flow only to find their chosen slot is unavailable at the point of payment.', why: 'Eliminated the primary cause of booking abandonment: discovering unavailability after intent and effort had already been invested.' },
+              { title: 'Simplified Booking Flow', body: 'The full booking journey, from discovery to confirmation, completes in five steps with a single, focused screen per decision. No account required to browse; payment is the only friction gate.', why: 'Reduced cognitive load by scoping each screen to one decision, eliminating the paralysis of too many simultaneous choices.' },
               { title: 'Mobile-First, Flutter-Built', body: 'Designed and built with mobile as the primary context. Flutter\'s single codebase ensured pixel-level design consistency across iOS and Android without duplicating any design or engineering decisions.', why: 'Players book on mobile, in the field, often with one hand. The UI was optimised for thumb reach, glanceability, and fast recovery from errors.' },
-              { title: 'Transparent, Fixed Pricing', body: 'Slot prices are displayed on the discovery screen and never change during checkout. No hidden fees, no price reveal at payment — the number the player sees at the start is the number they pay.', why: 'Trust collapses when prices change between screens. Transparent pricing removed the final reason for checkout abandonment.' },
+              { title: 'Transparent, Fixed Pricing', body: 'Slot prices are displayed on the discovery screen and never change during checkout. No hidden fees, no price reveal at payment. The number the player sees at the start is the number they pay.', why: 'Trust collapses when prices change between screens. Transparent pricing removed the final reason for checkout abandonment.' },
             ].map(({ title, body, why }) => (
               <div key={title} style={{ background: '#fafafa', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
                 <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.25rem', color: '#1a1a1a', marginBottom: '0.85rem', lineHeight: 1.2 }}>{title}</p>
@@ -1417,11 +1417,11 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
           <div style={CENTER}>
             <p style={LABEL}>Edge Cases & System States</p>
             <h2 style={H2}>Designing for what goes wrong</h2>
-            <p style={{ ...BODY, marginBottom: '3.5rem' }}>Real-world product quality is measured in edge cases. A booking platform without graceful failure handling creates distrust at exactly the moments users need reassurance most — when something unexpected happens between intent and confirmation.</p>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>Real-world product quality is measured in edge cases. A booking platform without graceful failure handling creates distrust at exactly the moments users need it most, right when something unexpected happens between intent and confirmation.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             {[
-              { state: 'No Availability', handling: 'Turf detail screens show a clear "No slots available for this date" state with a date-change prompt — never a blank slot grid with no explanation of why it\'s empty.' },
+              { state: 'No Availability', handling: 'Turf detail screens show a clear "No slots available for this date" state with a date-change prompt, never a blank slot grid with no explanation of why it\'s empty.' },
               { state: 'Slot Already Booked', handling: 'If a slot is claimed by another user during selection, the slot updates in real time with a toast notification explaining the conflict and surfacing the nearest alternative.' },
               { state: 'Payment Failure', handling: 'Clear, plain-language error state with the specific reason for failure, a retry path, and an alternative payment method prompt — no dead end, no generic "something went wrong".' },
               { state: 'Network Loss', handling: 'Booking progress is preserved locally. A persistent banner indicates offline state. Confirmation only sends once connectivity is restored — no silent failures, no data loss.' },
@@ -1449,11 +1449,11 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
           <div style={CENTER}>
             <p style={LABEL}>Trust & Experience</p>
             <h2 style={H2}>Designing for confidence, not just completion</h2>
-            <p style={{ ...BODY, marginBottom: '3.5rem' }}>A booking product lives or dies on trust. Every interaction pattern in PlayConnect was designed to reduce anxiety, not just friction — because friction you understand is survivable. Uncertainty is not.</p>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>A booking product lives or dies on trust. Every interaction pattern in PlayConnect was designed to reduce anxiety, not just friction. Friction you understand is survivable. Uncertainty is not.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             {[
-              { title: 'Immediate Confirmations', body: 'Booking confirmation appears within seconds of payment — with a reference number, venue name, slot time, and directions link. Players have everything they need before closing the app.' },
+              { title: 'Immediate Confirmations', body: 'Booking confirmation appears within seconds of payment, with a reference number, venue name, slot time, and directions link. Players have everything they need before closing the app.' },
               { title: 'Transparent Pricing', body: 'Slot prices are shown at discovery, repeated on the detail screen, and confirmed at checkout. The number never changes. No fees revealed at the last step.' },
               { title: 'Consistent System Feedback', body: 'Every action — slot selection, form completion, payment submission — receives immediate visual feedback. Loading states are never empty; they communicate exactly what\'s happening.' },
               { title: 'Clear Cancellation Rules', body: 'Cancellation policy is surfaced at slot selection, before payment. Users understand the terms before they commit — removing the need to dispute after the fact.' },
@@ -1479,8 +1479,8 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
           <div style={CENTER}>
             <p style={LABEL}>Development</p>
             <h2 style={H2}>Designed and built end-to-end in Flutter</h2>
-            <p style={BODY}>PlayConnect is not a design handoff — it is a shipped product. I handled every layer: user research, information architecture, UI design in Figma, and full cross-platform development in Flutter. The app runs natively on iOS and Android from a single codebase.</p>
-            <p style={{ ...BODY, marginBottom: '3.5rem' }}>Building the product I designed eliminated the gap between design intent and engineering reality. Real-time slot updates, optimistic UI patterns, and smooth animation transitions were decisions made with full awareness of both what was ideal and what was implementable — not aspirational specs handed off to a separate team.</p>
+            <p style={BODY}>PlayConnect is not a design handoff. It is a shipped product. I handled every layer: user research, information architecture, UI design in Figma, and full cross-platform development in Flutter. The app runs natively on iOS and Android from a single codebase.</p>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>Building the product I designed eliminated the gap between design intent and engineering reality. Real-time slot updates, optimistic UI patterns, and smooth transitions were decisions made with full awareness of both what was ideal and what was implementable, not specs handed off to a separate team.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
             {[
@@ -1529,9 +1529,9 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
             {[
-              { title: 'Real-time systems need design for latency', body: 'When slot availability updates live, there are moments of uncertainty between a user\'s action and the system\'s response. Designing for those micro-moments — optimistic UI, loading states, conflict resolution — is what separates a product that feels fast from one that feels broken.' },
-              { title: 'Complexity hides in flows, not screens', body: 'The individual screens in PlayConnect are simple. The complexity is in the transitions — how state is preserved across steps, how conflicts are communicated, how recovery works without forcing a full restart. Designing flows, not just screens, is the real work.' },
-              { title: 'Design + development is a force multiplier', body: 'Building what I designed eliminated weeks of ambiguity that typically live in handoff. Decisions about animations, state handling, and edge cases were made once, correctly, with full context of both what was ideal and what was implementable.' },
+              { title: 'Real-time systems need design for latency', body: 'When slot availability updates live, there are moments of uncertainty between a user\'s action and the system\'s response. Designing for those micro-moments, optimistic UI, loading states, conflict resolution, is what separates a product that feels fast from one that feels broken.' },
+              { title: 'Complexity hides in flows, not screens', body: 'The individual screens in PlayConnect are simple. The complexity is in the transitions: how state is preserved across steps, how conflicts are communicated, how recovery works without forcing a full restart. Designing flows, not just screens, is the real work.' },
+              { title: 'Design + development is a force multiplier', body: 'Building what I designed eliminated weeks of ambiguity that typically live in handoff. Decisions about animations, state handling, and edge cases were made once, with full context of both what was ideal and what was implementable.' },
               { title: 'Trust is the product', body: 'In a booking product, the design\'s primary job is to make users confident enough to commit. Every layout decision, every confirmation message, every error state either builds or erodes that confidence. The visible UI is the smallest part of what creates trust.' },
             ].map(({ title, body }, i) => (
               <div key={title} style={{ padding: '2.25rem', borderBottom: i < 2 ? '1px solid #eee' : 'none', borderRight: i % 2 === 0 ? '1px solid #eee' : 'none' }}>
