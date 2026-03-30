@@ -197,6 +197,7 @@ const PROJECTS = [
     role: 'Lead Product Designer',
     tools: 'Figma · FigJam · Notion',
     duration: '4 months',
+    hideFields: ['Role', 'Client'],
     tagline: 'Rebuilding how finance teams see, decide, and act — at enterprise scale.',
     problem: 'Finance teams, operations leads, and administrators at mid-market companies were stitching together three to five disconnected tools to do work that should be fluid — an ERP for records, a separate approval system, spreadsheets for reconciliation, and email for exceptions. The result: over 40% of working time lost to navigation and manual cross-referencing, core tasks requiring six or more steps, and no unified view of where anything stood. The product had all the data. It just couldn\'t communicate it. The core problem wasn\'t missing features — it was missing clarity, hierarchy, and trust.',
     approach: 'The first week was deliberately screen-free. I ran user shadowing sessions with finance managers, operations leads, and administrators to observe real workflows — not the documented ones, which bore little resemblance to how work actually happened. From those sessions I built a current-state service blueprint mapping every step, handoff, and failure point across the full transaction lifecycle. The blueprint made the dysfunction legible in a way that verbal descriptions couldn\'t: the sheer volume of context switches was striking when laid end-to-end. I rebuilt the IA around role-based task frequency rather than system modules, restructured the payment and approval flow from six steps to two, and established a component system early — before any high-fidelity screens — so that consistency was built in by default. High-stakes actions (bulk approvals, transaction voids) were designed with two-step confirmation, inline validation, and plain-language error states to reduce both errors and anxiety. Every trade-off between ideal design and engineering constraints was documented and resolved in weekly cross-functional critique sessions.',
@@ -739,7 +740,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
             { label: 'Client', value: project.client },
             { label: 'Duration', value: project.duration },
             { label: 'Tools', value: project.tools },
-          ].map(({ label, value }) => (
+          ].filter(({ label }) => !(project.hideFields || []).includes(label)).map(({ label, value }) => (
             <div key={label}>
               <p style={{ fontSize: '0.58rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.18)', fontWeight: 600, marginBottom: '0.65rem', fontFamily: "'Inter', sans-serif" }}>{label}</p>
               <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.7)', fontFamily: "'Inter', sans-serif", lineHeight: 1.55 }}>{value}</p>
