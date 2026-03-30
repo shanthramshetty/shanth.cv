@@ -816,6 +816,327 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
   )
 }
 
+/* ─── FluxPay Premium Case Study ────────────────────────────────── */
+
+function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
+  const [nextHovered, setNextHovered] = useState(false)
+  useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [])
+
+  const WRAP = { maxWidth: '1040px', margin: '0 auto', padding: '0 3.2rem' }
+  const SEC_DARK = { background: '#fafafa', borderBottom: '1px solid #dddddd', padding: '6rem 0' }
+  const SEC_LIGHT = { background: '#ffffff', borderBottom: '1px solid #dddddd', padding: '6rem 0' }
+  const H2 = { fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1.9rem, 3.2vw, 2.6rem)', fontWeight: 400, color: '#1a1a1a', letterSpacing: '-0.025em', lineHeight: 1.15, marginBottom: '1.1rem' }
+  const BODY = { fontFamily: "'Inter', sans-serif", fontSize: '1.05rem', color: '#555555', lineHeight: 1.9, marginBottom: '1.4rem' }
+  const LABEL = { fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: '#3b82f6', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1rem' }
+  const CENTER = { maxWidth: '660px', margin: '0 auto', textAlign: 'center' }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      transition={{ duration: 0.45 }}
+      style={{ background: '#ffffff', minHeight: '100vh', paddingTop: '64px' }}
+    >
+
+      {/* ── Back nav ── */}
+      <div style={{ background: '#fafafa', borderBottom: '1px solid #dddddd', padding: '0.9rem 3.2rem' }}>
+        <div style={{ maxWidth: '1040px', margin: '0 auto' }}>
+          <button onClick={onBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: '#999', fontSize: '0.8rem', fontFamily: "'Inter', sans-serif", letterSpacing: '0.03em', transition: 'color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = '#1a1a1a'} onMouseLeave={e => e.currentTarget.style.color = '#999'}>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
+            All Work
+          </button>
+        </div>
+      </div>
+
+      {/* ── HERO ── */}
+      <section style={{ background: '#ffffff', borderBottom: '1px solid #dddddd', padding: '6rem 0 0' }}>
+        <div style={WRAP}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '4.5rem', alignItems: 'center' }}>
+            <div>
+              <p style={LABEL}>{project.number} / 07 · {project.category}</p>
+              <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(3.8rem, 8vw, 6.2rem)', fontWeight: 400, color: '#1a1a1a', letterSpacing: '-0.04em', lineHeight: 0.95, marginBottom: '1rem' }}>
+                {project.title}
+              </h1>
+              <p style={{ fontSize: '0.9rem', color: '#aaa', fontFamily: "'Inter', sans-serif", marginBottom: '2rem', letterSpacing: '0.01em' }}>
+                {project.year} · {project.duration}
+              </p>
+              <p style={{ ...BODY, textAlign: 'left', maxWidth: '420px', marginBottom: '2.5rem', fontSize: '1.05rem' }}>
+                {project.tagline}
+              </p>
+              <div style={{ display: 'flex', gap: '2.5rem' }}>
+                {[{ label: 'Duration', value: project.duration }, { label: 'Tools', value: project.tools }].map(({ label, value }) => (
+                  <div key={label}>
+                    <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#ccc', fontWeight: 600, marginBottom: '0.3rem', fontFamily: "'Inter', sans-serif" }}>{label}</p>
+                    <p style={{ fontSize: '0.85rem', color: '#333', fontFamily: "'Inter', sans-serif" }}>{value}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div style={{ borderRadius: '14px', overflow: 'hidden', border: '1px solid #e8e8e8', boxShadow: '0 24px 72px rgba(0,0,0,0.08)' }}>
+              <MockupFintech />
+            </div>
+          </div>
+        </div>
+        {/* Full-width mockup strip */}
+        <div style={{ marginTop: '5rem', background: '#f5f5f3', borderTop: '1px solid #e8e8e8', padding: '3rem 3.2rem', display: 'flex', gap: '1.5rem', justifyContent: 'center', overflowX: 'auto' }}>
+          {[MockupFintech, MockupAIDashboard, MockupDesignSystem].map((Comp, i) => (
+            <div key={i} style={{ width: '340px', flexShrink: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid #e0e0e0', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+              <Comp />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── THE PROBLEM ── */}
+      <section style={SEC_DARK}>
+        <div style={WRAP}>
+          <div style={CENTER}>
+            <p style={LABEL}>The Problem</p>
+            <h2 style={H2}>Fragmented systems, high stakes, zero clarity</h2>
+            <p style={BODY}>Finance teams at mid-market companies typically operate across three to five disconnected tools — an ERP for records, a separate approval system, spreadsheets for reconciliation, and email for exceptions. Critical information lives everywhere, approval bottlenecks go undetected until they become emergencies, and nobody has a reliable view of where anything stands.</p>
+            <p style={{ ...BODY, marginBottom: 0 }}>The product had all the data. It just couldn't communicate it. The problem wasn't missing features — it was missing <strong style={{ color: '#1a1a1a', fontWeight: 600 }}>clarity, hierarchy, and trust</strong>.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginTop: '3.5rem' }}>
+            {[
+              { value: '40%+', desc: 'of working time lost to cross-system navigation and manual reconciliation' },
+              { value: '6+ steps', desc: 'required to complete a single payment request or approval action' },
+              { value: 'No single view', desc: 'of transaction status, pending approvals, or financial position' },
+            ].map(({ value, desc }) => (
+              <div key={value} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
+                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '2.2rem', color: '#3b82f6', marginBottom: '0.75rem', lineHeight: 1 }}>{value}</p>
+                <p style={{ fontSize: '0.875rem', color: '#888', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── USERS & INSIGHTS ── */}
+      <section style={SEC_LIGHT}>
+        <div style={WRAP}>
+          <div style={CENTER}>
+            <p style={LABEL}>Users & Insights</p>
+            <h2 style={H2}>Three roles, one broken workflow</h2>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>Research ran across three distinct roles through stakeholder interviews, user shadowing, and task analysis. Each had different goals and different failure points — but all were being failed by the same root cause: not a lack of data, but a lack of structured hierarchy that made the right data surfaceable at the right moment.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
+            {[
+              { role: 'Finance Managers', goal: 'Real-time visibility into cash flow, pending approvals, and flagged transactions.', pain: 'Spent more time finding information than acting on it.', color: '#3b82f6' },
+              { role: 'Operations Leads', goal: 'Submit, track, and escalate requests without chasing email threads.', pain: 'The approval process was a black box — requests disappeared with no status update.', color: '#8b5cf6' },
+              { role: 'Administrators', goal: 'Configure workflows, manage permissions, and generate compliance reports.', pain: 'Every configuration change required IT involvement. No recovery path for mistakes.', color: '#0ea5e9' },
+            ].map(({ role, goal, pain, color }) => (
+              <div key={role} style={{ background: '#fafafa', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
+                <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color, fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.65rem' }}>{role}</p>
+                <p style={{ fontSize: '0.875rem', color: '#333', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", marginBottom: '1.1rem' }}><strong style={{ fontWeight: 600 }}>Goal —</strong> {goal}</p>
+                <p style={{ fontSize: '0.875rem', color: '#888', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}><strong style={{ color: '#666', fontWeight: 600 }}>Pain —</strong> {pain}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── THE APPROACH ── */}
+      <section style={SEC_DARK}>
+        <div style={WRAP}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '4.5rem' }}>
+            {[MockupFintech, MockupDesignSystem].map((Comp, i) => (
+              <div key={i} style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid #e0e0e0', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}><Comp /></div>
+            ))}
+          </div>
+          <div style={CENTER}>
+            <p style={LABEL}>The Approach</p>
+            <h2 style={H2}>Problem before pixels</h2>
+            <p style={BODY}>The first week was deliberately screen-free. I ran shadowing sessions with each user group to observe real workflows — not the documented ones, which bore little resemblance to how work actually happened. From those sessions I built a current-state service blueprint mapping every step, handoff, and failure point across the full transaction lifecycle.</p>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>The IA was rebuilt around role-based task frequency rather than system modules. The design process ran in parallel with engineering — weekly critique sessions pressure-tested trade-offs between ideal UX and technical constraints. A component system was built before any high-fidelity screens, so consistency was structural rather than enforced after the fact.</p>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: '0' }}>
+            {['User Shadowing', 'Service Blueprint', 'IA Rebuild', 'Component System', 'Prototype & Test', 'Ship'].map((step, i, arr) => (
+              <div key={step} style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ textAlign: 'center', padding: '0 0.75rem' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: i === 0 ? '#3b82f6' : '#d5d5d5', margin: '0 auto 0.5rem' }} />
+                  <p style={{ fontSize: '0.68rem', color: i === 0 ? '#3b82f6' : '#aaa', fontFamily: "'Inter', sans-serif", letterSpacing: '0.04em', whiteSpace: 'nowrap', margin: 0 }}>{step}</p>
+                </div>
+                {i < arr.length - 1 && <div style={{ width: '2rem', height: '1px', background: '#ddd', flexShrink: 0, marginBottom: '1.1rem' }} />}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WORKFLOW SIMPLIFICATION ── */}
+      <section style={SEC_LIGHT}>
+        <div style={WRAP}>
+          <div style={CENTER}>
+            <p style={LABEL}>Workflow Simplification</p>
+            <h2 style={H2}>From six steps to two</h2>
+            <p style={BODY}>The most impactful change was restructuring the payment request and approval flow. In the original system, submitting a request required navigating three separate screens, manually cross-referencing a budget code in a separate module, and awaiting email confirmation before an approver could even begin their process.</p>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>The redesigned flow consolidates everything into a single progressive form — budget data surfaces inline, smart validation catches errors before submission, and the approval interface presents all necessary context at the point of decision. The guiding principle: <em style={{ color: '#1a1a1a', fontStyle: 'italic' }}>reduce the distance between intent and action</em>.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+            <div style={{ background: '#fff5f5', border: '1px solid #fecdd3', borderRadius: '10px', padding: '2rem 1.75rem' }}>
+              <p style={{ fontSize: '0.6rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#e11d48', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1.25rem' }}>Before</p>
+              {['Navigate to the correct module', 'Locate the right form', 'Open budget tool in a separate tab', 'Cross-reference and fill manually', 'Submit — await email confirmation', 'Approver re-logs in separately to action'].map((s, i) => (
+                <div key={s} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.7rem' }}>
+                  <div style={{ minWidth: '20px', height: '20px', borderRadius: '50%', background: '#fee2e2', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '1px' }}>
+                    <span style={{ fontSize: '0.58rem', color: '#e11d48', fontWeight: 700 }}>{i + 1}</span>
+                  </div>
+                  <p style={{ fontSize: '0.85rem', color: '#666', fontFamily: "'Inter', sans-serif", lineHeight: 1.55, margin: 0 }}>{s}</p>
+                </div>
+              ))}
+              <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid #fecdd3' }}>
+                <p style={{ fontSize: '0.85rem', color: '#e11d48', fontWeight: 600, fontFamily: "'Inter', sans-serif", margin: 0 }}>6+ steps · High cognitive load</p>
+              </div>
+            </div>
+            <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '10px', padding: '2rem 1.75rem' }}>
+              <p style={{ fontSize: '0.6rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#16a34a', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1.25rem' }}>After</p>
+              {['Open progressive form — budget data surfaces inline', 'Review summary & confirm'].map((s, i) => (
+                <div key={s} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.7rem' }}>
+                  <div style={{ minWidth: '20px', height: '20px', borderRadius: '50%', background: '#dcfce7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '1px' }}>
+                    <span style={{ fontSize: '0.58rem', color: '#16a34a', fontWeight: 700 }}>{i + 1}</span>
+                  </div>
+                  <p style={{ fontSize: '0.85rem', color: '#333', fontFamily: "'Inter', sans-serif", lineHeight: 1.55, margin: 0 }}>{s}</p>
+                </div>
+              ))}
+              <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid #bbf7d0' }}>
+                <p style={{ fontSize: '0.85rem', color: '#16a34a', fontWeight: 600, fontFamily: "'Inter', sans-serif", margin: 0 }}>2 steps · Intent → action</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── KEY DESIGN DECISIONS ── */}
+      <section style={SEC_DARK}>
+        <div style={WRAP}>
+          <div style={CENTER}>
+            <p style={LABEL}>Design Decisions</p>
+            <h2 style={H2}>What we built and why</h2>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>Every major decision in FluxPay involved a real trade-off between what was ideal for users and what was feasible within the constraints of timeline, technology, and business scope. Three decisions were most consequential.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
+            {[
+              { title: 'Dashboard Architecture', body: 'Designed as a role-aware command centre — the most time-sensitive items (pending approvals, flagged transactions, budget alerts) surface first. Every widget is actionable, not decorative.', tradeoff: 'Scoped to 3 pre-set role views for v1. Fully dynamic personalisation deferred to phase 2, with architecture designed to support it.' },
+              { title: 'Navigation Model', body: 'Persistent left-rail replaced a top-nav/breadcrumb hybrid with no clear hierarchy. Finance tools are used in extended sessions — persistent nav reduces reorientation cost across a long working day.', tradeoff: 'Mobile collapses to a drawer pattern. Optimised explicitly for the approval flow on mobile, not full feature parity.' },
+              { title: 'Data Presentation', body: 'Strict hierarchy: primary metrics in large high-contrast type, supporting context in secondary weight. Tables show only the most task-relevant columns by default.', tradeoff: 'Power users wanted more data visible by default. Saved views were introduced — individual column configurations persisted per user — rather than increasing default density.' },
+            ].map(({ title, body, tradeoff }) => (
+              <div key={title} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
+                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.25rem', color: '#1a1a1a', marginBottom: '0.85rem', lineHeight: 1.2 }}>{title}</p>
+                <p style={{ fontSize: '0.875rem', color: '#555', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", marginBottom: '1.25rem' }}>{body}</p>
+                <div style={{ borderTop: '1px solid #eee', paddingTop: '1rem' }}>
+                  <p style={{ fontSize: '0.58rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#f59e0b', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.45rem' }}>Trade-off</p>
+                  <p style={{ fontSize: '0.82rem', color: '#999', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{tradeoff}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TRUST & CLARITY ── */}
+      <section style={SEC_LIGHT}>
+        <div style={WRAP}>
+          <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e8e8e8', boxShadow: '0 8px 40px rgba(0,0,0,0.05)', marginBottom: '4.5rem' }}>
+            <MockupEcommerce />
+          </div>
+          <div style={CENTER}>
+            <p style={LABEL}>Trust & Clarity</p>
+            <h2 style={H2}>Designing for confidence, not just completion</h2>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>In a financial product, the cost of a mistake isn't inconvenience — it can mean a missed payment, a compliance breach, or a budget overrun. Every high-stakes interaction was designed with this as the operating constraint.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            {[
+              { title: 'Confirmation Patterns', body: 'Destructive and irreversible actions use a two-step confirmation model with explicit consequence labelling. Users see exactly what will happen before committing — no surprises.' },
+              { title: 'Inline Validation', body: 'Forms validate in real time at the field level as soon as focus moves — not on submission. Errors are caught when the context to fix them is still fresh.' },
+              { title: 'Error Prevention First', body: 'Budget codes are selectable from a pre-validated list, not free-text. Date ranges auto-constrain to valid periods. The system prevents errors rather than asking users to recover from them.' },
+              { title: 'Summary Checkpoints', body: 'For bulk actions and large transactions, a plain-language summary screen acts as a final checkpoint before execution — with an explicit undo window for reversible actions.' },
+            ].map(({ title, body }) => (
+              <div key={title} style={{ background: '#fafafa', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '1.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.7rem' }}>
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#3b82f6', flexShrink: 0 }} />
+                  <p style={{ fontSize: '0.875rem', fontWeight: 600, color: '#1a1a1a', fontFamily: "'Inter', sans-serif", margin: 0 }}>{title}</p>
+                </div>
+                <p style={{ fontSize: '0.875rem', color: '#777', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}>{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── IMPACT & OUTCOMES ── */}
+      <section style={SEC_DARK}>
+        <div style={WRAP}>
+          <div style={CENTER}>
+            <p style={LABEL}>Impact & Outcomes</p>
+            <h2 style={H2}>What shipped, and what it delivered</h2>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>FluxPay shipped to internal teams and early enterprise clients. Zero critical usability issues in the first month of deployment — a direct result of the validation and confirmation architecture built into every high-stakes flow.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginBottom: '3.5rem' }}>
+            {project.metrics.map(({ value, label }) => (
+              <div key={label} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '12px', padding: '2.5rem 2rem', textAlign: 'center' }}>
+                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2.6rem, 5vw, 3.4rem)', color: '#3b82f6', fontWeight: 400, lineHeight: 1, marginBottom: '0.8rem' }}>{value}</p>
+                <p style={{ fontSize: '0.82rem', color: '#aaa', fontFamily: "'Inter', sans-serif", lineHeight: 1.55, margin: 0 }}>{label}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{ ...CENTER }}>
+            <p style={{ ...BODY, marginBottom: 0 }}>{project.outcome}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── KEY LEARNINGS ── */}
+      <section style={SEC_LIGHT}>
+        <div style={WRAP}>
+          <div style={CENTER}>
+            <p style={LABEL}>Key Learnings</p>
+            <h2 style={H2}>What this project taught me</h2>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>Four ideas that shaped how I think about designing for complex systems — applicable well beyond this project.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
+            {[
+              { title: 'Complexity isn\'t the enemy', body: 'Unexplained complexity is. Finance teams don\'t need simpler data — they need better-structured data. The designer\'s job here is not to remove information, but to make it navigable.' },
+              { title: 'Trust is a design output', body: 'Every micro-decision — confirmation copy, error messages, feedback states — contributes to whether users trust the system enough to depend on it. Trust is accumulated across thousands of consistent small decisions.' },
+              { title: 'Constraints produce better design', body: 'Technical and timeline limitations forced prioritisation that resulted in a more focused, coherent product. Real constraints are the closest proxy to the conditions under which great products are actually built.' },
+              { title: 'Design systems are product decisions', body: 'Building the component system before high-fidelity work began meant every screen was consistent by default. The engineering handoff had near-zero ambiguity — which compounds directly into shipping velocity.' },
+            ].map(({ title, body }, i) => (
+              <div key={title} style={{ padding: '2.25rem', borderBottom: i < 2 ? '1px solid #eee' : 'none', borderRight: i % 2 === 0 ? '1px solid #eee' : 'none' }}>
+                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.2rem', color: '#1a1a1a', marginBottom: '0.65rem', lineHeight: 1.25 }}>{title}</p>
+                <p style={{ fontSize: '0.9rem', color: '#777', lineHeight: 1.8, fontFamily: "'Inter', sans-serif", margin: 0 }}>{body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── NEXT PROJECT ── */}
+      {nextProject && (
+        <section style={{ background: '#fafafa', borderTop: '1px solid #dddddd', padding: '5rem 0 6rem' }}>
+          <div style={WRAP}>
+            <div style={{ position: 'relative', height: '1px', background: '#dddddd', marginBottom: '3.5rem' }}>
+              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', background: '#fafafa', padding: '0 1.5rem' }}>
+                <p style={{ fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#bbb', fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: 'nowrap', margin: 0 }}>More case studies</p>
+              </div>
+            </div>
+            <div onClick={onNext} onMouseEnter={() => setNextHovered(true)} onMouseLeave={() => setNextHovered(false)}
+              style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '2rem', padding: '1.5rem 0' }}>
+              <div>
+                <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#ccc', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.5rem' }}>Next Project</p>
+                <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 400, letterSpacing: '-0.025em', color: nextHovered ? '#1a1a1a' : '#bbb', transition: 'color 0.3s', margin: 0 }}>{nextProject.title}</h3>
+              </div>
+              <div style={{ width: '52px', height: '52px', borderRadius: '50%', border: `1px solid ${nextHovered ? '#1a1a1a' : '#ddd'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'border-color 0.3s' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={nextHovered ? '#1a1a1a' : '#ccc'} strokeWidth="1.75" style={{ transition: 'stroke 0.3s' }}>
+                  <path d="M7 17L17 7M17 7H7M17 7v10"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+    </motion.div>
+  )
+}
+
 /* ─── Root ──────────────────────────────────────────────────────── */
 
 export default function Work() {
@@ -829,20 +1150,29 @@ export default function Work() {
   const handleBack = () => { window.scrollTo({ top: 0, behavior: 'instant' }); setActiveId(null) }
 
   return (
-    <main style={{ minHeight: '100vh', background: '#0f0f11', paddingTop: '64px' }}>
-      <AnimatePresence mode="wait">
-        {!active ? (
-          <WorkListing key="listing" onSelect={handleSelect} />
-        ) : (
+    <AnimatePresence mode="wait">
+      {!active ? (
+        <main key="listing" style={{ minHeight: '100vh', background: '#0f0f11', paddingTop: '64px' }}>
+          <WorkListing onSelect={handleSelect} />
+        </main>
+      ) : active.id === 0 ? (
+        <FluxPayCaseStudy
+          key="fluxpay"
+          project={active}
+          onBack={handleBack}
+          nextProject={next}
+          onNext={() => handleSelect(next.id)}
+        />
+      ) : (
+        <main key={active.id} style={{ minHeight: '100vh', background: '#0f0f11', paddingTop: '64px' }}>
           <CaseStudyView
-            key={active.id}
             project={active}
             onBack={handleBack}
             onNext={() => handleSelect(next.id)}
             nextProject={next}
           />
-        )}
-      </AnimatePresence>
-    </main>
+        </main>
+      )}
+    </AnimatePresence>
   )
 }
