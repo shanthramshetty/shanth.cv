@@ -11,8 +11,8 @@ export default function Contact() {
   return (
     <main style={{
       minHeight: '100vh', background: '#f0eeea',
-      paddingTop: '64px', paddingLeft: '2.5rem', paddingRight: '2.5rem', paddingBottom: '4rem',
-      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      paddingTop: '64px', paddingLeft: 'clamp(1.25rem, 5vw, 2.5rem)', paddingRight: 'clamp(1.25rem, 5vw, 2.5rem)', paddingBottom: '4rem',
+      display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative',
     }}>
       <div style={{ maxWidth: '600px', width: '100%', textAlign: 'center' }}>
 
@@ -84,7 +84,7 @@ export default function Contact() {
       </div>
 
       <motion.div {...fade(0.5)} style={{
-        position: 'absolute', bottom: '2rem',
+        marginTop: '3rem',
         display: 'flex', justifyContent: 'center', gap: '1rem',
         fontSize: '0.72rem', color: '#ccc', fontFamily: "'Inter', sans-serif",
       }}>

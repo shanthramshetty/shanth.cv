@@ -1,5 +1,104 @@
 @import "tailwindcss";
 
+/* ── Case Study — responsive grid overrides ───────────────────── */
+
+/* Section padding — both case studies */
+.cs-section { padding: clamp(2.5rem, 6vw, 6rem) 0 !important; }
+
+/* Hero: 2-col (text + mockup) → stacked */
+.cs-hero-grid {
+  grid-template-columns: 1fr 1.1fr !important;
+  gap: 4.5rem !important;
+}
+@media (max-width: 800px) {
+  .cs-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.5rem !important;
+  }
+  .cs-hero-grid > div:last-child { order: -1; }
+}
+
+/* Two-column sections */
+.cs-two-col { grid-template-columns: 1fr 1fr !important; }
+@media (max-width: 640px) {
+  .cs-two-col { grid-template-columns: 1fr !important; }
+}
+
+/* Three-column sections (stats, user cards, dev tools) */
+.cs-three-col { grid-template-columns: repeat(3, 1fr) !important; }
+@media (max-width: 860px) {
+  .cs-three-col { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 520px) {
+  .cs-three-col { grid-template-columns: 1fr !important; }
+}
+
+/* Four-column overview row */
+.cs-four-col { grid-template-columns: repeat(4, 1fr) !important; }
+@media (max-width: 720px) {
+  .cs-four-col { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 400px) {
+  .cs-four-col { grid-template-columns: 1fr 1fr !important; }
+}
+
+/* Metrics 3-col */
+.cs-metrics { grid-template-columns: repeat(3, 1fr) !important; }
+@media (max-width: 560px) {
+  .cs-metrics { grid-template-columns: 1fr !important; }
+}
+
+/* Five-column UI breakdown */
+.cs-five-col { grid-template-columns: repeat(5, 1fr) !important; }
+@media (max-width: 860px) {
+  .cs-five-col { grid-template-columns: repeat(3, 1fr) !important; }
+}
+@media (max-width: 520px) {
+  .cs-five-col { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* Key learnings 2×2 with cross borders */
+.cs-learnings { grid-template-columns: 1fr 1fr !important; }
+@media (max-width: 640px) {
+  .cs-learnings { grid-template-columns: 1fr !important; }
+  .cs-learnings > * { border-right: none !important; }
+  .cs-learnings > *:nth-child(3) { border-bottom: 1px solid #eee !important; }
+  .cs-learnings > *:last-child   { border-bottom: none !important; }
+}
+
+/* Approach split (label+steps | body copy) */
+.cs-approach-split {
+  grid-template-columns: 1fr 2fr !important;
+  gap: 5rem !important;
+}
+@media (max-width: 720px) {
+  .cs-approach-split {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+}
+
+/* Mockup strip horizontal scroll on small screens */
+@media (max-width: 720px) {
+  .cs-mockup-strip {
+    padding-left: clamp(1rem, 4vw, 3.2rem) !important;
+    padding-right: clamp(1rem, 4vw, 3.2rem) !important;
+    justify-content: flex-start !important;
+  }
+  .cs-mockup-strip > div { width: 260px !important; }
+}
+
+/* Floating cursor preview — hide on touch / narrow viewports */
+@media (pointer: coarse), (max-width: 768px) {
+  .floating-preview { display: none !important; }
+}
+
+/* Work listing: tighten project title on small screens */
+@media (max-width: 480px) {
+  .project-row-title { font-size: clamp(1.35rem, 7vw, 1.75rem) !important; }
+  .project-row-arrow { display: none !important; }
+}
+
 /* ── Responsive layout helpers ────────────────────────────────── */
 
 /* Photo masonry grid */

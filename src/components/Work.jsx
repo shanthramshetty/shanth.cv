@@ -398,6 +398,7 @@ function FloatingPreview({ hoveredProject }) {
 
   return (
     <motion.div
+      className="floating-preview"
       style={{
         position: 'fixed',
         left: springX,
@@ -495,11 +496,12 @@ function ProjectRow({ project, index, onClick, onHover }) {
               {project.number}
             </span>
             <motion.h2
+              className="project-row-title"
               animate={{ x: hovered ? 8 : 0 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               style={{
                 fontFamily: "'DM Serif Display', serif",
-                fontSize: 'clamp(1.75rem, 3.8vw, 3rem)',
+                fontSize: 'clamp(1.35rem, 5vw, 3rem)',
                 fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1,
                 color: hovered ? '#ffffff' : 'rgba(255,255,255,0.7)',
                 transition: 'color 0.3s',
@@ -519,6 +521,7 @@ function ProjectRow({ project, index, onClick, onHover }) {
         </div>
 
         <motion.div
+          className="project-row-arrow"
           animate={{ x: hovered ? 5 : 0, borderColor: hovered ? project.accent : 'rgba(255,255,255,0.1)' }}
           transition={{ duration: 0.35 }}
           style={{
@@ -703,7 +706,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
       {/* Back */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2.5rem 2.5rem 0' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2.5rem clamp(1rem, 4vw, 2.5rem) 0' }}>
         <button
           onClick={onBack}
           style={{
@@ -723,7 +726,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
       </div>
 
       {/* Hero */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '4.5rem 2.5rem 4rem' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2rem, 4.5vw, 4.5rem) clamp(1rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 4rem)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
           <span style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: project.accent, fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>
             {project.number} / 0{PROJECTS.length}
@@ -780,8 +783,8 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
       <Divider />
 
       {/* Overview */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '3.5rem 2.5rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '2.5rem' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2rem, 4vw, 3.5rem) clamp(1rem, 4vw, 2.5rem)' }}>
+        <div className="cs-four-col" style={{ display: 'grid', gap: '2.5rem' }}>
           {[
             { label: 'Role', value: project.role },
             { label: 'Client', value: project.client },
@@ -799,7 +802,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
       <Divider />
 
       {/* Challenge */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 2.5rem' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
         <SectionLabel text="The Challenge" accent={project.accent} />
         <p style={{
           fontFamily: "'DM Serif Display', serif",
@@ -814,8 +817,8 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
       <Divider />
 
       {/* Approach */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 2.5rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '5rem', alignItems: 'start' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
+        <div className="cs-approach-split" style={{ display: 'grid', alignItems: 'start' }}>
           <div>
             <SectionLabel text="The Approach" accent={project.accent} />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
@@ -836,9 +839,9 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
       <Divider />
 
       {/* Outcome */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '5rem 2.5rem' }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
         <SectionLabel text="Outcome" accent={project.accent} />
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '3.5rem' }}>
+        <div className="cs-metrics" style={{ display: 'grid', gap: '1.5rem', marginBottom: '3.5rem' }}>
           {project.metrics.map(({ value, label }) => (
             <div key={label} style={{
               padding: '2.25rem 2rem',
@@ -869,9 +872,9 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
   const [nextHovered, setNextHovered] = useState(false)
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [])
 
-  const WRAP = { maxWidth: '1040px', margin: '0 auto', padding: '0 3.2rem' }
-  const SEC_DARK = { background: '#fafafa', borderBottom: '1px solid #dddddd', padding: '6rem 0' }
-  const SEC_LIGHT = { background: '#ffffff', borderBottom: '1px solid #dddddd', padding: '6rem 0' }
+  const WRAP = { maxWidth: '1040px', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 3.2rem)' }
+  const SEC_DARK = { background: '#fafafa', borderBottom: '1px solid #dddddd' }
+  const SEC_LIGHT = { background: '#ffffff', borderBottom: '1px solid #dddddd' }
   const H2 = { fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1.9rem, 3.2vw, 2.6rem)', fontWeight: 400, color: '#1a1a1a', letterSpacing: '-0.025em', lineHeight: 1.15, marginBottom: '1.1rem' }
   const BODY = { fontFamily: "'Inter', sans-serif", fontSize: '1.05rem', color: '#555555', lineHeight: 1.9, marginBottom: '1.4rem' }
   const LABEL = { fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: '#3b82f6', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1rem' }
@@ -885,7 +888,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
     >
 
       {/* ── Back nav ── */}
-      <div style={{ background: '#fafafa', borderBottom: '1px solid #dddddd', padding: '0.9rem 3.2rem' }}>
+      <div style={{ background: '#fafafa', borderBottom: '1px solid #dddddd', padding: '0.9rem clamp(1rem, 5vw, 3.2rem)' }}>
         <div style={{ maxWidth: '1040px', margin: '0 auto' }}>
           <button onClick={onBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: '#999', fontSize: '0.8rem', fontFamily: "'Inter', sans-serif", letterSpacing: '0.03em', transition: 'color 0.2s' }}
             onMouseEnter={e => e.currentTarget.style.color = '#1a1a1a'} onMouseLeave={e => e.currentTarget.style.color = '#999'}>
@@ -896,9 +899,9 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
       </div>
 
       {/* ── HERO ── */}
-      <section style={{ background: '#ffffff', borderBottom: '1px solid #dddddd', padding: '6rem 0 0' }}>
+      <section style={{ background: '#ffffff', borderBottom: '1px solid #dddddd', padding: 'clamp(3rem, 6vw, 6rem) 0 0' }}>
         <div style={WRAP}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '4.5rem', alignItems: 'center' }}>
+          <div className="cs-hero-grid" style={{ display: 'grid', alignItems: 'center' }}>
             <div>
               <p style={LABEL}>{project.number} / 07 · {project.category}</p>
               <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(3.8rem, 8vw, 6.2rem)', fontWeight: 400, color: '#1a1a1a', letterSpacing: '-0.04em', lineHeight: 0.95, marginBottom: '1rem' }}>
@@ -925,7 +928,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
           </div>
         </div>
         {/* Full-width mockup strip */}
-        <div style={{ marginTop: '5rem', background: '#f5f5f3', borderTop: '1px solid #e8e8e8', padding: '3rem 3.2rem', display: 'flex', gap: '1.5rem', justifyContent: 'center', overflowX: 'auto' }}>
+        <div className="cs-mockup-strip" style={{ marginTop: '5rem', background: '#f5f5f3', borderTop: '1px solid #e8e8e8', padding: '3rem clamp(1rem, 4vw, 3.2rem)', display: 'flex', gap: '1.5rem', justifyContent: 'center', overflowX: 'auto' }}>
           {[MockupFintech, MockupAIDashboard, MockupDesignSystem].map((Comp, i) => (
             <div key={i} style={{ width: '340px', flexShrink: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid #e0e0e0', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
               <Comp />
@@ -935,7 +938,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── THE PROBLEM ── */}
-      <section style={SEC_DARK}>
+      <section style={SEC_DARK} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>The Problem</p>
@@ -943,7 +946,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
             <p style={BODY}>Finance teams at mid-market companies typically operate across three to five disconnected tools: an ERP for records, a separate approval system, spreadsheets for reconciliation, and email for exceptions. Critical information lives everywhere, approval bottlenecks go undetected until they become emergencies, and nobody has a reliable view of where anything stands.</p>
             <p style={{ ...BODY, marginBottom: 0 }}>The product had all the data. It just couldn't communicate it. The problem wasn't missing features. It was missing <strong style={{ color: '#1a1a1a', fontWeight: 600 }}>clarity, hierarchy, and trust</strong>.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginTop: '3.5rem' }}>
+          <div className="cs-three-col" style={{ display: 'grid', gap: '1.25rem', marginTop: '3.5rem' }}>
             {[
               { value: '40%+', desc: 'of working time lost to cross-system navigation and manual reconciliation' },
               { value: '6+ steps', desc: 'required to complete a single payment request or approval action' },
@@ -959,14 +962,14 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── USERS & INSIGHTS ── */}
-      <section style={SEC_LIGHT}>
+      <section style={SEC_LIGHT} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>Users & Insights</p>
             <h2 style={H2}>Three roles, one broken workflow</h2>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>Research ran across three distinct roles through stakeholder interviews, user shadowing, and task analysis. Each had different goals and different failure points, but all were being failed by the same root cause: not a lack of data, but a lack of structured hierarchy that made the right data surfaceable at the right moment.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
+          <div className="cs-three-col" style={{ display: 'grid', gap: '1.25rem' }}>
             {[
               { role: 'Finance Managers', goal: 'Real-time visibility into cash flow, pending approvals, and flagged transactions.', pain: 'Spent more time finding information than acting on it.', color: '#3b82f6' },
               { role: 'Operations Leads', goal: 'Submit, track, and escalate requests without chasing email threads.', pain: 'The approval process was a black box. Requests disappeared with no status update.', color: '#8b5cf6' },
@@ -983,9 +986,9 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── THE APPROACH ── */}
-      <section style={SEC_DARK}>
+      <section style={SEC_DARK} className="cs-section">
         <div style={WRAP}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '4.5rem' }}>
+          <div className="cs-two-col" style={{ display: 'grid', gap: '1.25rem', marginBottom: '4.5rem' }}>
             {[MockupFintech, MockupDesignSystem].map((Comp, i) => (
               <div key={i} style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid #e0e0e0', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}><Comp /></div>
             ))}
@@ -1011,7 +1014,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── WORKFLOW SIMPLIFICATION ── */}
-      <section style={SEC_LIGHT}>
+      <section style={SEC_LIGHT} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>Workflow Simplification</p>
@@ -1019,7 +1022,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
             <p style={BODY}>The most impactful change was restructuring the payment request and approval flow. In the original system, submitting a request required navigating three separate screens, manually cross-referencing a budget code in a separate module, and awaiting email confirmation before an approver could even begin their process.</p>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>The redesigned flow consolidates everything into a single progressive form. Budget data surfaces inline, smart validation catches errors before submission, and the approval interface presents all necessary context at the point of decision. The guiding principle: <em style={{ color: '#1a1a1a', fontStyle: 'italic' }}>reduce the distance between intent and action</em>.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+          <div className="cs-two-col" style={{ display: 'grid', gap: '1.25rem' }}>
             <div style={{ background: '#fff5f5', border: '1px solid #fecdd3', borderRadius: '10px', padding: '2rem 1.75rem' }}>
               <p style={{ fontSize: '0.6rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#e11d48', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1.25rem' }}>Before</p>
               {['Navigate to the correct module', 'Locate the right form', 'Open budget tool in a separate tab', 'Cross-reference and fill manually', 'Submit, await email confirmation', 'Approver re-logs in separately to action'].map((s, i) => (
@@ -1053,14 +1056,14 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── KEY DESIGN DECISIONS ── */}
-      <section style={SEC_DARK}>
+      <section style={SEC_DARK} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>Design Decisions</p>
             <h2 style={H2}>What we built and why</h2>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>Every major decision in FluxPay involved a real trade-off between what was ideal for users and what was feasible within the constraints of timeline, technology, and business scope. Three decisions were most consequential.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
+          <div className="cs-three-col" style={{ display: 'grid', gap: '1.25rem' }}>
             {[
               { title: 'Dashboard Architecture', body: 'Designed as a role-aware command centre. The most time-sensitive items (pending approvals, flagged transactions, budget alerts) surface first. Every widget is actionable, not decorative.', tradeoff: 'Scoped to 3 pre-set role views for v1. Fully dynamic personalisation deferred to phase 2, with architecture designed to support it.' },
               { title: 'Navigation Model', body: 'Persistent left-rail replaced a top-nav/breadcrumb hybrid with no clear hierarchy. Finance tools are used in extended sessions, so persistent nav reduces reorientation cost across a long working day.', tradeoff: 'Mobile collapses to a drawer pattern. Optimised explicitly for the approval flow on mobile, not full feature parity.' },
@@ -1080,7 +1083,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── TRUST & CLARITY ── */}
-      <section style={SEC_LIGHT}>
+      <section style={SEC_LIGHT} className="cs-section">
         <div style={WRAP}>
           <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e8e8e8', boxShadow: '0 8px 40px rgba(0,0,0,0.05)', marginBottom: '4.5rem' }}>
             <MockupEcommerce />
@@ -1090,7 +1093,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
             <h2 style={H2}>Designing for confidence, not just completion</h2>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>In a financial product, the cost of a mistake isn't inconvenience — it can mean a missed payment, a compliance breach, or a budget overrun. Every high-stakes interaction was designed with this as the operating constraint.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="cs-two-col" style={{ display: 'grid', gap: '1rem' }}>
             {[
               { title: 'Confirmation Patterns', body: 'Destructive and irreversible actions use a two-step confirmation model with explicit consequence labelling. Users see exactly what will happen before committing — no surprises.' },
               { title: 'Inline Validation', body: 'Forms validate in real time at the field level as soon as focus moves — not on submission. Errors are caught when the context to fix them is still fresh.' },
@@ -1110,14 +1113,14 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── IMPACT & OUTCOMES ── */}
-      <section style={SEC_DARK}>
+      <section style={SEC_DARK} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>Impact & Outcomes</p>
             <h2 style={H2}>What shipped, and what it delivered</h2>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>FluxPay shipped to internal teams and early enterprise clients. Zero critical usability issues in the first month of deployment, a direct result of the validation and confirmation architecture built into every high-stakes flow.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginBottom: '3.5rem' }}>
+          <div className="cs-metrics" style={{ display: 'grid', gap: '1.25rem', marginBottom: '3.5rem' }}>
             {project.metrics.map(({ value, label }) => (
               <div key={label} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '12px', padding: '2.5rem 2rem', textAlign: 'center' }}>
                 <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2.6rem, 5vw, 3.4rem)', color: '#3b82f6', fontWeight: 400, lineHeight: 1, marginBottom: '0.8rem' }}>{value}</p>
@@ -1132,14 +1135,14 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── KEY LEARNINGS ── */}
-      <section style={SEC_LIGHT}>
+      <section style={SEC_LIGHT} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>Key Learnings</p>
             <h2 style={H2}>What this project taught me</h2>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>Four ideas that shaped how I think about designing for complex systems — applicable well beyond this project.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
+          <div className="cs-learnings" style={{ display: 'grid', gap: '0' }}>
             {[
               { title: 'Complexity isn\'t the enemy', body: 'Unexplained complexity is. Finance teams don\'t need simpler data. They need better-structured data. The designer\'s job here is not to remove information, but to make it navigable.' },
               { title: 'Trust is a design output', body: 'Every micro-decision, from confirmation copy to error messages and feedback states, contributes to whether users trust the system enough to depend on it. Trust is accumulated across thousands of consistent small decisions.' },
@@ -1190,9 +1193,9 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
   const [nextHovered, setNextHovered] = useState(false)
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [])
 
-  const WRAP = { maxWidth: '1040px', margin: '0 auto', padding: '0 3.2rem' }
-  const SEC_DARK = { background: '#fafafa', borderBottom: '1px solid #dddddd', padding: '6rem 0' }
-  const SEC_LIGHT = { background: '#ffffff', borderBottom: '1px solid #dddddd', padding: '6rem 0' }
+  const WRAP = { maxWidth: '1040px', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 3.2rem)' }
+  const SEC_DARK = { background: '#fafafa', borderBottom: '1px solid #dddddd' }
+  const SEC_LIGHT = { background: '#ffffff', borderBottom: '1px solid #dddddd' }
   const H2 = { fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1.9rem, 3.2vw, 2.6rem)', fontWeight: 400, color: '#1a1a1a', letterSpacing: '-0.025em', lineHeight: 1.15, marginBottom: '1.1rem' }
   const BODY = { fontFamily: "'Inter', sans-serif", fontSize: '1.05rem', color: '#555555', lineHeight: 1.9, marginBottom: '1.4rem' }
   const LABEL = { fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: '#22c55e', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1rem' }
@@ -1207,7 +1210,7 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
     >
 
       {/* ── Back nav ── */}
-      <div style={{ background: '#fafafa', borderBottom: '1px solid #dddddd', padding: '0.9rem 3.2rem' }}>
+      <div style={{ background: '#fafafa', borderBottom: '1px solid #dddddd', padding: '0.9rem clamp(1rem, 5vw, 3.2rem)' }}>
         <div style={{ maxWidth: '1040px', margin: '0 auto' }}>
           <button onClick={onBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: '#999', fontSize: '0.8rem', fontFamily: "'Inter', sans-serif", letterSpacing: '0.03em', transition: 'color 0.2s' }}
             onMouseEnter={e => e.currentTarget.style.color = '#1a1a1a'} onMouseLeave={e => e.currentTarget.style.color = '#999'}>
@@ -1218,9 +1221,9 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       </div>
 
       {/* ── HERO ── */}
-      <section style={{ background: '#ffffff', borderBottom: '1px solid #dddddd', padding: '6rem 0 0' }}>
+      <section style={{ background: '#ffffff', borderBottom: '1px solid #dddddd', padding: 'clamp(3rem, 6vw, 6rem) 0 0' }}>
         <div style={WRAP}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '4.5rem', alignItems: 'center' }}>
+          <div className="cs-hero-grid" style={{ display: 'grid', alignItems: 'center' }}>
             <div>
               <p style={LABEL}>{project.number} / 07 · {project.category}</p>
               <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(3.8rem, 8vw, 6.2rem)', fontWeight: 400, color: '#1a1a1a', letterSpacing: '-0.04em', lineHeight: 0.95, marginBottom: '1rem' }}>
@@ -1247,7 +1250,7 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
           </div>
         </div>
         {/* Full-width mockup strip */}
-        <div style={{ marginTop: '5rem', background: '#f5f5f3', borderTop: '1px solid #e8e8e8', padding: '3rem 3.2rem', display: 'flex', gap: '1.5rem', justifyContent: 'center', overflowX: 'auto' }}>
+        <div className="cs-mockup-strip" style={{ marginTop: '5rem', background: '#f5f5f3', borderTop: '1px solid #e8e8e8', padding: '3rem clamp(1rem, 4vw, 3.2rem)', display: 'flex', gap: '1.5rem', justifyContent: 'center', overflowX: 'auto' }}>
           {[MockupPlayConnect, MockupFlutterApp, MockupMobileApp].map((Comp, i) => (
             <div key={i} style={{ width: '340px', flexShrink: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid #e0e0e0', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
               <Comp />
@@ -1257,7 +1260,7 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── THE PROBLEM ── */}
-      <section style={SEC_DARK}>
+      <section style={SEC_DARK} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>The Problem</p>
@@ -1265,7 +1268,7 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
             <p style={BODY}>Sports and recreational infrastructure is abundant, but booking it is broken. Players looking for turf time face a fragmented reality: venues share availability via WhatsApp groups, manually updated social posts, or not at all. There is no reliable way to know whether a slot is free, what it costs, or whether a booking is confirmed.</p>
             <p style={{ ...BODY, marginBottom: 0 }}>For turf owners, the problem exists in reverse: no visibility into real-time occupancy, no structured payment flow, and high no-show rates because there is no formal confirmation system. The booking experience is not just inconvenient. It is <strong style={{ color: '#1a1a1a', fontWeight: 600 }}>fundamentally untrustworthy</strong>.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginTop: '3.5rem' }}>
+          <div className="cs-three-col" style={{ display: 'grid', gap: '1.25rem', marginTop: '3.5rem' }}>
             {[
               { value: 'No real-time', desc: 'Availability was shared via WhatsApp or phone calls — no live slot visibility for players at any point in the flow' },
               { value: 'High drop-off', desc: 'Confusing multi-step booking flows and unclear pricing caused players to abandon before completing a reservation' },
@@ -1281,14 +1284,14 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── USERS & PAIN POINTS ── */}
-      <section style={SEC_LIGHT}>
+      <section style={SEC_LIGHT} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>Users & Pain Points</p>
             <h2 style={H2}>Two sides of the same broken system</h2>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>Research surfaced two distinct user groups with mirrored problems. Players could not find or trust available slots. Turf owners could not communicate availability or confirm bookings reliably. Every pain point traced back to the same root: the absence of a single shared, real-time truth about slot availability.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem' }}>
+          <div className="cs-two-col" style={{ display: 'grid', gap: '1.25rem' }}>
             {[
               {
                 role: 'Players', color: accent,
@@ -1328,9 +1331,9 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── THE APPROACH ── */}
-      <section style={SEC_DARK}>
+      <section style={SEC_DARK} className="cs-section">
         <div style={WRAP}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.25rem', marginBottom: '4.5rem' }}>
+          <div className="cs-two-col" style={{ display: 'grid', gap: '1.25rem', marginBottom: '4.5rem' }}>
             {[MockupPlayConnect, MockupFlutterApp].map((Comp, i) => (
               <div key={i} style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid #e0e0e0', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}><Comp /></div>
             ))}
@@ -1357,14 +1360,14 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── KEY PRODUCT DECISIONS ── */}
-      <section style={SEC_LIGHT}>
+      <section style={SEC_LIGHT} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>Key Product Decisions</p>
             <h2 style={H2}>What we built and why it mattered</h2>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>Every significant design decision in PlayConnect was driven by a specific user pain point and a deliberate trade-off. Four decisions were most consequential to the product's success.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.25rem' }}>
+          <div className="cs-two-col" style={{ display: 'grid', gap: '1.25rem' }}>
             {[
               { title: 'Real-Time Slot Visibility', body: 'Slots update live. Booked slots appear greyed out and non-interactive immediately after a booking completes. Players never navigate through a flow only to find their chosen slot is unavailable at the point of payment.', why: 'Eliminated the primary cause of booking abandonment: discovering unavailability after intent and effort had already been invested.' },
               { title: 'Simplified Booking Flow', body: 'The full booking journey, from discovery to confirmation, completes in five steps with a single, focused screen per decision. No account required to browse; payment is the only friction gate.', why: 'Reduced cognitive load by scoping each screen to one decision, eliminating the paralysis of too many simultaneous choices.' },
@@ -1385,14 +1388,14 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── UI BREAKDOWN ── */}
-      <section style={SEC_DARK}>
+      <section style={SEC_DARK} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>UI Breakdown</p>
             <h2 style={H2}>Five screens, one seamless journey</h2>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>Each screen in the booking flow has a single job. The design avoids multi-purpose screens that force users to context-switch mid-task. Clarity of purpose at every step is the core design constraint — no screen asks a user to do more than one thing.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem' }}>
+          <div className="cs-five-col" style={{ display: 'grid', gap: '1rem' }}>
             {[
               { screen: 'Home / Discovery', purpose: 'Search venues by sport, location, or date. Glanceable cards with live slot status and upfront pricing.', impact: 'Players know what\'s available and what it costs before tapping into any detail.' },
               { screen: 'Turf Detail', purpose: 'Full venue profile: amenities, photos, real-time availability grid, and per-slot pricing with no hidden extras.', impact: 'All information needed to decide — no surprises downstream in the flow.' },
@@ -1412,14 +1415,14 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── EDGE CASES & SYSTEM STATES ── */}
-      <section style={SEC_LIGHT}>
+      <section style={SEC_LIGHT} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>Edge Cases & System States</p>
             <h2 style={H2}>Designing for what goes wrong</h2>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>Real-world product quality is measured in edge cases. A booking platform without graceful failure handling creates distrust at exactly the moments users need it most, right when something unexpected happens between intent and confirmation.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="cs-two-col" style={{ display: 'grid', gap: '1rem' }}>
             {[
               { state: 'No Availability', handling: 'Turf detail screens show a clear "No slots available for this date" state with a date-change prompt, never a blank slot grid with no explanation of why it\'s empty.' },
               { state: 'Slot Already Booked', handling: 'If a slot is claimed by another user during selection, the slot updates in real time with a toast notification explaining the conflict and surfacing the nearest alternative.' },
@@ -1444,14 +1447,14 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── TRUST & EXPERIENCE ── */}
-      <section style={SEC_DARK}>
+      <section style={SEC_DARK} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>Trust & Experience</p>
             <h2 style={H2}>Designing for confidence, not just completion</h2>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>A booking product lives or dies on trust. Every interaction pattern in PlayConnect was designed to reduce anxiety, not just friction. Friction you understand is survivable. Uncertainty is not.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="cs-two-col" style={{ display: 'grid', gap: '1rem' }}>
             {[
               { title: 'Immediate Confirmations', body: 'Booking confirmation appears within seconds of payment, with a reference number, venue name, slot time, and directions link. Players have everything they need before closing the app.' },
               { title: 'Transparent Pricing', body: 'Slot prices are shown at discovery, repeated on the detail screen, and confirmed at checkout. The number never changes. No fees revealed at the last step.' },
@@ -1471,7 +1474,7 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── DEVELOPMENT — FLUTTER ── */}
-      <section style={SEC_LIGHT}>
+      <section style={SEC_LIGHT} className="cs-section">
         <div style={WRAP}>
           <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e8e8e8', boxShadow: '0 8px 40px rgba(0,0,0,0.05)', marginBottom: '4.5rem' }}>
             <MockupPlayConnect />
@@ -1482,7 +1485,7 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
             <p style={BODY}>PlayConnect is not a design handoff. It is a shipped product. I handled every layer: user research, information architecture, UI design in Figma, and full cross-platform development in Flutter. The app runs natively on iOS and Android from a single codebase.</p>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>Building the product I designed eliminated the gap between design intent and engineering reality. Real-time slot updates, optimistic UI patterns, and smooth transitions were decisions made with full awareness of both what was ideal and what was implementable, not specs handed off to a separate team.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
+          <div className="cs-three-col" style={{ display: 'grid', gap: '1.25rem' }}>
             {[
               { title: 'Flutter', desc: 'Cross-platform framework delivering native-quality UI on iOS and Android from a single codebase — with consistent design fidelity across both platforms.' },
               { title: 'Firebase', desc: 'Real-time database for live slot availability. Firestore listeners update the slot grid without requiring a manual refresh or polling loop.' },
@@ -1498,14 +1501,14 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── IMPACT & OUTCOMES ── */}
-      <section style={SEC_DARK}>
+      <section style={SEC_DARK} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>Impact & Outcomes</p>
             <h2 style={H2}>From broken process to seamless flow</h2>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>PlayConnect shipped as a fully functional cross-platform mobile application. The real-time availability system eliminated the primary source of booking abandonment. The guided booking flow — discovery through confirmation in five steps — reduced the cognitive load that caused drop-off in comparable booking experiences.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem', marginBottom: '3.5rem' }}>
+          <div className="cs-metrics" style={{ display: 'grid', gap: '1.25rem', marginBottom: '3.5rem' }}>
             {project.metrics.map(({ value, label }) => (
               <div key={label} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '12px', padding: '2.5rem 2rem', textAlign: 'center' }}>
                 <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2.6rem, 5vw, 3.4rem)', color: accent, fontWeight: 400, lineHeight: 1, marginBottom: '0.8rem' }}>{value}</p>
@@ -1520,14 +1523,14 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       </section>
 
       {/* ── KEY LEARNINGS ── */}
-      <section style={SEC_LIGHT}>
+      <section style={SEC_LIGHT} className="cs-section">
         <div style={WRAP}>
           <div style={CENTER}>
             <p style={LABEL}>Key Learnings</p>
             <h2 style={H2}>What this project taught me</h2>
             <p style={{ ...BODY, marginBottom: '3.5rem' }}>Four ideas from PlayConnect that changed how I approach product design — especially for real-time systems and mobile-first experiences where design and development are inseparable.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0' }}>
+          <div className="cs-learnings" style={{ display: 'grid', gap: '0' }}>
             {[
               { title: 'Real-time systems need design for latency', body: 'When slot availability updates live, there are moments of uncertainty between a user\'s action and the system\'s response. Designing for those micro-moments, optimistic UI, loading states, conflict resolution, is what separates a product that feels fast from one that feels broken.' },
               { title: 'Complexity hides in flows, not screens', body: 'The individual screens in PlayConnect are simple. The complexity is in the transitions: how state is preserved across steps, how conflicts are communicated, how recovery works without forcing a full restart. Designing flows, not just screens, is the real work.' },
