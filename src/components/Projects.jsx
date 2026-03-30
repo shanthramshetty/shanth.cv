@@ -12,19 +12,19 @@ const projects = [
   },
   {
     number: '02',
+    title: 'PlayConnect — Turf Booking',
+    description: 'Designed and built end-to-end in Flutter — a mobile platform that removes friction from sports venue discovery and booking. Real-time slot availability, transparent pricing, and a five-step flow from discovery to confirmed booking.',
+    tags: ['Flutter', 'Mobile Design', 'Product Thinking', 'Firebase'],
+    type: 'Case Study',
+    year: '2025',
+  },
+  {
+    number: '03',
     title: 'AI Analytics Dashboard',
     description: 'Solved the explainability gap in an AI analytics product — redesigning data hierarchy, introducing confidence indicators, and building a layered disclosure model. Feature adoption grew 47% within six weeks.',
     tags: ['Figma', 'AI Product Design', 'User Flows', 'Accessibility'],
     type: 'Case Study',
     year: '2024',
-  },
-  {
-    number: '03',
-    title: 'Consumer Mobile App — Freelance',
-    description: 'Designed end-to-end product flows for a consumer mobile app from zero — onboarding, core interactions, and notification strategy. Raised onboarding completion from 39% to 82%, shipping to a 4.6 App Store rating.',
-    tags: ['Mobile Design', 'User Research', 'Figma', 'Product Thinking'],
-    type: 'Freelance',
-    year: '2023',
   },
   {
     number: '04',
