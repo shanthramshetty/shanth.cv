@@ -4,11 +4,11 @@ import profileImg from '../assets/images/profile.jpeg'
 import FlipWords from './FlipWords'
 
 const TAGLINES = [
-  'I love crafting clean, meaningful digital experiences',
-  'I turn complex problems into intuitive interfaces',
-  'I bridge the gap between design and development',
-  'I build scalable design systems that teams love',
-  'I design with empathy and ship with precision',
+  'I turn ambiguous problems into clear, impactful products',
+  'I bridge user needs, business goals, and technical constraints',
+  'I design systems that scale — from discovery to delivery',
+  'I ship products backed by research, iteration, and intent',
+  'I bring structure to complexity, and clarity to ambiguity',
 ]
 
 
@@ -97,7 +97,7 @@ export default function Hero() {
               style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}
             >
               {[
-                { label: 'Currently', value: 'UX Designer I @ 7EDGE' },
+                { label: 'Currently', value: 'Product Designer @ 7EDGE' },
                 { label: 'Previously at', value: 'NeST Digital & Luminar' },
               ].map(({ label, value }) => (
                 <div key={label}>
@@ -136,11 +136,11 @@ export default function Hero() {
               marginBottom: '1.4rem', maxWidth: '272px',
               fontFamily: "'Inter', sans-serif",
             }}>
-              I'm a Product UX Designer with 2+ years of experience
-              designing for web and mobile. With a background in
-              software engineering, I bridge design and development —
-              from research and IA to prototyping and scalable
-              design systems.
+              I'm a Product Designer with 2+ years shipping
+              end-to-end experiences across fintech, AI, and mobile.
+              With a background in software engineering, I own the
+              full design cycle — from research and IA to system
+              design and dev handoff.
             </p>
             <div style={{ display: 'flex', gap: '0.8rem' }}>
               <a href="#" aria-label="Twitter / X"

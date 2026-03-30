@@ -38,8 +38,9 @@ export default function Contact() {
           fontSize: '0.925rem', color: '#888', lineHeight: 1.8,
           marginBottom: '2.5rem', fontFamily: "'Inter', sans-serif",
         }}>
-          Open to new opportunities in UX design and product strategy.
-          Whether you have a project in mind or just want to connect — reach out.
+          Open to new opportunities in product design — especially complex,
+          research-driven challenges. Whether you have a project in mind or
+          just want to connect — reach out.
         </motion.p>
 
         <motion.div {...fade(0.3)} style={{ marginBottom: '2.5rem' }}>

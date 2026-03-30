@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 
 const categories = [
-  { name: 'UX Design', items: ['UX Research', 'Wireframing', 'Prototyping', 'User Flows', 'Usability Testing', 'Information Architecture'] },
+  { name: 'Product Design', items: ['Product Thinking', 'UX Research', 'Wireframing', 'Prototyping', 'User Flows', 'Information Architecture'] },
   { name: 'Design Tools', items: ['Figma', 'Design Systems', 'Interaction Design', 'Component Libraries', 'HTML & CSS', 'Responsive Design'] },
   { name: 'Development', items: ['Flutter', 'Dart', 'Java', 'C#', 'WPF / XAML', 'Node.js', 'PostgreSQL', 'REST APIs'] },
   { name: 'Certifications', items: ['AWS Cloud Practitioner', 'Google UX Design', 'Cloud & DevOps', 'Android & Flutter'] },

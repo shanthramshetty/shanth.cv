@@ -61,10 +61,11 @@ export default function About() {
               marginBottom: '2.5rem', maxWidth: '480px',
               fontFamily: "'Inter', sans-serif",
             }}>
-              I'm a product designer who thrives on all things ambiguous and gnarly.
-              With a strong focus on craft, storytelling, and high exploration output,
-              I enjoy diving into the details, solving problems thoughtfully, and
-              bringing order to chaos.
+              I'm a product designer who thrives on ambiguity and complexity.
+              I care deeply about the why behind every decision — from the first
+              research session to the final shipped state. My work lives at the
+              intersection of user insight, systems thinking, and measurable
+              business impact.
             </motion.p>
 
             <motion.div {...fade(0.36)} className="about-stats">
@@ -77,10 +78,11 @@ export default function About() {
                   Day job
                 </p>
                 <p style={{ fontSize: '0.875rem', color: '#333', lineHeight: 1.75, fontFamily: "'Inter', sans-serif" }}>
-                  Currently, I am a <strong style={{ fontWeight: 600, color: '#111' }}>UX Designer I at 7EDGE</strong>.
+                  Currently, I am a <strong style={{ fontWeight: 600, color: '#111' }}>Product Designer at 7EDGE</strong>.
                   Before that, I worked at NeST Digital and Luminar, and freelanced for
-                  startups. I hold certifications in Google UX Design and AWS Cloud,
-                  along with a background in Computer Science.
+                  startups across fintech, e-commerce, and consumer apps. I hold
+                  certifications in Google UX Design and AWS Cloud, with a background
+                  in Computer Science.
                 </p>
               </div>
               <div>
@@ -92,10 +94,10 @@ export default function About() {
                   Out of office
                 </p>
                 <p style={{ fontSize: '0.875rem', color: '#333', lineHeight: 1.75, fontFamily: "'Inter', sans-serif" }}>
-                  When I'm not building things, I love exploring new technology,
-                  tinkering with side projects, and solving hard problems. I'm a
-                  natural systems thinker — feel free to reach out if I've piqued
-                  your interest!
+                  When I'm not designing, I'm building — Eventurox, my live event
+                  discovery platform, is the clearest proof of that. I'm drawn to
+                  hard problems, tight systems, and the overlap between design and
+                  engineering. Feel free to reach out if any of that resonates.
                 </p>
               </div>
             </motion.div>
