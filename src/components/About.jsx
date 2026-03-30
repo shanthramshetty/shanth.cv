@@ -94,10 +94,10 @@ export default function About() {
                   Out of office
                 </p>
                 <p style={{ fontSize: '0.875rem', color: '#333', lineHeight: 1.75, fontFamily: "'Inter', sans-serif" }}>
-                  When I'm not designing, I'm building — Eventurox, my live event
-                  discovery platform, is the clearest proof of that. I'm drawn to
-                  hard problems, tight systems, and the overlap between design and
-                  engineering. Feel free to reach out if any of that resonates.
+                  Outside of work, I enjoy exploring emerging technology, contributing
+                  to side projects, and thinking through product problems. I believe
+                  the best designers understand how things are built — and I actively
+                  pursue that edge. Always open to meaningful conversations.
                 </p>
               </div>
             </motion.div>
