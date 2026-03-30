@@ -4,11 +4,11 @@ import { useState } from 'react'
 const projects = [
   {
     number: '01',
-    title: 'Fintech SaaS Platform',
-    description: 'Redesigned the end-to-end product experience for a fintech SaaS platform — from stakeholder research and IA restructuring to high-fidelity prototypes for complex transaction dashboards. Cut task completion time by 63%.',
-    tags: ['Figma', 'Product Research', 'Prototyping', 'Design Systems'],
+    title: 'FluxPay — Fintech SaaS',
+    description: 'Rebuilt how finance teams see, decide, and act inside a complex enterprise SaaS platform — from a week of user shadowing and service blueprinting to a role-aware IA, a six-to-two-step approval flow, and a component system adopted across three product teams. Task completion time dropped 63%.',
+    tags: ['Product Design', 'Figma', 'Design Systems', 'Fintech'],
     type: 'Case Study',
-    year: '2024',
+    year: '2025',
   },
   {
     number: '02',
