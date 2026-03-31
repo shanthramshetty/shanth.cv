@@ -6,23 +6,53 @@ import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motio
 function MockupFintech() {
   return (
     <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
-      <rect width="360" height="200" fill="#1a1f2e"/>
-      <rect x="0" y="0" width="64" height="200" fill="#141824"/>
-      <circle cx="32" cy="24" r="10" fill="#3b82f6" opacity="0.9"/>
-      {[50,74,98,122].map((y,i) => <rect key={i} x="14" y={y} width="36" height="6" rx="3" fill="white" opacity={i===0?0.5:0.15}/>)}
-      <rect x="76" y="16" width="110" height="52" rx="6" fill="#232b3e"/>
-      <rect x="88" y="26" width="48" height="5" rx="2" fill="white" opacity="0.4"/>
-      <rect x="88" y="36" width="28" height="14" rx="2" fill="#3b82f6" opacity="0.9"/>
-      <rect x="88" y="54" width="40" height="4" rx="2" fill="#22c55e" opacity="0.7"/>
-      <rect x="198" y="16" width="110" height="52" rx="6" fill="#232b3e"/>
-      <rect x="210" y="26" width="48" height="5" rx="2" fill="white" opacity="0.4"/>
-      <rect x="210" y="36" width="28" height="14" rx="2" fill="#a78bfa" opacity="0.9"/>
-      <rect x="76" y="80" width="232" height="100" rx="6" fill="#232b3e"/>
-      {[0,1,2,3,4,5,6].map(i => {
-        const h=[40,55,35,65,48,70,52][i]
-        return <rect key={i} x={100+i*28} y={165-h} width="16" height={h} rx="3" fill="#3b82f6" opacity={i===5?1:0.4}/>
+      {/* Background */}
+      <rect width="360" height="200" fill="#0B0F1A"/>
+      {/* Sidebar */}
+      <rect x="0" y="0" width="52" height="200" fill="#0d1121"/>
+      <rect x="13" y="10" width="26" height="26" rx="7" fill="#2B7FFF" opacity="0.9"/>
+      <rect x="19" y="18" width="14" height="10" rx="2" fill="white" opacity="0.85"/>
+      {[46,68,90,112,134].map((y,i) => (
+        <rect key={i} x="14" y={y} width="24" height="14" rx="5"
+          fill={i===0?'#2B7FFF20':'transparent'}
+          stroke={i===0?'#2B7FFF40':'none'}/>
+      ))}
+      {[46,68,90,112,134].map((y,i) => (
+        <rect key={i} x="20" y={y+4} width="12" height="6" rx="2" fill="white" opacity={i===0?0.5:0.18}/>
+      ))}
+      {/* KPI cards */}
+      <rect x="62" y="10" width="88" height="46" rx="7" fill="#111520" stroke="#2B7FFF30" strokeWidth="1"/>
+      <rect x="70" y="18" width="36" height="5" rx="2" fill="#99A1AF" opacity="0.5"/>
+      <rect x="70" y="27" width="52" height="12" rx="2" fill="#2B7FFF" opacity="0.85"/>
+      <rect x="70" y="44" width="20" height="4" rx="2" fill="#00C950" opacity="0.7"/>
+      <rect x="158" y="10" width="88" height="46" rx="7" fill="#111520" stroke="#00C95030" strokeWidth="1"/>
+      <rect x="166" y="18" width="36" height="5" rx="2" fill="#99A1AF" opacity="0.5"/>
+      <rect x="166" y="27" width="44" height="12" rx="2" fill="#00C950" opacity="0.85"/>
+      <rect x="166" y="44" width="20" height="4" rx="2" fill="#00B8DB" opacity="0.7"/>
+      <rect x="254" y="10" width="96" height="46" rx="7" fill="#111520" stroke="#00B8DB30" strokeWidth="1"/>
+      <rect x="262" y="18" width="36" height="5" rx="2" fill="#99A1AF" opacity="0.5"/>
+      <rect x="262" y="27" width="48" height="12" rx="2" fill="#00B8DB" opacity="0.85"/>
+      <rect x="262" y="44" width="20" height="4" rx="2" fill="#615FFF" opacity="0.7"/>
+      {/* Chart */}
+      <rect x="62" y="64" width="180" height="80" rx="7" fill="#111520" stroke="#1a2035" strokeWidth="1"/>
+      <rect x="72" y="72" width="55" height="5" rx="2" fill="#D1D5DC" opacity="0.4"/>
+      {[0,1,2,3,4,5,6,7].map(i => {
+        const h=[30,45,28,58,40,65,50,70][i]
+        return <rect key={i} x={74+i*18} y={135-h} width="10" height={h} rx="2"
+          fill={i===7?'#2B7FFF':'#2B7FFF30'}/>
       })}
-      <polyline points="108,155 136,140 164,158 192,125 220,143 248,115 276,130" fill="none" stroke="#22c55e" strokeWidth="2" opacity="0.8"/>
+      <polyline points="74,120 92,110 110,118 128,100 146,108 164,92 182,100 200,88"
+        fill="none" stroke="#00C950" strokeWidth="1.5" opacity="0.75"/>
+      {/* Transactions */}
+      <rect x="62" y="152" width="288" height="40" rx="7" fill="#111520" stroke="#1a2035" strokeWidth="1"/>
+      {[0,1].map(i => (
+        <g key={i}>
+          <circle cx={76} cy={162+i*16} r="7" fill="#2B7FFF25" stroke="#2B7FFF40" strokeWidth="0.8"/>
+          <rect x="88" cy={158+i*16} width="55" height="5" rx="2" fill="#D1D5DC" opacity="0.4" y={158+i*16}/>
+          <rect x={310} y={158+i*16} width="30" height="5" rx="2" fill="#D1D5DC" opacity="0.4"/>
+          <circle cx="340" cy={161+i*16} r="3.5" fill={i===0?'#00C950':'#00B8DB'} opacity="0.9"/>
+        </g>
+      ))}
     </svg>
   )
 }
@@ -254,7 +284,7 @@ const PROJECTS = [
       { value: '4.8', label: 'Satisfaction score (up from 2.9)' },
       { value: '3', label: 'Product teams on one design system' },
     ],
-    accent: '#3b82f6',
+    accent: '#2B7FFF',
   },
   {
     id: 1, number: '02',

@@ -7,53 +7,119 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 
 function SkeletonFinovaX() {
   return (
-    <div style={{ width: '100%', height: '100%', background: '#0d1117', borderRadius: '12px 12px 0 0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-      {/* Topbar */}
-      <div style={{ height: '40px', background: '#161b22', borderBottom: '1px solid #21262d', display: 'flex', alignItems: 'center', padding: '0 14px', gap: '8px' }}>
-        <div className="skeleton" style={{ width: '72px', height: '8px' }} />
-        <div style={{ flex: 1 }} />
-        <div className="skeleton" style={{ width: '24px', height: '24px', borderRadius: '50%' }} />
+    <div style={{ width: '100%', height: '100%', background: '#0B0F1A', borderRadius: '12px 12px 0 0', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      {/* Browser chrome */}
+      <div style={{ height: '28px', background: '#111520', borderBottom: '1px solid #1e2540', display: 'flex', alignItems: 'center', padding: '0 10px', gap: '5px', flexShrink: 0 }}>
+        {['#ef4444','#f59e0b','#22c55e'].map((c, i) => (
+          <div key={i} style={{ width: '7px', height: '7px', borderRadius: '50%', background: c, opacity: 0.7 }} />
+        ))}
+        <div style={{ flex: 1, margin: '0 8px', background: '#1a2035', borderRadius: '4px', height: '14px', display: 'flex', alignItems: 'center', padding: '0 7px' }}>
+          <div className="skeleton" style={{ width: '90px', height: '5px', opacity: 0.5 }} />
+        </div>
       </div>
 
       <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
         {/* Sidebar */}
-        <div style={{ width: '52px', background: '#0d1117', borderRight: '1px solid #21262d', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '12px 0', gap: '14px' }}>
-          {[1,1,0.4,0.4,0.4].map((op, i) => (
-            <div key={i} className="skeleton" style={{ width: '28px', height: '28px', borderRadius: '8px', opacity: op }} />
+        <div style={{ width: '44px', background: '#0d1121', borderRight: '1px solid #1a2035', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '12px 0', gap: '10px', flexShrink: 0 }}>
+          {/* Logo mark */}
+          <div style={{ width: '26px', height: '26px', borderRadius: '7px', background: '#2B7FFF', marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: '10px', height: '10px', borderRadius: '2px', background: 'rgba(255,255,255,0.85)' }} />
+          </div>
+          {[1, 0.9, 0.35, 0.35, 0.35].map((op, i) => (
+            <div key={i} style={{
+              width: '28px', height: '28px', borderRadius: '8px',
+              background: i === 0 ? '#2B7FFF20' : 'transparent',
+              border: i === 0 ? '1px solid #2B7FFF40' : 'none',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', opacity: op,
+            }}>
+              <div className="skeleton" style={{ width: '14px', height: '14px', borderRadius: '3px' }} />
+            </div>
           ))}
         </div>
 
-        {/* Main */}
-        <div style={{ flex: 1, padding: '14px', display: 'flex', flexDirection: 'column', gap: '10px', overflow: 'hidden' }}>
-          {/* KPI row */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px' }}>
-            {['#3b82f620', '#8b5cf620', '#22c55e20'].map((bg, i) => (
-              <div key={i} style={{ background: bg, border: `1px solid ${['#3b82f640','#8b5cf640','#22c55e40'][i]}`, borderRadius: '10px', padding: '10px' }}>
-                <div className="skeleton" style={{ width: '40px', height: '6px', marginBottom: '6px' }} />
-                <div className="skeleton" style={{ width: '55px', height: '14px' }} />
+        {/* Main content */}
+        <div style={{ flex: 1, padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px', overflow: 'hidden' }}>
+          {/* Page header */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2px' }}>
+            <div className="skeleton" style={{ width: '70px', height: '8px' }} />
+            <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+              <div style={{ padding: '4px 10px', borderRadius: '6px', background: '#2B7FFF', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: '30px', height: '5px', borderRadius: '2px', background: 'rgba(255,255,255,0.7)' }} />
+              </div>
+              <div className="skeleton" style={{ width: '24px', height: '24px', borderRadius: '50%' }} />
+            </div>
+          </div>
+
+          {/* KPI cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '6px' }}>
+            {[
+              { bg: '#2B7FFF18', border: '#2B7FFF35', accent: '#2B7FFF' },
+              { bg: '#00C95018', border: '#00C95035', accent: '#00C950' },
+              { bg: '#00B8DB18', border: '#00B8DB35', accent: '#00B8DB' },
+            ].map((c, i) => (
+              <div key={i} style={{ background: c.bg, border: `1px solid ${c.border}`, borderRadius: '9px', padding: '9px 10px' }}>
+                <div className="skeleton" style={{ width: '36px', height: '5px', marginBottom: '5px', opacity: 0.6 }} />
+                <div className="skeleton" style={{ width: '48px', height: '13px', marginBottom: '5px' }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                  <div style={{ width: '0', height: '0', borderLeft: '3px solid transparent', borderRight: '3px solid transparent', borderBottom: `4px solid ${c.accent}` }} />
+                  <div style={{ width: '22px', height: '4px', borderRadius: '2px', background: c.accent, opacity: 0.7 }} />
+                </div>
               </div>
             ))}
           </div>
 
-          {/* Chart area */}
-          <div style={{ flex: 1, background: '#161b22', borderRadius: '10px', padding: '12px', border: '1px solid #21262d' }}>
-            <div className="skeleton" style={{ width: '80px', height: '7px', marginBottom: '12px' }} />
-            <div style={{ display: 'flex', alignItems: 'flex-end', gap: '5px', height: '60px' }}>
-              {[45, 65, 40, 75, 55, 80, 60, 70, 50, 85, 65, 72].map((h, i) => (
-                <div key={i} style={{ flex: 1, height: `${h}%`, background: i === 10 ? '#3b82f6' : '#3b82f630', borderRadius: '3px 3px 0 0' }} />
+          {/* Chart */}
+          <div style={{ flex: 1, background: '#111520', borderRadius: '9px', padding: '10px 12px', border: '1px solid #1a2035', minHeight: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+              <div className="skeleton" style={{ width: '65px', height: '6px' }} />
+              <div style={{ display: 'flex', gap: '8px' }}>
+                {['#2B7FFF', '#00C950'].map((c, i) => (
+                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                    <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: c }} />
+                    <div className="skeleton" style={{ width: '24px', height: '4px', opacity: 0.5 }} />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'flex-end', gap: '3px', height: '52px' }}>
+              {[38, 55, 42, 68, 50, 78, 60, 72, 45, 82, 65, 88].map((h, i) => (
+                <div key={i} style={{
+                  flex: 1,
+                  height: `${h}%`,
+                  background: i === 11 ? '#2B7FFF' : i % 2 === 0 ? '#2B7FFF25' : '#00C95025',
+                  borderRadius: '3px 3px 0 0',
+                  transition: 'height 0.3s',
+                }} />
               ))}
             </div>
+            {/* Area line */}
+            <svg width="100%" height="14" viewBox="0 0 200 14" preserveAspectRatio="none" style={{ marginTop: '2px' }}>
+              <polyline points="0,12 18,8 36,10 54,5 72,7 90,3 108,6 126,4 144,8 162,2 180,5 200,1"
+                fill="none" stroke="#00C950" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.7"/>
+            </svg>
           </div>
 
-          {/* Table rows */}
-          <div style={{ background: '#161b22', borderRadius: '10px', border: '1px solid #21262d', overflow: 'hidden' }}>
-            {[1,0.7,0.5].map((op, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 12px', borderBottom: i < 2 ? '1px solid #21262d' : 'none', opacity: op }}>
-                <div className="skeleton" style={{ width: '22px', height: '22px', borderRadius: '50%' }} />
-                <div className="skeleton" style={{ width: '70px', height: '7px' }} />
-                <div style={{ flex: 1 }} />
-                <div className="skeleton" style={{ width: '40px', height: '7px' }} />
-                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: ['#22c55e','#f59e0b','#ef4444'][i] }} />
+          {/* Transactions */}
+          <div style={{ background: '#111520', borderRadius: '9px', border: '1px solid #1a2035', overflow: 'hidden', flexShrink: 0 }}>
+            <div style={{ padding: '7px 10px', borderBottom: '1px solid #1a2035', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div className="skeleton" style={{ width: '80px', height: '6px' }} />
+              <div className="skeleton" style={{ width: '30px', height: '5px', opacity: 0.4 }} />
+            </div>
+            {[
+              { color: '#2B7FFF', status: '#00C950' },
+              { color: '#615FFF', status: '#00B8DB' },
+              { color: '#00C950', status: '#00C950' },
+            ].map((row, i) => (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '7px 10px', borderBottom: i < 2 ? '1px solid #1a203520' : 'none', opacity: 1 - i * 0.2 }}>
+                <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: row.color + '25', border: `1px solid ${row.color}40`, flexShrink: 0 }}>
+                  <div className="skeleton" style={{ width: '22px', height: '22px', borderRadius: '50%', opacity: 0 }} />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <div className="skeleton" style={{ width: '60px', height: '6px', marginBottom: '3px' }} />
+                  <div className="skeleton" style={{ width: '40px', height: '5px', opacity: 0.4 }} />
+                </div>
+                <div className="skeleton" style={{ width: '38px', height: '7px' }} />
+                <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: row.status, boxShadow: `0 0 5px ${row.status}80` }} />
               </div>
             ))}
           </div>
@@ -229,11 +295,11 @@ const SHOWCASE = [
     id: 'finovax',
     number: '01',
     title: 'FinovaX',
-    subtitle: 'Fintech SaaS Dashboard',
-    description: 'Redesigned a fragmented financial operations platform into a single, high-clarity command centre — reducing task time by 63%.',
-    tags: ['UX Design', 'SaaS', 'Fintech'],
-    metric: { value: '63%', label: 'Faster workflows' },
-    accent: '#3b82f6',
+    subtitle: 'Fintech SaaS · Web + Mobile',
+    description: 'Smarter financial control for modern businesses — dashboard overview, transaction management, payment flows, and analytics hub in one platform.',
+    tags: ['SaaS Design', 'Fintech', 'Web + Mobile'],
+    metric: { value: '63%', label: 'Task completion time reduced' },
+    accent: '#2B7FFF',
     Skeleton: SkeletonFinovaX,
   },
   {
