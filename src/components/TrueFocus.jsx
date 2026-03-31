@@ -1,17 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 
-/*
-  TrueFocus — depth-of-field word cycling animation.
-  Props:
-    sentence      — string of space-separated words
-    manualMode    — if true, hover controls focus instead of auto
-    blurAmount    — px blur on unfocused words (default 5)
-    borderColor   — CSS color for the focus brackets
-    glowColor     — CSS rgba for the glow behind brackets
-    animDuration  — seconds per transition (default 0.4)
-    pauseBetween  — seconds to hold each word (default 1.2)
-*/
 export default function TrueFocus({
   sentence     = 'True Focus',
   manualMode   = false,
@@ -25,9 +14,9 @@ export default function TrueFocus({
   color        = '#ffffff',
 }) {
   const words        = sentence.split(' ')
-  const [activeIdx,  setActiveIdx]  = useState(0)
-  const [hoverIdx,   setHoverIdx]   = useState(null)
-  const [focusRect,  setFocusRect]  = useState(null)
+  const [activeIdx,  setActiveIdx] = useState(0)
+  const [hoverIdx,   setHoverIdx]  = useState(null)
+  const [focusRect,  setFocusRect] = useState(null)
   const wordRefs     = useRef([])
   const containerRef = useRef(null)
 
@@ -43,7 +32,7 @@ export default function TrueFocus({
     return () => clearInterval(id)
   }, [manualMode, words.length, animDuration, pauseBetween])
 
-  /* Measure focused word → position brackets */
+  /* Measure focused word → bracket position */
   const updateRect = useCallback(() => {
     const el  = wordRefs.current[focusedIdx]
     const box = containerRef.current
@@ -64,14 +53,17 @@ export default function TrueFocus({
     return () => window.removeEventListener('resize', updateRect)
   }, [updateRect])
 
+  /* Spring config — bracket glides smoothly between words */
+  const spring = { type: 'spring', stiffness: 300, damping: 30, mass: 0.8 }
+
   return (
     <span
       ref={containerRef}
       style={{
-        position: 'relative',
-        display:  'inline-flex',
-        flexWrap: 'wrap',
-        gap:      '0.3em',
+        position:   'relative',
+        display:    'inline-flex',
+        flexWrap:   'wrap',
+        gap:        '0.3em',
         alignItems: 'center',
       }}
     >
@@ -90,9 +82,11 @@ export default function TrueFocus({
               color,
               fontWeight: 400,
               lineHeight: 1.15,
-              filter:     focused ? 'blur(0px)' : `blur(${blurAmount}px)`,
-              opacity:    focused ? 1 : 0.3,
-              transition: `filter ${animDuration}s ease, opacity ${animDuration}s ease`,
+              filter:  focused ? 'blur(0px)' : `blur(${blurAmount}px)`,
+              opacity: focused ? 1 : 0.28,
+              /* Smooth, slightly springy easing on the words themselves */
+              transition: `filter ${animDuration * 0.9}s cubic-bezier(0.25,0.46,0.45,0.94),
+                           opacity ${animDuration * 0.9}s cubic-bezier(0.25,0.46,0.45,0.94)`,
             }}
           >
             {word}
@@ -100,47 +94,44 @@ export default function TrueFocus({
         )
       })}
 
-      {/* Animated focus bracket */}
+      {/* Single persistent bracket — springs to the focused word */}
       {focusRect && (
         <motion.span
-          key={`bracket-${focusedIdx}`}
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{    opacity: 0 }}
-          transition={{ duration: animDuration, ease: [0.22, 1, 0.36, 1] }}
+          /* No key change — this element stays mounted and animates position */
+          animate={{
+            left:   focusRect.left,
+            top:    focusRect.top,
+            width:  focusRect.width,
+            height: focusRect.height,
+            opacity: 1,
+          }}
+          initial={{ opacity: 0 }}
+          transition={spring}
           style={{
             position:      'absolute',
             pointerEvents: 'none',
-            left:          focusRect.left,
-            top:           focusRect.top,
-            width:         focusRect.width,
-            height:        focusRect.height,
             borderRadius:  '4px',
             boxShadow:     `0 0 14px 3px ${glowColor}`,
           }}
         >
-          {/* Top-left corner */}
           <span style={{
             position: 'absolute', top: 0, left: 0,
             width: '10px', height: '10px',
             borderTop:  `2px solid ${borderColor}`,
             borderLeft: `2px solid ${borderColor}`,
           }} />
-          {/* Top-right corner */}
           <span style={{
             position: 'absolute', top: 0, right: 0,
             width: '10px', height: '10px',
             borderTop:   `2px solid ${borderColor}`,
             borderRight: `2px solid ${borderColor}`,
           }} />
-          {/* Bottom-left corner */}
           <span style={{
             position: 'absolute', bottom: 0, left: 0,
             width: '10px', height: '10px',
             borderBottom: `2px solid ${borderColor}`,
             borderLeft:   `2px solid ${borderColor}`,
           }} />
-          {/* Bottom-right corner */}
           <span style={{
             position: 'absolute', bottom: 0, right: 0,
             width: '10px', height: '10px',
