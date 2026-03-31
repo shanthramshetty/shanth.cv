@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import profileImg from '../assets/images/profile.jpeg'
+import profileImg from '../assets/images/profile-hero.jpeg'
 import FlipWords from './FlipWords'
 import TiltedCard from './TiltedCard'
 import TrueFocus from './TrueFocus'
@@ -170,7 +170,7 @@ export default function Hero({ setPage }) {
                   alt="Shanthram Shetty"
                   style={{
                     width: '100%', height: '100%',
-                    objectFit: 'cover', objectPosition: 'center top',
+                    objectFit: 'cover', objectPosition: 'center center',
                     display: 'block',
                   }}
                 />
