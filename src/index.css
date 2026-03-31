@@ -587,20 +587,6 @@ input, textarea, select, button {
 }
 .hero-btn-outline:active { transform: translateY(0); }
 
-/* ── Responsive ──────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .hero-top-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  /* Photo card goes on top on mobile */
-  .hero-top-grid > *:last-child { order: -1; }
-
-  .hero-bento-row {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* ── TrueFocus sections row ──────────────────────────────────────── */
 .hero-focus-row {
   display: grid;
@@ -623,10 +609,51 @@ input, textarea, select, button {
   flex-shrink: 0;
 }
 
-@media (max-width: 640px) {
+/* ═══════════════════════════════════════════════════════════════════
+   COMPREHENSIVE MOBILE RESPONSIVENESS
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* ── Hero top grid: single column, photo first ── */
+  .hero-top-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .hero-top-grid > *:last-child { order: -1; }
+
+  /* ── Center entire text column on mobile ── */
+  .hero-text-col {
+    align-items: center !important;
+    text-align: center;
+  }
+
+  /* ── Chip: center by auto margins ── */
+  .hero-chip-wrap {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ── Buttons row: centered ── */
+  .hero-btn-row {
+    justify-content: center;
+  }
+
+  /* ── Make buttons full-width on very small screens ── */
+  .hero-btn-primary,
+  .hero-btn-outline {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  /* ── TrueFocus bento row: stack vertically ── */
+  .hero-bento-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* ── TrueFocus focus row: stack ── */
   .hero-focus-row {
     grid-template-columns: 1fr;
-    gap: 0;
   }
   .hero-focus-divider {
     width: 100%;
@@ -635,5 +662,37 @@ input, textarea, select, button {
   }
   .hero-focus-block {
     padding: 1.5rem 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  /* ── Nav: tighten pill padding on small phones ── */
+  header nav button {
+    padding: 0.28rem 0.7rem !important;
+    font-size: 0.78rem !important;
+  }
+
+  /* ── Hero buttons: stack if very narrow ── */
+  .hero-btn-primary,
+  .hero-btn-outline {
+    font-size: 0.82rem;
+    padding: 0.6rem 1.1rem;
+  }
+
+  /* ── About page portrait: max width ── */
+  .about-portrait {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+
+  /* ── Work page cards: full width ── */
+  .work-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Fun section photo grid: 1 col ── */
+  .fun-photo-grid {
+    grid-template-columns: 1fr 1fr !important;
   }
 }

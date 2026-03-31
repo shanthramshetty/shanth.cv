@@ -39,10 +39,11 @@ export default function Hero({ setPage }) {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="hero-text-col"
             style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
           >
             {/* Status chip */}
-            <div style={{
+            <div className="hero-chip-wrap" style={{
               display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
               background: 'rgba(99,102,241,0.1)',
               border: '1px solid rgba(99,102,241,0.2)',
@@ -123,6 +124,7 @@ export default function Hero({ setPage }) {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
+              className="hero-btn-row"
               style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}
             >
               <button onClick={() => setPage?.('about')} className="hero-btn-primary">
