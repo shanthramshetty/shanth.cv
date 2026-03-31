@@ -9,8 +9,8 @@ import {
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline'
 import * as THREE from 'three'
 
-const cardGLB   = '/lanyard/card.glb'
-const lanyardPng = '/lanyard/lanyard.png'
+import cardGLB    from './card.glb'
+import lanyardPng from './lanyard.png'
 
 extend({ MeshLineGeometry, MeshLineMaterial })
 
