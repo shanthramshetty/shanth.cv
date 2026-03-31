@@ -136,7 +136,7 @@ export default function Hero() {
               marginBottom: '1.4rem', maxWidth: '272px',
               fontFamily: "'Inter', sans-serif",
             }}>
-              I'm a Product Designer with 2+ years shipping
+              I'm a Product Designer with 3+ years shipping
               end-to-end experiences across fintech, AI, and mobile.
               With a background in software engineering, I own the
               full design cycle — from research and IA to system

@@ -38,7 +38,7 @@ const SOCIAL = [
 ]
 
 const STATS = [
-  { value: '2+', label: 'Years Experience' },
+  { value: '3+', label: 'Years Experience' },
   { value: '7+', label: 'Projects Shipped' },
   { value: '3',  label: 'Companies' },
 ]
@@ -241,8 +241,8 @@ export default function Home({ setPage }) {
               maxWidth: '440px', marginBottom: '2rem',
             }}>
               I turn ambiguous problems into clear, impactful products —
-              shipping end-to-end experiences across fintech, AI, and mobile
-              with a background in software engineering.
+              3+ years shipping end-to-end experiences across fintech, AI,
+              and mobile with a background in software engineering.
             </motion.p>
 
             {/* CTA buttons */}
@@ -369,7 +369,7 @@ export default function Home({ setPage }) {
                   background: '#22c55e',
                   boxShadow: '0 0 0 3px rgba(34,197,94,0.2)',
                 }} />
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.68rem', fontWeight: 600, color: '#111', margin: 0 }}>2+ yrs exp</p>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.68rem', fontWeight: 600, color: '#111', margin: 0 }}>3+ yrs exp</p>
               </motion.div>
             </div>
           </motion.div>
