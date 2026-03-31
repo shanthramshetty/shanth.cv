@@ -252,3 +252,172 @@ body {
   background: #ccc9c0;
   border-radius: 3px;
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   HOME PAGE
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Split hero grid ─────────────────────────────────────────────── */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: center;
+  min-height: calc(100svh - 64px - 200px);
+}
+
+@media (max-width: 768px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    min-height: unset;
+  }
+  /* Photo column: render before text on mobile for visual impact */
+  .home-grid > div:last-child { order: -1; }
+}
+
+/* ── CTA buttons ─────────────────────────────────────────────────── */
+.home-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.72rem 1.55rem;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
+  min-height: 44px;
+  transition: background 0.2s, transform 0.18s, box-shadow 0.2s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  outline: none;
+}
+.home-cta-primary:hover {
+  background: #2a2a2a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+.home-cta-primary:active { transform: translateY(0); box-shadow: none; }
+
+.home-cta-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.72rem 1.55rem;
+  border-radius: 999px;
+  background: transparent;
+  color: #333;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border: 1.5px solid rgba(0,0,0,0.18);
+  cursor: pointer;
+  min-height: 44px;
+  transition: border-color 0.2s, color 0.2s, transform 0.18s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  outline: none;
+}
+.home-cta-outline:hover {
+  border-color: #111;
+  color: #111;
+  transform: translateY(-2px);
+}
+.home-cta-outline:active { transform: translateY(0); }
+
+/* ── Social link buttons ─────────────────────────────────────────── */
+.home-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  color: #999;
+  text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+.home-social-link:hover {
+  color: #111;
+  background: rgba(0,0,0,0.05);
+}
+
+/* ── Stats strip ─────────────────────────────────────────────────── */
+.home-stats {
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid rgba(0,0,0,0.07);
+  padding-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.home-stat {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  padding: 0 clamp(1.25rem, 3.5vw, 2.75rem) 0 0;
+}
+
+.home-stat-sep {
+  position: absolute;
+  right: 0;
+  top: 8%;
+  height: 84%;
+  width: 1px;
+  background: rgba(0,0,0,0.08);
+}
+
+@media (max-width: 480px) {
+  .home-stats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .home-stat { padding: 0; }
+  .home-stat-sep { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   GLOBAL DESIGN TOKENS & CONSISTENCY FIXES
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --font-serif:  'DM Serif Display', serif;
+  --font-sans:   'Inter', system-ui, sans-serif;
+  --font-hand:   'Caveat', cursive;
+  --color-bg:    #fafaf8;
+  --color-dark:  #0a0a0a;
+  --radius-card: 14px;
+  --radius-sm:   10px;
+  --transition:  0.25s ease;
+  --nav-h:       64px;
+}
+
+/* Smooth page-transition layering */
+.page-wrap {
+  will-change: opacity, transform;
+}
+
+/* Ensure all interactive elements have consistent focus rings */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* Remove iOS input style overrides */
+input, textarea, select, button {
+  -webkit-appearance: none;
+  appearance: none;
+}
