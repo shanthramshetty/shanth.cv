@@ -150,54 +150,23 @@ export default function Hero({ setPage }) {
               glareOpacity={0.12}
               style={{
                 borderRadius: '24px',
-                background: 'linear-gradient(145deg, #18182a 0%, #1a1a3a 60%, #0f1628 100%)',
+                overflow: 'hidden',
                 boxShadow: '0 28px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.07)',
-                padding: '1.25rem 1.25rem 1rem',
                 width: 'clamp(220px, 26vw, 300px)',
+                aspectRatio: '1 / 1',
+                padding: 0,
               }}
             >
-              <div style={{
-                position: 'absolute', inset: 0, borderRadius: '24px', pointerEvents: 'none',
-                background: 'radial-gradient(ellipse at 40% 15%, rgba(99,102,241,0.14) 0%, transparent 65%)',
-              }} />
-              <div style={{
-                position: 'relative', zIndex: 1,
-                borderRadius: '16px', overflow: 'hidden',
-                aspectRatio: '1 / 1.15',
-              }}>
-                <img
-                  src={profileImg}
-                  alt="Shanthram Shetty"
-                  style={{
-                    width: '100%', height: '100%',
-                    objectFit: 'cover', objectPosition: 'center center',
-                    display: 'block',
-                  }}
-                />
-                <div style={{
-                  position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%',
-                  background: 'linear-gradient(to top, rgba(15,15,17,0.6) 0%, transparent 100%)',
-                  pointerEvents: 'none',
-                }} />
-              </div>
-              <div style={{ position: 'relative', zIndex: 1, marginTop: '0.85rem', textAlign: 'center' }}>
-                <p style={{
-                  fontFamily: "'DM Serif Display', serif",
-                  fontSize: '1rem', color: 'rgba(255,255,255,0.9)',
-                  letterSpacing: '-0.01em', marginBottom: '0.25rem',
-                }}>
-                  Shanthram Shetty
-                </p>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}>
-                  <span style={{
-                    width: '5px', height: '5px', borderRadius: '50%',
-                    background: '#22c55e', boxShadow: '0 0 5px rgba(34,197,94,0.8)',
-                  }} />
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)' }}>
-                    Available for opportunities
-                  </span>
-                </div>
-              </div>
+              <img
+                src={profileImg}
+                alt="Shanthram Shetty"
+                style={{
+                  width: '100%', height: '100%',
+                  objectFit: 'cover', objectPosition: 'center center',
+                  display: 'block',
+                  position: 'relative', zIndex: 1,
+                }}
+              />
             </TiltedCard>
           </motion.div>
         </div>
