@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import profileImg from '../assets/images/profile.jpeg'
+import Lanyard from './Lanyard/Lanyard'
 
 /* ─── Constants ─────────────────────────────────────────────────── */
 
@@ -51,7 +52,7 @@ const fadeUp = (delay = 0) => ({
   transition: { delay, duration: 0.62, ease: [0.22, 1, 0.36, 1] },
 })
 
-/* ─── Role badge that cycles with crossfade ─────────────────────── */
+/* ─── Animated role title ───────────────────────────────────────── */
 
 function RoleBadge() {
   const [idx, setIdx] = useState(0)
@@ -65,8 +66,7 @@ function RoleBadge() {
     <div style={{
       height: 'clamp(1.6rem, 2.8vw, 2.1rem)',
       display: 'flex', alignItems: 'center',
-      overflow: 'hidden',
-      marginBottom: '1.5rem',
+      overflow: 'hidden', marginBottom: '1.5rem',
     }}>
       <AnimatePresence mode="wait">
         <motion.span
@@ -78,10 +78,8 @@ function RoleBadge() {
           style={{
             fontFamily: "'DM Serif Display', serif",
             fontSize: 'clamp(1.15rem, 2.4vw, 1.7rem)',
-            color: '#888',
-            fontStyle: 'italic',
-            display: 'block',
-            letterSpacing: '-0.01em',
+            color: '#888', fontStyle: 'italic',
+            display: 'block', letterSpacing: '-0.01em',
           }}
         >
           {ROLES[idx]}
@@ -97,14 +95,18 @@ export default function Home({ setPage }) {
   return (
     <main style={{
       minHeight: '100vh',
-      background: '#fafaf8',
+      background: 'linear-gradient(160deg, #fafaf8 0%, #f4f2ef 50%, #fafaf8 100%)',
       paddingTop: '64px',
       position: 'relative',
       overflow: 'hidden',
     }}>
 
-      {/* ── Self-contained keyframes ─────────────────────────────── */}
+      {/* ── Keyframes ────────────────────────────────────────────── */}
       <style>{`
+        @keyframes statusPulse {
+          0%,100%{ box-shadow:0 0 0 3px rgba(99,102,241,0.18) }
+          50%    { box-shadow:0 0 0 6px rgba(99,102,241,0.07) }
+        }
         @keyframes blobA {
           0%,100%{ transform:translate(0,0) scale(1) }
           33%    { transform:translate(28px,-38px) scale(1.04) }
@@ -112,278 +114,171 @@ export default function Home({ setPage }) {
         }
         @keyframes blobB {
           0%,100%{ transform:translate(0,0) scale(1) }
-          40%    { transform:translate(-32px,28px) scale(1.06) }
-          70%    { transform:translate(22px,-18px) scale(0.96) }
-        }
-        @keyframes blobC {
-          0%,100%{ transform:translate(0,0) scale(1) }
-          50%    { transform:translate(18px,36px) scale(1.03) }
-        }
-        @keyframes photoFloat {
-          0%,100%{ transform:translateY(0px) rotate(-1.5deg) }
-          50%    { transform:translateY(-9px) rotate(0.8deg) }
-        }
-        @keyframes statusPulse {
-          0%,100%{ box-shadow:0 0 0 3px rgba(99,102,241,0.18) }
-          50%    { box-shadow:0 0 0 6px rgba(99,102,241,0.07) }
-        }
-        /* Pause photo animation on touch devices to avoid jank */
-        @media (pointer: coarse) {
-          .home-photo { animation:none !important; transform:rotate(-1.5deg) !important; }
+          50%    { transform:translate(-22px,30px) scale(1.05) }
         }
       `}</style>
 
-      {/* ── Dot grid background ──────────────────────────────────── */}
+      {/* ── Subtle ambient blobs ─────────────────────────────────── */}
       <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
-        backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.055) 1px, transparent 1px)',
-        backgroundSize: '28px 28px',
-        maskImage: 'radial-gradient(ellipse 85% 75% at 50% 40%, black 25%, transparent 100%)',
-        WebkitMaskImage: 'radial-gradient(ellipse 85% 75% at 50% 40%, black 25%, transparent 100%)',
-      }} />
-
-      {/* ── Ambient color blobs ──────────────────────────────────── */}
-      <div style={{
-        position: 'absolute', top: '5%', left: '-8%',
-        width: 'clamp(320px, 42vw, 580px)', height: 'clamp(320px, 42vw, 580px)',
+        position: 'absolute', top: '5%', left: '-10%', pointerEvents: 'none', zIndex: 0,
+        width: 'clamp(300px, 40vw, 520px)', height: 'clamp(300px, 40vw, 520px)',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(99,102,241,0.11) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(99,102,241,0.09) 0%, transparent 70%)',
         filter: 'blur(72px)',
-        animation: 'blobA 20s ease-in-out infinite',
-        pointerEvents: 'none', zIndex: 0,
+        animation: 'blobA 22s ease-in-out infinite',
       }} />
       <div style={{
-        position: 'absolute', bottom: '8%', right: '-6%',
-        width: 'clamp(260px, 34vw, 480px)', height: 'clamp(260px, 34vw, 480px)',
-        borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(236,72,153,0.08) 0%, transparent 70%)',
-        filter: 'blur(62px)',
-        animation: 'blobB 25s ease-in-out infinite',
-        pointerEvents: 'none', zIndex: 0,
-      }} />
-      <div style={{
-        position: 'absolute', top: '52%', left: '38%',
-        width: 'clamp(200px, 26vw, 380px)', height: 'clamp(200px, 26vw, 380px)',
+        position: 'absolute', bottom: '5%', right: '-8%', pointerEvents: 'none', zIndex: 0,
+        width: 'clamp(240px, 32vw, 440px)', height: 'clamp(240px, 32vw, 440px)',
         borderRadius: '50%',
         background: 'radial-gradient(circle, rgba(20,184,166,0.08) 0%, transparent 70%)',
-        filter: 'blur(52px)',
-        animation: 'blobC 30s ease-in-out infinite',
-        pointerEvents: 'none', zIndex: 0,
+        filter: 'blur(64px)',
+        animation: 'blobB 28s ease-in-out infinite',
       }} />
 
-      {/* ── Main hero content ────────────────────────────────────── */}
+      {/* ── Hero: text left, lanyard right ───────────────────────── */}
       <div style={{
-        maxWidth: '1100px', margin: '0 auto',
-        padding: 'clamp(3rem, 6.5vw, 5.5rem) clamp(1.25rem, 4vw, 2.5rem) 0',
+        maxWidth: '1200px', margin: '0 auto',
+        padding: '0 clamp(1.25rem, 4vw, 2.5rem)',
         position: 'relative', zIndex: 1,
-      }}>
-        <div className="home-grid">
+        display: 'flex',
+        alignItems: 'center',
+        minHeight: 'calc(100svh - 64px - 120px)',
+        gap: 'clamp(1rem, 3vw, 2rem)',
+      }}
+        className="home-hero-flex"
+      >
 
-          {/* ── LEFT: text ───────────────────────────────────────── */}
-          <div>
-
-            {/* Status chip */}
-            <motion.div {...fadeUp(0.05)}>
-              <div style={{
-                display: 'inline-flex', alignItems: 'center', gap: '0.55rem',
-                background: 'rgba(99,102,241,0.07)',
-                border: '1px solid rgba(99,102,241,0.15)',
-                borderRadius: '999px',
-                padding: '0.3rem 0.9rem 0.3rem 0.65rem',
-                marginBottom: '1.75rem',
-              }}>
-                <span style={{
-                  width: '7px', height: '7px', borderRadius: '50%',
-                  background: '#6366f1', flexShrink: 0,
-                  animation: 'statusPulse 2.8s ease-in-out infinite',
-                }} />
-                <span style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: '0.775rem', fontWeight: 500,
-                  color: '#6366f1', letterSpacing: '0.005em',
-                }}>
-                  Product Designer @ 7EDGE
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Greeting + name */}
-            <motion.div {...fadeUp(0.12)}>
-              <h1 style={{ marginBottom: '0.4rem', lineHeight: 1 }}>
-                <span style={{
-                  fontFamily: "'Caveat', cursive",
-                  fontSize: 'clamp(26px, 3.8vw, 46px)',
-                  color: '#aaa', display: 'block', lineHeight: 1.15,
-                }}>
-                  Hello, I'm
-                </span>
-                <span style={{
-                  fontFamily: "'DM Serif Display', serif",
-                  fontSize: 'clamp(54px, 8.5vw, 100px)',
-                  fontWeight: 400, color: '#111', display: 'block',
-                  letterSpacing: '-0.035em', lineHeight: 0.95,
-                }}>
-                  Shanthram
-                </span>
-              </h1>
-            </motion.div>
-
-            {/* Animated role */}
-            <motion.div {...fadeUp(0.18)}>
-              <RoleBadge />
-            </motion.div>
-
-            {/* Bio */}
-            <motion.p {...fadeUp(0.24)} style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 'clamp(0.875rem, 1.45vw, 1rem)',
-              color: '#555', lineHeight: 1.88,
-              maxWidth: '440px', marginBottom: '2rem',
+        {/* ── LEFT: text content ───────────────────────────────── */}
+        <div style={{ flex: '0 0 auto', width: 'clamp(280px, 42%, 500px)', zIndex: 2 }}
+          className="home-text-col"
+        >
+          {/* Status chip */}
+          <motion.div {...fadeUp(0.05)}>
+            <div style={{
+              display: 'inline-flex', alignItems: 'center', gap: '0.55rem',
+              background: 'rgba(99,102,241,0.07)',
+              border: '1px solid rgba(99,102,241,0.15)',
+              borderRadius: '999px',
+              padding: '0.3rem 0.9rem 0.3rem 0.65rem',
+              marginBottom: '1.75rem',
             }}>
-              I turn ambiguous problems into clear, impactful products —
-              3+ years shipping end-to-end experiences across fintech, AI,
-              and mobile with a background in software engineering.
-            </motion.p>
-
-            {/* CTA buttons */}
-            <motion.div {...fadeUp(0.30)} style={{
-              display: 'flex', gap: '0.75rem',
-              flexWrap: 'wrap', marginBottom: '2.25rem',
-            }}>
-              <button
-                onClick={() => setPage('work')}
-                className="home-cta-primary"
-              >
-                View My Work
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M7 17L17 7M17 7H7M17 7v10"/>
-                </svg>
-              </button>
-              <button
-                onClick={() => setPage('about')}
-                className="home-cta-outline"
-              >
-                About Me
-              </button>
-            </motion.div>
-
-            {/* Social links */}
-            <motion.div {...fadeUp(0.36)} style={{
-              display: 'flex', gap: '0.65rem', alignItems: 'center',
-            }}>
-              {SOCIAL.map(({ label, href, icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target={href !== '#' ? '_blank' : undefined}
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="home-social-link"
-                >
-                  {icon}
-                </a>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* ── RIGHT: profile photo ─────────────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ delay: 0.22, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'flex-start',
-            }}
-          >
-            <div style={{ position: 'relative' }}>
-
-              {/* Decorative gradient ring */}
-              <div style={{
-                position: 'absolute', inset: '-10px',
-                borderRadius: '22px',
-                background: 'linear-gradient(145deg, rgba(99,102,241,0.14), rgba(236,72,153,0.09), rgba(20,184,166,0.08))',
-                zIndex: 0,
+              <span style={{
+                width: '7px', height: '7px', borderRadius: '50%',
+                background: '#6366f1', flexShrink: 0,
+                animation: 'statusPulse 2.8s ease-in-out infinite',
               }} />
-
-              {/* Profile image */}
-              <img
-                src={profileImg}
-                alt="Shanthram Shetty"
-                className="home-photo"
-                style={{
-                  position: 'relative', zIndex: 1,
-                  width: '100%',
-                  maxWidth: 'clamp(230px, 30vw, 370px)',
-                  borderRadius: '16px',
-                  objectFit: 'cover',
-                  objectPosition: 'center top',
-                  aspectRatio: '4/5',
-                  display: 'block',
-                  boxShadow: '0 24px 64px rgba(0,0,0,0.11), 0 4px 18px rgba(0,0,0,0.06)',
-                  animation: 'photoFloat 8s ease-in-out infinite',
-                  transformOrigin: 'center bottom',
-                }}
-              />
-
-              {/* Floating chip — bottom left */}
-              <motion.div
-                initial={{ opacity: 0, x: -14, y: 8 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  position: 'absolute', bottom: '16%', left: '-18px', zIndex: 2,
-                  background: '#ffffff',
-                  border: '1px solid rgba(0,0,0,0.08)',
-                  borderRadius: '12px',
-                  padding: '0.52rem 0.85rem',
-                  boxShadow: '0 8px 28px rgba(0,0,0,0.09)',
-                  display: 'flex', alignItems: 'center', gap: '0.5rem',
-                }}
-              >
-                <span style={{ fontSize: '1rem', lineHeight: 1 }}>✦</span>
-                <div>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.68rem', fontWeight: 700, color: '#111', margin: 0, lineHeight: 1.25 }}>7+ Projects</p>
-                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6rem', color: '#aaa', margin: 0, lineHeight: 1.25 }}>Shipped end-to-end</p>
-                </div>
-              </motion.div>
-
-              {/* Floating chip — top right */}
-              <motion.div
-                initial={{ opacity: 0, x: 14, y: -8 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
-                style={{
-                  position: 'absolute', top: '14%', right: '-18px', zIndex: 2,
-                  background: '#ffffff',
-                  border: '1px solid rgba(0,0,0,0.08)',
-                  borderRadius: '12px',
-                  padding: '0.52rem 0.85rem',
-                  boxShadow: '0 8px 28px rgba(0,0,0,0.09)',
-                  display: 'flex', alignItems: 'center', gap: '0.5rem',
-                }}
-              >
-                <div style={{
-                  width: '8px', height: '8px', borderRadius: '50%',
-                  background: '#22c55e',
-                  boxShadow: '0 0 0 3px rgba(34,197,94,0.2)',
-                }} />
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.68rem', fontWeight: 600, color: '#111', margin: 0 }}>3+ yrs exp</p>
-              </motion.div>
+              <span style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: '0.775rem', fontWeight: 500,
+                color: '#6366f1', letterSpacing: '0.005em',
+              }}>
+                Product Designer @ 7EDGE
+              </span>
             </div>
           </motion.div>
+
+          {/* Name */}
+          <motion.div {...fadeUp(0.12)}>
+            <h1 style={{ marginBottom: '0.4rem', lineHeight: 1 }}>
+              <span style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: 'clamp(24px, 3.5vw, 42px)',
+                color: '#aaa', display: 'block', lineHeight: 1.15,
+              }}>
+                Hello, I'm
+              </span>
+              <span style={{
+                fontFamily: "'DM Serif Display', serif",
+                fontSize: 'clamp(50px, 7.5vw, 88px)',
+                fontWeight: 400, color: '#111', display: 'block',
+                letterSpacing: '-0.035em', lineHeight: 0.95,
+              }}>
+                Shanthram
+              </span>
+            </h1>
+          </motion.div>
+
+          {/* Animated role */}
+          <motion.div {...fadeUp(0.18)}>
+            <RoleBadge />
+          </motion.div>
+
+          {/* Bio */}
+          <motion.p {...fadeUp(0.24)} style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 'clamp(0.875rem, 1.3vw, 0.975rem)',
+            color: '#555', lineHeight: 1.88,
+            maxWidth: '400px', marginBottom: '2rem',
+          }}>
+            I turn ambiguous problems into clear, impactful products —
+            3+ years shipping end-to-end experiences across fintech, AI,
+            and mobile with a background in software engineering.
+          </motion.p>
+
+          {/* CTA buttons */}
+          <motion.div {...fadeUp(0.30)} style={{
+            display: 'flex', gap: '0.75rem',
+            flexWrap: 'wrap', marginBottom: '2rem',
+          }}>
+            <button onClick={() => setPage('work')} className="home-cta-primary">
+              View My Work
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
+            </button>
+            <button onClick={() => setPage('about')} className="home-cta-outline">
+              About Me
+            </button>
+          </motion.div>
+
+          {/* Social */}
+          <motion.div {...fadeUp(0.36)} style={{ display: 'flex', gap: '0.65rem', alignItems: 'center' }}>
+            {SOCIAL.map(({ label, href, icon }) => (
+              <a
+                key={label}
+                href={href}
+                target={href !== '#' ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="home-social-link"
+              >
+                {icon}
+              </a>
+            ))}
+          </motion.div>
         </div>
+
+        {/* ── RIGHT: Lanyard (main visual) ─────────────────────── */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.15, duration: 0.9, ease: 'easeOut' }}
+          style={{ flex: '1 1 0', minWidth: 0, position: 'relative', zIndex: 1 }}
+          className="home-lanyard-col"
+        >
+          <div className="home-lanyard-canvas">
+            <Suspense fallback={<LanyardPlaceholder />}>
+              <Lanyard
+                position={[0, 0, 30]}
+                gravity={[0, -40, 0]}
+                fov={20}
+                transparent={true}
+                profileImage={profileImg}
+              />
+            </Suspense>
+          </div>
+        </motion.div>
       </div>
 
       {/* ── Stats strip ──────────────────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.52, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         style={{
-          maxWidth: '1100px', margin: '0 auto',
-          padding: 'clamp(2.5rem, 5vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem)',
+          maxWidth: '1200px', margin: '0 auto',
+          padding: 'clamp(1.5rem, 3vw, 2.5rem) clamp(1.25rem, 4vw, 2.5rem)',
           position: 'relative', zIndex: 1,
         }}
       >
@@ -392,25 +287,40 @@ export default function Home({ setPage }) {
             <div key={label} className="home-stat">
               <span style={{
                 fontFamily: "'DM Serif Display', serif",
-                fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)',
+                fontSize: 'clamp(2rem, 4.5vw, 3rem)',
                 color: '#111', lineHeight: 1,
                 letterSpacing: '-0.03em',
-              }}>
-                {value}
-              </span>
+              }}>{value}</span>
               <span style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: '0.7rem', color: '#aaa',
                 letterSpacing: '0.08em', textTransform: 'uppercase',
                 fontWeight: 500, marginTop: '0.3rem',
-              }}>
-                {label}
-              </span>
+              }}>{label}</span>
               {i < arr.length - 1 && <div className="home-stat-sep" />}
             </div>
           ))}
         </div>
       </motion.div>
     </main>
+  )
+}
+
+/* ─── Placeholder while Lanyard loads ───────────────────────────── */
+
+function LanyardPlaceholder() {
+  return (
+    <div style={{
+      width: '100%', height: '100%',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+    }}>
+      <div style={{
+        width: '64px', height: '64px', borderRadius: '50%',
+        border: '2px solid rgba(0,0,0,0.08)',
+        borderTopColor: '#6366f1',
+        animation: 'spin 0.8s linear infinite',
+      }} />
+      <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+    </div>
   )
 }
