@@ -1,7 +1,6 @@
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import profileImg from '../assets/images/profile.jpeg'
-import Lanyard from './Lanyard/Lanyard'
 
 /* ─── Constants ─────────────────────────────────────────────────── */
 
@@ -249,24 +248,20 @@ export default function Home({ setPage }) {
           </motion.div>
         </div>
 
-        {/* ── RIGHT: Lanyard (main visual) ─────────────────────── */}
+        {/* ── RIGHT: Profile visual ────────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.15, duration: 0.9, ease: 'easeOut' }}
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.15, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           style={{ flex: '1 1 0', minWidth: 0, position: 'relative', zIndex: 1 }}
           className="home-lanyard-col"
         >
-          <div className="home-lanyard-canvas">
-            <Suspense fallback={<LanyardPlaceholder />}>
-              <Lanyard
-                position={[0, 0, 30]}
-                gravity={[0, -40, 0]}
-                fov={20}
-                transparent={true}
-                profileImage={profileImg}
-              />
-            </Suspense>
+          <div className="home-profile-visual">
+            <img
+              src={profileImg}
+              alt="Shanthram Shetty"
+              className="home-profile-img"
+            />
           </div>
         </motion.div>
       </div>
@@ -306,21 +301,3 @@ export default function Home({ setPage }) {
   )
 }
 
-/* ─── Placeholder while Lanyard loads ───────────────────────────── */
-
-function LanyardPlaceholder() {
-  return (
-    <div style={{
-      width: '100%', height: '100%',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-    }}>
-      <div style={{
-        width: '64px', height: '64px', borderRadius: '50%',
-        border: '2px solid rgba(0,0,0,0.08)',
-        borderTopColor: '#6366f1',
-        animation: 'spin 0.8s linear infinite',
-      }} />
-      <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
-    </div>
-  )
-}

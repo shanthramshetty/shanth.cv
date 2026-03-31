@@ -7,8 +7,4 @@ export default defineConfig({
     tailwindcss(),
     react(),
   ],
-  assetsInclude: ['**/*.glb'],
-  optimizeDeps: {
-    exclude: ['@dimforge/rapier3d-compat'],
-  },
 })
