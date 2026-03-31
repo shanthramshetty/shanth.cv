@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import profileImg from '../assets/images/profile-hero.jpeg'
+import profileImg from '../assets/images/profile-hero.png'
 import FlipWords from './FlipWords'
 import TiltedCard from './TiltedCard'
 import TrueFocus from './TrueFocus'
