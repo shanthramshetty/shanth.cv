@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Lenis from 'lenis'
 import Navbar from './components/Navbar'
-import Home from './components/Home'
+import Hero from './components/Hero'
 import Work from './components/Work'
 import AboutPage from './components/About'
 import FunSection from './components/FunSection'
@@ -12,7 +12,7 @@ import './App.css'
 
 /* Background color per page — drives the wrapper bg transition */
 const PAGE_BG = {
-  home:    '#fafaf8',
+  home:    '#0f0f11',
   about:   '#f0eeea',
   work:    '#0a0a0a',
   fun:     '#0a0a0a',
@@ -70,7 +70,7 @@ export default function App() {
             <Navbar page={page} setPage={setPage} />
 
             <AnimatePresence mode="wait">
-              {page === 'home'    && <PageWrap key="home"><Home setPage={setPage} /></PageWrap>}
+              {page === 'home'    && <PageWrap key="home"><Hero /></PageWrap>}
               {page === 'about'   && <PageWrap key="about"><AboutPage /></PageWrap>}
               {page === 'work'    && <PageWrap key="work"><Work /></PageWrap>}
               {page === 'fun'     && <PageWrap key="fun"><FunSection /></PageWrap>}
