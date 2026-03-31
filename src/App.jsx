@@ -70,7 +70,7 @@ export default function App() {
             <Navbar page={page} setPage={setPage} />
 
             <AnimatePresence mode="wait">
-              {page === 'home'    && <PageWrap key="home"><Hero /></PageWrap>}
+              {page === 'home'    && <PageWrap key="home"><Hero setPage={setPage} /></PageWrap>}
               {page === 'about'   && <PageWrap key="about"><AboutPage /></PageWrap>}
               {page === 'work'    && <PageWrap key="work"><Work /></PageWrap>}
               {page === 'fun'     && <PageWrap key="fun"><FunSection /></PageWrap>}

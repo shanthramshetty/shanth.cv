@@ -501,3 +501,102 @@ input, textarea, select, button {
     width: clamp(260px, 38%, 420px) !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   HERO PAGE — BENTO LAYOUT
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Top hero grid: text left, card right */
+.hero-top-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+/* Bento row: experience + products side by side */
+.hero-bento-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* ── CTA buttons ─────────────────────────────────────────────────── */
+.hero-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  background: #6366f1;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.25s ease,
+              background 0.25s ease;
+  box-shadow: 0 4px 18px rgba(99,102,241,0.35);
+}
+.hero-btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.hero-btn-primary:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 28px rgba(99,102,241,0.55);
+  background: #7c7ffa;
+}
+.hero-btn-primary:hover::before { opacity: 1; }
+.hero-btn-primary:active { transform: translateY(0) scale(0.98); }
+
+.hero-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255,255,255,0.65);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.15);
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1),
+              border-color 0.25s ease,
+              color 0.25s ease,
+              background 0.25s ease;
+}
+.hero-btn-outline:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.38);
+  color: #fff;
+  background: rgba(255,255,255,0.06);
+}
+.hero-btn-outline:active { transform: translateY(0); }
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-top-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  /* Photo card goes on top on mobile */
+  .hero-top-grid > *:last-child { order: -1; }
+
+  .hero-bento-row {
+    grid-template-columns: 1fr;
+  }
+}
