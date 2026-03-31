@@ -3,59 +3,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 import profileImg from '../assets/images/profile.jpeg'
 import FlipWords from './FlipWords'
 import TiltedCard from './TiltedCard'
+import TrueFocus from './TrueFocus'
 
 /* ─── Data ───────────────────────────────────────────────────────── */
-
-const EXPERIENCE = [
-  {
-    role:    'Product Designer',
-    company: '7EDGE',
-    period:  '2023 — Present',
-    tag:     'Current',
-    color:   '#6366f1',
-  },
-  {
-    role:    'UX Designer',
-    company: 'NeST Digital',
-    period:  '2022 — 2023',
-    tag:     null,
-    color:   '#22d3ee',
-  },
-  {
-    role:    'UI/UX Designer',
-    company: 'Luminar',
-    period:  '2021 — 2022',
-    tag:     null,
-    color:   '#f59e0b',
-  },
-]
-
-const PRODUCTS = [
-  {
-    name:    'FluxPay',
-    domain:  'Fintech · Mobile',
-    desc:    'End-to-end payments & wallet redesign',
-    color:   '#2B7FFF',
-  },
-  {
-    name:    'AI Dashboard',
-    domain:  'SaaS · Web',
-    desc:    'Analytics platform for ML pipelines',
-    color:   '#a78bfa',
-  },
-  {
-    name:    'HealthTrack',
-    domain:  'Health · Mobile',
-    desc:    'Personal wellness & habit tracker',
-    color:   '#34d399',
-  },
-  {
-    name:    'FinovaX',
-    domain:  'Fintech · Web',
-    desc:    'B2B financial management suite',
-    color:   '#fb923c',
-  },
-]
 
 const TAGLINES = [
   'I turn ambiguous problems into clear, impactful products',
@@ -63,94 +13,6 @@ const TAGLINES = [
   'I design systems that scale — from discovery to delivery',
   'I ship products backed by research, iteration, and intent',
 ]
-
-/* ─── Bento hover card ───────────────────────────────────────────── */
-
-function BentoCard({ title, subtitle, icon, children, accentColor = '#6366f1' }) {
-  const [hovered, setHovered] = useState(false)
-
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        position: 'relative',
-        borderRadius: '20px',
-        background: 'rgba(255,255,255,0.03)',
-        border: `1px solid ${hovered ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.06)'}`,
-        padding: '1.5rem',
-        overflow: 'hidden',
-        cursor: 'default',
-        transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-        boxShadow: hovered
-          ? `0 0 0 1px ${accentColor}22, 0 16px 40px rgba(0,0,0,0.4)`
-          : '0 4px 20px rgba(0,0,0,0.2)',
-        height: '100%',
-      }}
-    >
-      {/* Ambient glow on hover */}
-      <div style={{
-        position: 'absolute', inset: 0, pointerEvents: 'none',
-        background: `radial-gradient(ellipse at 20% 0%, ${accentColor}18 0%, transparent 65%)`,
-        opacity: hovered ? 1 : 0,
-        transition: 'opacity 0.4s ease',
-      }} />
-
-      {/* Default state — title + subtitle */}
-      <div style={{
-        position: 'relative', zIndex: 1,
-        transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        transition: 'transform 0.4s cubic-bezier(0.22,1,0.36,1)',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.4rem' }}>
-          <span style={{ fontSize: '1.2rem' }}>{icon}</span>
-          <span style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '0.65rem', fontWeight: 700,
-            letterSpacing: '0.1em', textTransform: 'uppercase',
-            color: accentColor,
-          }}>
-            {title}
-          </span>
-        </div>
-        <p style={{
-          fontFamily: "'DM Serif Display', serif",
-          fontSize: 'clamp(1rem, 1.8vw, 1.25rem)',
-          color: 'rgba(255,255,255,0.85)',
-          lineHeight: 1.3,
-          marginBottom: '0.25rem',
-        }}>
-          {subtitle}
-        </p>
-      </div>
-
-      {/* Hover-reveal content */}
-      <div style={{
-        position: 'relative', zIndex: 1,
-        maxHeight: hovered ? '300px' : '0px',
-        opacity: hovered ? 1 : 0,
-        overflow: 'hidden',
-        transition: 'max-height 0.5s cubic-bezier(0.22,1,0.36,1), opacity 0.35s ease',
-        marginTop: hovered ? '1rem' : '0',
-      }}>
-        {children}
-      </div>
-
-      {/* Hint arrow */}
-      <div style={{
-        position: 'absolute', bottom: '1.1rem', right: '1.2rem',
-        color: `${accentColor}99`,
-        fontSize: '0.8rem',
-        transform: hovered ? 'translate(2px,-2px)' : 'translate(0,0)',
-        transition: 'transform 0.3s ease, opacity 0.3s ease',
-        opacity: hovered ? 0 : 0.6,
-        fontFamily: "'Inter', sans-serif",
-      }}>
-        hover ↗
-      </div>
-    </div>
-  )
-}
 
 /* ─── Hero ───────────────────────────────────────────────────────── */
 
@@ -263,19 +125,13 @@ export default function Hero({ setPage }) {
               transition={{ delay: 0.3, duration: 0.5 }}
               style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}
             >
-              <button
-                onClick={() => setPage?.('about')}
-                className="hero-btn-primary"
-              >
+              <button onClick={() => setPage?.('about')} className="hero-btn-primary">
                 About Me
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M7 17L17 7M17 7H7M17 7v10" />
                 </svg>
               </button>
-              <button
-                onClick={() => setPage?.('work')}
-                className="hero-btn-outline"
-              >
+              <button onClick={() => setPage?.('work')} className="hero-btn-outline">
                 My Works
               </button>
             </motion.div>
@@ -300,13 +156,10 @@ export default function Hero({ setPage }) {
                 width: 'clamp(220px, 26vw, 300px)',
               }}
             >
-              {/* Inner glow */}
               <div style={{
                 position: 'absolute', inset: 0, borderRadius: '24px', pointerEvents: 'none',
                 background: 'radial-gradient(ellipse at 40% 15%, rgba(99,102,241,0.14) 0%, transparent 65%)',
               }} />
-
-              {/* Profile photo */}
               <div style={{
                 position: 'relative', zIndex: 1,
                 borderRadius: '16px', overflow: 'hidden',
@@ -321,19 +174,13 @@ export default function Hero({ setPage }) {
                     display: 'block',
                   }}
                 />
-                {/* Photo overlay gradient */}
                 <div style={{
                   position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%',
                   background: 'linear-gradient(to top, rgba(15,15,17,0.6) 0%, transparent 100%)',
                   pointerEvents: 'none',
                 }} />
               </div>
-
-              {/* Name tag */}
-              <div style={{
-                position: 'relative', zIndex: 1,
-                marginTop: '0.85rem', textAlign: 'center',
-              }}>
+              <div style={{ position: 'relative', zIndex: 1, marginTop: '0.85rem', textAlign: 'center' }}>
                 <p style={{
                   fontFamily: "'DM Serif Display', serif",
                   fontSize: '1rem', color: 'rgba(255,255,255,0.9)',
@@ -344,13 +191,9 @@ export default function Hero({ setPage }) {
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem' }}>
                   <span style={{
                     width: '5px', height: '5px', borderRadius: '50%',
-                    background: '#22c55e',
-                    boxShadow: '0 0 5px rgba(34,197,94,0.8)',
+                    background: '#22c55e', boxShadow: '0 0 5px rgba(34,197,94,0.8)',
                   }} />
-                  <span style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)',
-                  }}>
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)' }}>
                     Available for opportunities
                   </span>
                 </div>
@@ -359,130 +202,76 @@ export default function Hero({ setPage }) {
           </motion.div>
         </div>
 
-        {/* ── Bento row — Experience + Products ────────────────────── */}
+        {/* ── TrueFocus text sections ───────────────────────────────── */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-          className="hero-bento-row"
+          transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="hero-focus-row"
         >
 
-          {/* Experience card */}
-          <BentoCard
-            title="Experience"
-            subtitle="3+ years across fintech, AI & mobile"
-            icon="💼"
-            accentColor="#6366f1"
-          >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {EXPERIENCE.map((exp, i) => (
-                <motion.div
-                  key={exp.company}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.08, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                  style={{
-                    display: 'flex', alignItems: 'center',
-                    gap: '0.75rem',
-                    padding: '0.6rem 0.75rem',
-                    borderRadius: '10px',
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.06)',
-                  }}
-                >
-                  <div style={{
-                    width: '8px', height: '8px', borderRadius: '50%',
-                    background: exp.color,
-                    boxShadow: `0 0 6px ${exp.color}88`,
-                    flexShrink: 0,
-                  }} />
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '0.8rem', fontWeight: 600,
-                      color: 'rgba(255,255,255,0.85)',
-                      margin: 0,
-                    }}>
-                      {exp.role}
-                      {exp.tag && (
-                        <span style={{
-                          marginLeft: '0.5rem',
-                          fontSize: '0.6rem', fontWeight: 700,
-                          letterSpacing: '0.08em', textTransform: 'uppercase',
-                          color: exp.color,
-                          background: `${exp.color}18`,
-                          padding: '1px 6px', borderRadius: '999px',
-                        }}>
-                          {exp.tag}
-                        </span>
-                      )}
-                    </p>
-                    <p style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '0.72rem', color: 'rgba(255,255,255,0.38)',
-                      margin: 0, marginTop: '1px',
-                    }}>
-                      {exp.company}
-                    </p>
-                  </div>
-                  <span style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.65rem', color: 'rgba(255,255,255,0.28)',
-                    whiteSpace: 'nowrap', flexShrink: 0,
-                  }}>
-                    {exp.period}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </BentoCard>
+          {/* Experience */}
+          <div className="hero-focus-block">
+            <span style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '0.62rem', fontWeight: 700,
+              letterSpacing: '0.14em', textTransform: 'uppercase',
+              color: '#6366f1', display: 'block', marginBottom: '0.85rem',
+            }}>
+              Experience
+            </span>
+            <TrueFocus
+              sentence="7EDGE NeST Luminar"
+              blurAmount={4}
+              borderColor="#6366f1"
+              glowColor="rgba(99,102,241,0.3)"
+              animDuration={0.45}
+              pauseBetween={1.4}
+              fontSize="clamp(1.5rem, 3vw, 2.2rem)"
+              fontFamily="'DM Serif Display', serif"
+              color="rgba(255,255,255,0.9)"
+            />
+            <p style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '0.72rem', color: 'rgba(255,255,255,0.28)',
+              marginTop: '0.75rem', lineHeight: 1.6,
+            }}>
+              Product Designer · UX Designer · UI/UX Designer
+            </p>
+          </div>
 
-          {/* Products card */}
-          <BentoCard
-            title="Products Shipped"
-            subtitle="7+ end-to-end products launched"
-            icon="🚀"
-            accentColor="#22d3ee"
-          >
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
-              {PRODUCTS.map((p, i) => (
-                <motion.div
-                  key={p.name}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.07, duration: 0.35, ease: [0.22, 1, 0.36,1] }}
-                  style={{
-                    padding: '0.65rem 0.75rem',
-                    borderRadius: '10px',
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.06)',
-                  }}
-                >
-                  <div style={{
-                    width: '24px', height: '4px', borderRadius: '2px',
-                    background: p.color,
-                    marginBottom: '0.5rem',
-                    boxShadow: `0 0 6px ${p.color}66`,
-                  }} />
-                  <p style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.78rem', fontWeight: 600,
-                    color: 'rgba(255,255,255,0.85)',
-                    margin: 0, marginBottom: '2px',
-                  }}>
-                    {p.name}
-                  </p>
-                  <p style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.64rem', color: 'rgba(255,255,255,0.32)',
-                    margin: 0,
-                  }}>
-                    {p.domain}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </BentoCard>
+          {/* Divider */}
+          <div className="hero-focus-divider" />
+
+          {/* Products */}
+          <div className="hero-focus-block">
+            <span style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '0.62rem', fontWeight: 700,
+              letterSpacing: '0.14em', textTransform: 'uppercase',
+              color: '#22d3ee', display: 'block', marginBottom: '0.85rem',
+            }}>
+              Products Shipped
+            </span>
+            <TrueFocus
+              sentence="FluxPay FinovaX HealthTrack Dashboard"
+              blurAmount={4}
+              borderColor="#22d3ee"
+              glowColor="rgba(34,211,238,0.28)"
+              animDuration={0.45}
+              pauseBetween={1.4}
+              fontSize="clamp(1.5rem, 3vw, 2.2rem)"
+              fontFamily="'DM Serif Display', serif"
+              color="rgba(255,255,255,0.9)"
+            />
+            <p style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '0.72rem', color: 'rgba(255,255,255,0.28)',
+              marginTop: '0.75rem', lineHeight: 1.6,
+            }}>
+              Fintech · SaaS · Health · AI
+            </p>
+          </div>
 
         </motion.div>
       </div>
