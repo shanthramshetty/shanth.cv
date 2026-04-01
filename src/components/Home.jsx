@@ -179,28 +179,35 @@ export default function Home({ setPage }) {
 
           {/* Headline */}
           <motion.div {...fadeUp(0.12)}>
-            <h1 style={{ marginBottom: '0.4rem', lineHeight: 1 }}>
+            <h1 style={{ marginBottom: '1.5rem', lineHeight: 1 }}>
               <span style={{
-                fontFamily: "'Caveat', cursive",
-                fontSize: 'clamp(24px, 3.5vw, 42px)',
-                color: '#aaa', display: 'block', lineHeight: 1.15,
+                fontFamily: "'DM Serif Display', serif",
+                fontSize: 'clamp(38px, 5.5vw, 68px)',
+                fontWeight: 400, color: '#111', display: 'block',
+                letterSpacing: '-0.03em', lineHeight: 1.05,
               }}>
-                turning ideas into
+                Product Designer
               </span>
               <span style={{
                 fontFamily: "'DM Serif Display', serif",
-                fontSize: 'clamp(50px, 7.5vw, 88px)',
-                fontWeight: 400, color: '#111', display: 'block',
-                letterSpacing: '-0.035em', lineHeight: 0.95,
+                fontSize: 'clamp(38px, 5.5vw, 68px)',
+                fontWeight: 400, display: 'block',
+                letterSpacing: '-0.03em', lineHeight: 1.05,
+                background: 'linear-gradient(90deg, #6366f1 0%, #14b8a6 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
               }}>
-                Experiences
+                Flutter Developer
+              </span>
+              <span style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: 'clamp(22px, 3vw, 38px)',
+                color: '#aaa', display: 'block', lineHeight: 1.3,
+                marginTop: '0.2rem',
+              }}>
+                with an engineering mind
               </span>
             </h1>
-          </motion.div>
-
-          {/* Animated role */}
-          <motion.div {...fadeUp(0.18)}>
-            <RoleBadge />
           </motion.div>
 
           {/* Bio */}
