@@ -5,7 +5,7 @@ const projects = [
   {
     number: '01',
     title: 'FluxPay — Fintech SaaS',
-    description: 'Rebuilt how finance teams see, decide, and act inside a complex enterprise SaaS platform — from a week of user shadowing and service blueprinting to a role-aware IA, a six-to-two-step approval flow, and a component system adopted across three product teams. Task completion time dropped 63%.',
+    description: 'Finance teams were operating across five disconnected tools to complete a single approval — not because the product lacked data, but because it lacked hierarchy. A week of user shadowing revealed the real problem: no one had a complete picture of where anything stood. Restructured the IA, reduced approval steps from six to two, and built a component system adopted across three product teams. Task completion time dropped 63%, measured across 12 usability sessions post-launch.',
     tags: ['Product Design', 'Figma', 'Design Systems', 'Fintech'],
     type: 'Case Study',
     year: '2025',
@@ -13,7 +13,7 @@ const projects = [
   {
     number: '02',
     title: 'PlayConnect — Turf Booking',
-    description: 'Designed and built end-to-end in Flutter — a mobile platform that removes friction from sports venue discovery and booking. Real-time slot availability, transparent pricing, and a five-step flow from discovery to confirmed booking.',
+    description: 'Sports venue booking in India is still largely phone-based — call ahead, hope the slot is free, pay on arrival. The real problem wasn\'t convenience. It was trust. Designed and built end-to-end in Flutter: real-time slot availability and upfront pricing weren\'t features added at the end — they were the product\'s core promise, designed in from the first flow. Being the designer and developer forced every interaction to earn its complexity.',
     tags: ['Flutter', 'Mobile Design', 'Product Thinking', 'Firebase'],
     type: 'Case Study',
     year: '2025',
@@ -21,7 +21,7 @@ const projects = [
   {
     number: '03',
     title: 'AI Analytics Dashboard',
-    description: 'Solved the explainability gap in an AI analytics product — redesigning data hierarchy, introducing confidence indicators, and building a layered disclosure model. Feature adoption grew 47% within six weeks.',
+    description: 'When an AI model tells you something is likely to happen, the interface needs to give you a basis to decide whether to act on it. Most AI dashboards ignore this entirely. Redesigned the data hierarchy and introduced confidence indicators — not as visual decoration, but as a product integrity decision. The entry point to the feature was visible; users just couldn\'t interpret what they were looking at. Feature adoption grew 47% in six weeks against a 90-day pre-launch baseline.',
     tags: ['Figma', 'AI Product Design', 'User Flows', 'Accessibility'],
     type: 'Case Study',
     year: '2024',
@@ -29,7 +29,7 @@ const projects = [
   {
     number: '04',
     title: 'Enterprise Design System',
-    description: 'Architected and built a multi-product design system at 7EDGE — 200+ components, a full token architecture, and Storybook parity with engineering. Reduced handoff time by 50% across five product teams.',
+    description: 'Design systems fail not because the components are wrong — but because no one agrees on what they\'re for. Five product teams at 7EDGE were building the same UI patterns in parallel, each slightly differently. I led the architecture solo: 200+ components, a full token layer, Storybook parity with engineering, and a contribution process so teams added back rather than forked. Handoff time dropped 50%. The harder outcome: teams started treating the system as shared infrastructure, not a constraint.',
     tags: ['Design Systems', 'Token Architecture', 'Figma', 'Storybook'],
     type: 'System Design',
     year: '2024',
@@ -150,7 +150,7 @@ export default function Projects() {
             Selected Work
           </p>
           <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', fontWeight: 400, color: '#ffffff', letterSpacing: '-0.02em' }}>
-            Projects
+            Work that shipped.
           </h2>
         </motion.div>
 

@@ -61,11 +61,21 @@ export default function About() {
               marginBottom: '2.5rem', maxWidth: '480px',
               fontFamily: "'Inter', sans-serif",
             }}>
-              I'm a product designer who thrives on ambiguity and complexity.
-              I care deeply about the why behind every decision — from the first
-              research session to the final shipped state. My work lives at the
-              intersection of user insight, systems thinking, and measurable
-              business impact.
+              Most design problems aren't design problems.
+              They're clarity problems — someone didn't know what decision to make,
+              what the system could do, or where the friction was hiding.
+              <br /><br />
+              I'm a product designer who starts with that question. Three years
+              across fintech, SaaS, and mobile — not just designing interfaces,
+              but helping teams understand what they're actually building and
+              why it matters to the people using it.
+              <br /><br />
+              My engineering background means I prototype in code when Figma
+              can't capture the interaction. It also means I've sat in sprint
+              planning, read the tickets, and understood the cost of a late
+              design decision. I work best inside complexity — messy discovery,
+              unclear requirements, competing stakeholder priorities.
+              That's where constraints make the design better.
             </motion.p>
 
             <motion.div {...fade(0.36)} className="about-stats">
@@ -78,11 +88,14 @@ export default function About() {
                   Day job
                 </p>
                 <p style={{ fontSize: '0.875rem', color: '#333', lineHeight: 1.75, fontFamily: "'Inter', sans-serif" }}>
-                  Currently, I am a <strong style={{ fontWeight: 600, color: '#111' }}>Product Designer at 7EDGE</strong>.
-                  Before that, I worked at NeST Digital and Luminar, and freelanced for
-                  startups across fintech, e-commerce, and consumer apps. I hold
-                  certifications in Google UX Design and AWS Cloud, with a background
-                  in Computer Science.
+                  Currently <strong style={{ fontWeight: 600, color: '#111' }}>Product Designer at 7EDGE</strong>,
+                  owning design across two enterprise SaaS products — from discovery
+                  and research through to design system governance and engineering handoff.
+                  Previously at NeST Digital and Luminar. Freelanced across fintech,
+                  e-commerce, and early-stage consumer apps. Google UX Design certified.
+                  Background in Computer Science — I use it daily to ask better questions
+                  in technical discussions and recognise when a design decision
+                  carries a hidden implementation cost.
                 </p>
               </div>
               <div>
@@ -94,10 +107,13 @@ export default function About() {
                   Out of office
                 </p>
                 <p style={{ fontSize: '0.875rem', color: '#333', lineHeight: 1.75, fontFamily: "'Inter', sans-serif" }}>
-                  Outside of work, I enjoy exploring emerging technology, contributing
-                  to side projects, and thinking through product problems. I believe
-                  the best designers understand how things are built — and I actively
-                  pursue that edge. Always open to meaningful conversations.
+                  I'm drawn to products that handle complexity at scale — logistics,
+                  financial infrastructure, healthcare workflows. The ones where the
+                  user is an expert, the stakes are real, and "simple" is genuinely hard.
+                  Outside client work I'm building PlayConnect — a Flutter app for sports
+                  venue booking. It's where I test ideas I can't always try at work:
+                  real-time sync, offline states, interactions that earn their complexity.
+                  Being the designer and the developer at once keeps me honest.
                 </p>
               </div>
             </motion.div>

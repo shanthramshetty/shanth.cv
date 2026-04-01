@@ -38,9 +38,11 @@ export default function Contact() {
           fontSize: '0.925rem', color: '#888', lineHeight: 1.8,
           marginBottom: '2.5rem', fontFamily: "'Inter', sans-serif",
         }}>
-          Open to new opportunities in product design — especially complex,
-          research-driven challenges. Whether you have a project in mind or
-          just want to connect — reach out.
+          Open to full-time product design roles — particularly in complex,
+          research-heavy environments where design has a seat at the table early.
+          If you're working on something with genuine UX depth, I'd like to hear
+          about it. Not just the brief — what makes the user problem hard.
+          That's usually where the interesting work starts.
         </motion.p>
 
         <motion.div {...fade(0.3)} style={{ marginBottom: '2.5rem' }}>
