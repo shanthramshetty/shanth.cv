@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import profileImg from '../assets/images/profile-hero.png'
 import TiltedCard from './TiltedCard'
 import TrueFocus from './TrueFocus'
+import RotatingText from './RotatingText'
 
 /* ─── Data ───────────────────────────────────────────────────────── */
 
@@ -77,16 +78,28 @@ export default function Hero({ setPage }) {
               }}>
                 Product Designer
               </span>
-              <span style={{
-                fontFamily: "'DM Serif Display', serif",
-                fontSize: 'clamp(40px, 6.5vw, 78px)',
-                fontWeight: 400, display: 'block',
-                letterSpacing: '-0.035em', lineHeight: 1,
-                background: 'linear-gradient(90deg, #6366f1 0%, #22d3ee 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}>
-                Flutter Developer
+              {/* Rotating second line */}
+              <span style={{ display: 'block', overflow: 'hidden', lineHeight: 1.05 }}>
+                <RotatingText
+                  texts={['Flutter Developer', 'UI/UX Engineer', 'Design Systems', 'Mobile Builder']}
+                  splitBy="characters"
+                  staggerFrom="first"
+                  staggerDuration={0.025}
+                  rotationInterval={3000}
+                  transition={{ type: 'spring', damping: 28, stiffness: 280 }}
+                  initial={{ y: '110%', opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: '-110%', opacity: 0 }}
+                  style={{
+                    fontFamily: "'DM Serif Display', serif",
+                    fontSize: 'clamp(40px, 6.5vw, 78px)',
+                    fontWeight: 400,
+                    letterSpacing: '-0.035em',
+                    background: 'linear-gradient(90deg, #6366f1 0%, #22d3ee 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
+                />
               </span>
               <span style={{
                 fontFamily: "'Caveat', cursive",
