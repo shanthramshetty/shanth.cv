@@ -84,12 +84,12 @@ export default function Hero({ setPage }) {
                   texts={['Flutter Developer', 'UI/UX Engineer', 'Design Systems', 'Mobile Builder']}
                   splitBy="characters"
                   staggerFrom="first"
-                  staggerDuration={0.025}
-                  rotationInterval={3000}
-                  transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-                  initial={{ y: '110%', opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  exit={{ y: '-110%', opacity: 0 }}
+                  staggerDuration={0.04}
+                  rotationInterval={3200}
+                  transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                  initial={{ y: '100%', opacity: 0, filter: 'blur(6px)' }}
+                  animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+                  exit={{ y: '-80%', opacity: 0, filter: 'blur(4px)' }}
                   style={{
                     fontFamily: "'DM Serif Display', serif",
                     fontSize: 'clamp(40px, 6.5vw, 78px)',
