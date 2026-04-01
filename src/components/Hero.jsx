@@ -8,10 +8,10 @@ import RotatingText from './RotatingText'
 /* ─── Data ───────────────────────────────────────────────────────── */
 
 const TAGLINES = [
-  'I find the real problem before designing the solution.',
-  'I translate research into product decisions, not just screens.',
-  'I design for the edge case that breaks the majority flow.',
-  'I ship work that holds up six months after launch.',
+  'I turn ambiguous problems into clear, impactful products',
+  'I bridge user needs, business goals, and technical constraints',
+  'I design systems that scale — from discovery to delivery',
+  'I ship products backed by research, iteration, and intent',
 ]
 
 /* ─── Hero ───────────────────────────────────────────────────────── */
@@ -64,7 +64,7 @@ export default function Hero({ setPage }) {
                 fontSize: '0.72rem', fontWeight: 500,
                 color: '#a5b4fc', letterSpacing: '0.02em',
               }}>
-                Available · Product Designer @ 7EDGE
+                Open to work · Product Designer
               </span>
             </div>
 
@@ -222,7 +222,7 @@ export default function Hero({ setPage }) {
               fontSize: '0.72rem', color: 'rgba(255,255,255,0.28)',
               marginTop: '0.75rem', lineHeight: 1.6,
             }}>
-                7EDGE · NeST Digital · Luminar
+              Product Designer · UX Designer · UI/UX Designer
             </p>
           </div>
 
@@ -255,7 +255,7 @@ export default function Hero({ setPage }) {
               fontSize: '0.72rem', color: 'rgba(255,255,255,0.28)',
               marginTop: '0.75rem', lineHeight: 1.6,
             }}>
-                Fintech · SaaS · AI · Mobile
+              Fintech · SaaS · Health · AI
             </p>
           </div>
 
