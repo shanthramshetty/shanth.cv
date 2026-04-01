@@ -147,6 +147,9 @@ export default function Hero({ setPage }) {
               </button>
               <button onClick={() => setPage?.('work')} className="hero-btn-outline">
                 My Works
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M7 17L17 7M17 7H7M17 7v10" />
+                </svg>
               </button>
             </motion.div>
           </motion.div>
