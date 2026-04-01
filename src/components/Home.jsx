@@ -177,7 +177,7 @@ export default function Home({ setPage }) {
             </div>
           </motion.div>
 
-          {/* Name */}
+          {/* Headline */}
           <motion.div {...fadeUp(0.12)}>
             <h1 style={{ marginBottom: '0.4rem', lineHeight: 1 }}>
               <span style={{
@@ -185,7 +185,7 @@ export default function Home({ setPage }) {
                 fontSize: 'clamp(24px, 3.5vw, 42px)',
                 color: '#aaa', display: 'block', lineHeight: 1.15,
               }}>
-                Hello, I'm
+                turning ideas into
               </span>
               <span style={{
                 fontFamily: "'DM Serif Display', serif",
@@ -193,7 +193,7 @@ export default function Home({ setPage }) {
                 fontWeight: 400, color: '#111', display: 'block',
                 letterSpacing: '-0.035em', lineHeight: 0.95,
               }}>
-                Shanthram
+                Experiences
               </span>
             </h1>
           </motion.div>
