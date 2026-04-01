@@ -79,7 +79,7 @@ export default function Hero({ setPage }) {
                 Product Designer
               </span>
               {/* Rotating second line */}
-              <span style={{ display: 'block', overflow: 'hidden', lineHeight: 1.05 }}>
+              <span style={{ display: 'block', overflow: 'visible', lineHeight: 1.15, paddingBottom: '0.1em' }}>
                 <RotatingText
                   texts={['Flutter Developer', 'UI/UX Engineer', 'Design Systems', 'Mobile Builder']}
                   splitBy="characters"
