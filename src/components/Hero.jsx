@@ -265,7 +265,7 @@ export default function Hero({ setPage }) {
           50%    { box-shadow: 0 0 10px rgba(99,102,241,0.2) }
         }
         .hero-grad-char {
-          background: linear-gradient(90deg, #6366f1 0%, #22d3ee 100%);
+          background: linear-gradient(90deg, #f0b429 0%, #e8952a 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
