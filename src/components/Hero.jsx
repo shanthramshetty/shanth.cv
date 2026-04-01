@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import profileImg from '../assets/images/profile-hero.png'
-import FlipWords from './FlipWords'
 import TiltedCard from './TiltedCard'
 import TrueFocus from './TrueFocus'
 
@@ -71,30 +70,32 @@ export default function Hero({ setPage }) {
             {/* Name block */}
             <h1 style={{ marginBottom: '1rem', lineHeight: 1 }}>
               <span style={{
-                fontFamily: "'Caveat', cursive",
-                fontSize: 'clamp(32px, 5vw, 56px)',
-                color: 'rgba(255,255,255,0.45)',
-                display: 'block', lineHeight: 1.1,
-              }}>
-                Hello, I'm
-              </span>
-              <span style={{
                 fontFamily: "'DM Serif Display', serif",
-                fontSize: 'clamp(44px, 7vw, 84px)',
+                fontSize: 'clamp(40px, 6.5vw, 78px)',
                 fontWeight: 400, color: '#ffffff',
-                display: 'block', letterSpacing: '-0.035em', lineHeight: 0.95,
+                display: 'block', letterSpacing: '-0.035em', lineHeight: 1,
               }}>
-                Shanthram
+                Product Designer
               </span>
               <span style={{
                 fontFamily: "'DM Serif Display', serif",
-                fontSize: 'clamp(20px, 3vw, 36px)',
-                fontWeight: 400,
-                letterSpacing: '-0.01em', lineHeight: 1.2,
-                marginTop: '0.3rem', display: 'block',
-                color: 'rgba(255,255,255,0.45)',
+                fontSize: 'clamp(40px, 6.5vw, 78px)',
+                fontWeight: 400, display: 'block',
+                letterSpacing: '-0.035em', lineHeight: 1,
+                background: 'linear-gradient(90deg, #6366f1 0%, #22d3ee 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
               }}>
-                <FlipWords words={['Designer', 'Builder', 'Thinker', 'Creator']} color="rgba(255,255,255,0.45)" />
+                Flutter Developer
+              </span>
+              <span style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: 'clamp(22px, 3.2vw, 42px)',
+                color: 'rgba(255,255,255,0.4)',
+                display: 'block', lineHeight: 1.3,
+                marginTop: '0.35rem',
+              }}>
+                with an engineering background
               </span>
             </h1>
 
