@@ -90,14 +90,12 @@ export default function Hero({ setPage }) {
                   initial={{ y: '100%', opacity: 0, filter: 'blur(6px)' }}
                   animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
                   exit={{ y: '-80%', opacity: 0, filter: 'blur(4px)' }}
+                  elementLevelClassName="hero-grad-char"
                   style={{
                     fontFamily: "'DM Serif Display', serif",
                     fontSize: 'clamp(40px, 6.5vw, 78px)',
                     fontWeight: 400,
                     letterSpacing: '-0.035em',
-                    background: 'linear-gradient(90deg, #6366f1 0%, #22d3ee 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
                   }}
                 />
               </span>
@@ -265,6 +263,12 @@ export default function Hero({ setPage }) {
         @keyframes heroPulse {
           0%,100%{ box-shadow: 0 0 4px rgba(99,102,241,0.6) }
           50%    { box-shadow: 0 0 10px rgba(99,102,241,0.2) }
+        }
+        .hero-grad-char {
+          background: linear-gradient(90deg, #6366f1 0%, #22d3ee 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
       `}</style>
     </main>
