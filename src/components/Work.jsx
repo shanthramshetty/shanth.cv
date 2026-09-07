@@ -762,31 +762,33 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
           />
         )}
         {project.url && (
-          <a
-            href={project.url} target="_blank" rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              padding: '0.65rem 1.4rem',
-              background: `${project.accent}18`,
-              border: `1px solid ${project.accent}55`,
-              borderRadius: '6px',
-              color: project.accent,
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '0.78rem', fontWeight: 500,
-              letterSpacing: '0.04em',
-              textDecoration: 'none',
-              transition: 'background 0.2s, border-color 0.2s',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = `${project.accent}28`; e.currentTarget.style.borderColor = project.accent }}
-            onMouseLeave={e => { e.currentTarget.style.background = `${project.accent}18`; e.currentTarget.style.borderColor = `${project.accent}55` }}
-          >
-            View Live Site
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-              <polyline points="15 3 21 3 21 9"/>
-              <line x1="10" y1="14" x2="21" y2="3"/>
-            </svg>
-          </a>
+          <span className="border-beam-wrap" style={{ '--beam-radius': '6px', '--beam-color': project.accent }}>
+            <a
+              href={project.url} target="_blank" rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                padding: '0.65rem 1.4rem',
+                background: `${project.accent}18`,
+                border: `1px solid ${project.accent}55`,
+                borderRadius: '6px',
+                color: project.accent,
+                fontFamily: "'Inter', sans-serif",
+                fontSize: '0.78rem', fontWeight: 500,
+                letterSpacing: '0.04em',
+                textDecoration: 'none',
+                transition: 'background 0.2s, border-color 0.2s',
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = `${project.accent}28`; e.currentTarget.style.borderColor = project.accent }}
+              onMouseLeave={e => { e.currentTarget.style.background = `${project.accent}18`; e.currentTarget.style.borderColor = `${project.accent}55` }}
+            >
+              View Live Site
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          </span>
         )}
       </div>
 

@@ -44,22 +44,24 @@ export default function Contact() {
         </motion.p>
 
         <motion.div {...fade(0.3)} style={{ marginBottom: '2.5rem' }}>
-          <motion.a
-            href="https://www.linkedin.com/in/shanthram-shetty-6a26a6376"
-            target="_blank" rel="noopener noreferrer"
-            whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-            style={{
-              display: 'inline-block',
-              padding: '0.875rem 2.5rem',
-              background: '#111', color: '#fff',
-              borderRadius: '100px', textDecoration: 'none',
-              fontSize: '0.9rem', fontWeight: 500,
-              fontFamily: "'Inter', sans-serif",
-              letterSpacing: '0.02em',
-            }}
-          >
-            Say Hello ↗
-          </motion.a>
+          <span className="border-beam-wrap" style={{ '--beam-radius': '100px', '--beam-color': '#6366f1' }}>
+            <motion.a
+              href="https://www.linkedin.com/in/shanthram-shetty-6a26a6376"
+              target="_blank" rel="noopener noreferrer"
+              whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+              style={{
+                display: 'inline-block',
+                padding: '0.875rem 2.5rem',
+                background: '#111', color: '#fff',
+                borderRadius: '100px', textDecoration: 'none',
+                fontSize: '0.9rem', fontWeight: 500,
+                fontFamily: "'Inter', sans-serif",
+                letterSpacing: '0.02em',
+              }}
+            >
+              Say Hello ↗
+            </motion.a>
+          </span>
         </motion.div>
 
         <motion.div {...fade(0.4)} style={{ display: 'flex', justifyContent: 'center', gap: '2.5rem' }}>
