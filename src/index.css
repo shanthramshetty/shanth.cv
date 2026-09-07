@@ -66,18 +66,6 @@
   .cs-learnings > *:last-child   { border-bottom: none !important; }
 }
 
-/* Approach split (label+steps | body copy) */
-.cs-approach-split {
-  grid-template-columns: 1fr 2fr !important;
-  gap: 5rem !important;
-}
-@media (max-width: 720px) {
-  .cs-approach-split {
-    grid-template-columns: 1fr !important;
-    gap: 1.5rem !important;
-  }
-}
-
 /* Mockup strip horizontal scroll on small screens */
 @media (max-width: 720px) {
   .cs-mockup-strip {

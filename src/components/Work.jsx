@@ -240,8 +240,9 @@ const PROJECTS = [
     year: '2024',
     role: 'Designer & Developer',
     tools: 'React · Node.js · Figma',
-    duration: 'Ongoing',
+    duration: 'Live',
     url: 'https://www.eventurox.in/',
+    screenshot: eventuroxPreview,
     tagline: 'The digital home for an experiential events agency — built to show, not just tell, what 15 years of concerts and corporate events looks like.',
     problem: 'Event U Rox is an experiential events agency that plans and runs large-scale corporate events, conferences, trade shows, brand activations, and concerts for enterprise clients like TCS, Oracle, Amazon, Airbus, and Bosch. But their website didn\'t reflect any of that. There was no clean, credible online front door for a prospective client to land on and immediately understand the scale and quality of work the agency actually delivers.',
     approach: 'I designed and built the site to lead with visual proof over claims. The homepage opens with a bold, editorial "Featured" section that puts real event photography front and center, backed by a scrollable showcase of past work, concerts, brand activations, corporate events, so a visitor sees the caliber of execution before reading a single line of copy. Services are organised into clear categories (MICE, exhibitions, brand activations, artist management) so enterprise buyers can quickly find the offering relevant to them. Built with React on the frontend and Node.js on the backend, so the event showcase stays easy to update as new work ships.',
@@ -815,23 +816,21 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
 
       {/* Approach */}
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
-        <div className="cs-approach-split" style={{ display: 'grid', alignItems: 'start' }}>
-          <div>
-            <SectionLabel text="The Approach" accent={project.accent} />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {['Research', 'Strategy', 'Design', 'Test', 'Deliver'].map((step, i) => (
-                <div key={step} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                  <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: i === 0 ? project.accent : 'rgba(255,255,255,0.12)', flexShrink: 0 }} />
-                  <span style={{ fontSize: '0.75rem', fontFamily: "'Inter', sans-serif", color: i === 0 ? project.accent : 'rgba(255,255,255,0.25)', letterSpacing: '0.04em' }}>{step}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9, paddingTop: '0.25rem' }}>
-            {project.approach}
-          </p>
-        </div>
+        <SectionLabel text="The Approach" accent={project.accent} />
+        <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9, maxWidth: '820px' }}>
+          {project.approach}
+        </p>
       </div>
+
+      {project.screenshot && (
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 clamp(1rem, 4vw, 2.5rem) clamp(2.5rem, 5vw, 5rem)' }}>
+          <img
+            src={project.screenshot}
+            alt={`${project.title} live site screenshot`}
+            style={{ width: '100%', display: 'block', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}
+          />
+        </div>
+      )}
 
       <Divider />
 
