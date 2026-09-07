@@ -88,6 +88,30 @@ function RoleBadge() {
   )
 }
 
+/* ─── Decorative 3D shapes ──────────────────────────────────────── */
+
+const SHAPES = [
+  { variant: 'sphere',   top: '14%', left: '6%',   size: 64,  c1: '#a78bfa', c2: '#7c3aed', rot: '0deg',   delay: 0 },
+  { variant: 'cube',     top: '58%', left: '4%',   size: 74,  c1: '#60d9c8', c2: '#0d9488', rot: '-8deg',  delay: 0.6 },
+  { variant: 'cylinder', top: '10%', right: '6%',  size: 60,  c1: '#fdba74', c2: '#ea580c', rot: '12deg',  delay: 1.1 },
+  { variant: 'cube',     top: '62%', right: '5%',  size: 68,  c1: '#fde047', c2: '#ca8a04', rot: '10deg',  delay: 0.3 },
+  { variant: 'sphere',   top: '38%', right: '12%', size: 40,  c1: '#7dd3fc', c2: '#0284c7', rot: '0deg',   delay: 1.6 },
+]
+
+function Shape3D({ variant, top, left, right, size, c1, c2, rot, delay }) {
+  return (
+    <div
+      className={`home-shape home-shape-${variant}`}
+      style={{
+        top, left, right,
+        width: size, height: size,
+        '--shape-c1': c1, '--shape-c2': c2, '--shape-rot': rot,
+        animationDelay: `${delay}s`,
+      }}
+    />
+  )
+}
+
 /* ─── Home ──────────────────────────────────────────────────────── */
 
 export default function Home({ setPage }) {
@@ -134,6 +158,12 @@ export default function Home({ setPage }) {
         filter: 'blur(64px)',
         animation: 'blobB 28s ease-in-out infinite',
       }} />
+
+      {/* ── Giant background name ────────────────────────────────── */}
+      <div className="home-giant-name">SHANTHRAM</div>
+
+      {/* ── Floating 3D shapes ────────────────────────────────────── */}
+      {SHAPES.map((s, i) => <Shape3D key={i} {...s} />)}
 
       {/* ── Hero: text left, lanyard right ───────────────────────── */}
       <div style={{
@@ -264,11 +294,9 @@ export default function Home({ setPage }) {
           className="home-lanyard-col"
         >
           <div className="home-profile-visual">
-            <img
-              src={profileImg}
-              alt="Shanthram Shetty"
-              className="home-profile-img"
-            />
+            <div className="home-photo-frame">
+              <img src={profileImg} alt="Shanthram Shetty" />
+            </div>
           </div>
         </motion.div>
       </div>

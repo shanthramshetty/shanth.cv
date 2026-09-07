@@ -14,7 +14,7 @@ export default function Navbar({ page, setPage }) {
     page === 'contact' ? 'Contact' : ''
 
   /* Dark-mode navbar for dark-background pages */
-  const dark = page === 'home' || page === 'work'
+  const dark = page === 'work'
 
   return (
     <header style={{

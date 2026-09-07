@@ -7,6 +7,44 @@ const fade = (delay = 0) => ({
   transition: { delay, duration: 0.5, ease: 'easeOut' },
 })
 
+/* ─── What I Do — derived from real project work, not invented ──── */
+const SERVICES = [
+  {
+    n: '01',
+    title: 'Product Design',
+    body: 'End-to-end design for ambiguous, complex problems — from early discovery through shipped, production-ready UI across web and mobile.',
+  },
+  {
+    n: '02',
+    title: 'Design Systems',
+    body: 'Token architecture, component libraries, and documentation that keep design and engineering in sync across multiple products and teams.',
+  },
+  {
+    n: '03',
+    title: 'User Research',
+    body: 'Interviews, usability testing, and service blueprinting to find the real problem before designing a solution to it.',
+  },
+  {
+    n: '04',
+    title: 'Mobile & Prototyping',
+    body: 'Flutter-based mobile app design and development, plus high-fidelity interactive prototypes for validating flows before a single line of production code ships.',
+  },
+]
+
+/* ─── Tech Stack — pulled from real project `tools` fields ───────── */
+const STACK = [
+  { name: 'Figma',      note: 'Design & prototyping' },
+  { name: 'FigJam',     note: 'Workshops & flows' },
+  { name: 'Flutter',    note: 'Mobile development' },
+  { name: 'Firebase',   note: 'Real-time backend' },
+  { name: 'Maze',       note: 'Usability testing' },
+  { name: 'Hotjar',     note: 'Session analysis' },
+  { name: 'Miro',       note: 'Research synthesis' },
+  { name: 'Storybook',  note: 'Component docs' },
+  { name: 'Notion',     note: 'Docs & planning' },
+  { name: 'Confluence', note: 'Team documentation' },
+]
+
 export default function About() {
   return (
     <main style={{ minHeight: '100vh', background: '#f0eeea', paddingTop: '64px' }}>
@@ -139,6 +177,76 @@ export default function About() {
           </div>
 
         </div>
+
+        {/* ── What I Do ────────────────────────────────────────── */}
+        <div style={{ marginTop: 'clamp(4rem, 8vw, 7rem)', borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 'clamp(2.5rem, 5vw, 4rem)' }}>
+          <motion.p {...fade(0)} style={{
+            fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase',
+            color: '#bbb', fontWeight: 600, marginBottom: '2.5rem',
+            fontFamily: "'Inter', sans-serif",
+          }}>
+            What I Do
+          </motion.p>
+          <div className="about-services-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2.5rem 3rem' }}>
+            {SERVICES.map((s, i) => (
+              <motion.div key={s.n} {...fade(0.05 * i)} style={{ position: 'relative' }}>
+                <span style={{
+                  position: 'absolute', top: '-1.6rem', left: '-0.3rem',
+                  fontFamily: "'DM Serif Display', serif",
+                  fontSize: '3.5rem', color: 'rgba(17,17,17,0.06)',
+                  lineHeight: 1, userSelect: 'none', zIndex: 0,
+                }}>
+                  {s.n}
+                </span>
+                <h3 style={{
+                  position: 'relative', zIndex: 1,
+                  fontFamily: "'DM Serif Display', serif", fontSize: '1.15rem',
+                  fontWeight: 400, color: '#111', marginBottom: '0.5rem',
+                }}>
+                  {s.title}
+                </h3>
+                <p style={{
+                  position: 'relative', zIndex: 1,
+                  fontFamily: "'Inter', sans-serif", fontSize: '0.85rem',
+                  color: '#666', lineHeight: 1.75, maxWidth: '380px',
+                }}>
+                  {s.body}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Tech Stack ───────────────────────────────────────── */}
+        <div style={{ marginTop: 'clamp(3.5rem, 7vw, 6rem)', borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 'clamp(2.5rem, 5vw, 4rem)' }}>
+          <motion.p {...fade(0)} style={{
+            fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase',
+            color: '#bbb', fontWeight: 600, marginBottom: '2rem',
+            fontFamily: "'Inter', sans-serif",
+          }}>
+            Tech Stack
+          </motion.p>
+          <div className="about-stack-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '1rem' }}>
+            {STACK.map((t, i) => (
+              <motion.div
+                key={t.name}
+                {...fade(0.03 * i)}
+                style={{
+                  padding: '1.1rem 1rem', borderRadius: '10px',
+                  border: '1px solid rgba(0,0,0,0.08)', background: '#fff',
+                }}
+              >
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', fontWeight: 600, color: '#111', marginBottom: '0.25rem' }}>
+                  {t.name}
+                </p>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.7rem', color: '#999' }}>
+                  {t.note}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </main>
   )
