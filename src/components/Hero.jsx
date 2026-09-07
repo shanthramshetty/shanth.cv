@@ -226,39 +226,6 @@ export default function Hero({ setPage }) {
             </p>
           </div>
 
-          {/* Divider */}
-          <div className="hero-focus-divider" />
-
-          {/* Products */}
-          <div className="hero-focus-block">
-            <span style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '0.62rem', fontWeight: 700,
-              letterSpacing: '0.14em', textTransform: 'uppercase',
-              color: '#22d3ee', display: 'block', marginBottom: '0.85rem',
-            }}>
-              Products Shipped
-            </span>
-            <TrueFocus
-              sentence="FluxPay FinovaX HealthTrack Dashboard"
-              blurAmount={4}
-              borderColor="#22d3ee"
-              glowColor="rgba(34,211,238,0.28)"
-              animDuration={0.45}
-              pauseBetween={1.4}
-              fontSize="clamp(1.5rem, 3vw, 2.2rem)"
-              fontFamily="'DM Serif Display', serif"
-              color="rgba(255,255,255,0.9)"
-            />
-            <p style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '0.72rem', color: 'rgba(255,255,255,0.28)',
-              marginTop: '0.75rem', lineHeight: 1.6,
-            }}>
-              Fintech · SaaS · Health · AI
-            </p>
-          </div>
-
         </motion.div>
       </div>
 
