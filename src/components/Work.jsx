@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
-import eventuroxPreview from '../assets/images/eventurox-preview.jpeg'
 import eventuroxDemo from '../assets/videos/eventurox-demo.mp4'
 
 /* ─── SVG Mockup Previews ───────────────────────────────────────── */
@@ -220,9 +219,9 @@ function MockupPlayConnect() {
 
 function MockupEventurox() {
   return (
-    <img
-      src={eventuroxPreview}
-      alt="Eventurox live site preview"
+    <video
+      src={eventuroxDemo}
+      autoPlay muted loop playsInline
       style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
     />
   )
