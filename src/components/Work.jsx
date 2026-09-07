@@ -610,7 +610,7 @@ function WorkListing({ onSelect }) {
           </motion.span>
         </div>
 
-        <div style={{ height: '1px', background: 'rgba(255,255,255,0.05)' }} />
+        <div className="work-list-divider" style={{ height: '1px', background: 'rgba(255,255,255,0.05)' }} />
 
         {PROJECTS.map((project, i) => (
           <ProjectRow
