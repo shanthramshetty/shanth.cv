@@ -82,7 +82,7 @@
 }
 
 /* Work listing: tighten project title on small screens */
-@media (max-width: 480px) {
+@media (max-width: 560px) {
   .project-row-title { font-size: clamp(1.35rem, 7vw, 1.75rem) !important; }
   .project-row-arrow { display: none !important; }
 }
@@ -154,7 +154,8 @@
     margin-bottom: 2rem !important;
   }
   .project-row-meta {
-    margin-left: 1rem !important;
+    margin-left: 0 !important;
+    margin-top: 0.4rem !important;
   }
 }
 
