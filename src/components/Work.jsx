@@ -462,11 +462,13 @@ function ProjectRow({ project, index, onClick, onHover }) {
       onClick={onClick}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
+      className="project-row"
       style={{
         position: 'relative',
         padding: '2.25rem 0',
         cursor: 'pointer',
         borderBottom: '1px solid rgba(255,255,255,0.05)',
+        '--pr-accent': project.accent,
       }}
     >
       {/* Accent bar */}
@@ -481,10 +483,10 @@ function ProjectRow({ project, index, onClick, onHover }) {
         }}
       />
 
-      <div style={{ paddingLeft: '1.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div className="project-row-content" style={{ paddingLeft: '1.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: '1.75rem', marginBottom: '0.55rem' }}>
-            <span style={{
+          <div className="project-row-head" style={{ display: 'flex', alignItems: 'baseline', gap: '1.75rem', marginBottom: '0.55rem' }}>
+            <span className="project-row-number" style={{
               fontSize: '0.6rem', letterSpacing: '0.12em',
               fontFamily: "'Inter', sans-serif", fontWeight: 500, flexShrink: 0,
               color: hovered ? project.accent : 'rgba(255,255,255,0.18)',

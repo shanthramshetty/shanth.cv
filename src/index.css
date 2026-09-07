@@ -81,10 +81,49 @@
   .floating-preview { display: none !important; }
 }
 
-/* Work listing: tighten project title on small screens */
+/* Work listing: card-style redesign for mobile only (desktop untouched) */
 @media (max-width: 560px) {
-  .project-row-title { font-size: clamp(1.35rem, 7vw, 1.75rem) !important; }
-  .project-row-arrow { display: none !important; }
+  .project-row {
+    background: rgba(255,255,255,0.025) !important;
+    border: 1px solid rgba(255,255,255,0.07) !important;
+    border-radius: 18px !important;
+    padding: 1.25rem 1.1rem !important;
+    margin-bottom: 0.85rem !important;
+  }
+  .project-row-content {
+    padding-left: 0 !important;
+  }
+  .project-row-head {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0 !important;
+  }
+  .project-row-number {
+    display: inline-flex !important;
+    color: var(--pr-accent) !important;
+    background: rgba(255,255,255,0.06) !important;
+    border-radius: 999px !important;
+    padding: 0.22rem 0.6rem !important;
+    font-size: 0.62rem !important;
+    margin-bottom: 0.65rem !important;
+  }
+  .project-row-title {
+    font-size: clamp(1.35rem, 7vw, 1.75rem) !important;
+    color: #ffffff !important;
+  }
+  .project-row-meta {
+    color: rgba(255,255,255,0.42) !important;
+    margin-left: 0 !important;
+    margin-top: 0.5rem !important;
+  }
+  .project-row-arrow {
+    display: flex !important;
+    width: 30px !important;
+    height: 30px !important;
+    border-color: var(--pr-accent) !important;
+    opacity: 0.85 !important;
+  }
+  .project-row-arrow svg { stroke: var(--pr-accent) !important; }
 }
 
 /* ── Responsive layout helpers ────────────────────────────────── */
@@ -152,10 +191,6 @@
     align-items: flex-start !important;
     gap: 0.5rem !important;
     margin-bottom: 2rem !important;
-  }
-  .project-row-meta {
-    margin-left: 0 !important;
-    margin-top: 0.4rem !important;
   }
 }
 
