@@ -244,8 +244,7 @@ const PROJECTS = [
     url: 'https://www.eventurox.in/',
     video: eventuroxDemo,
     tagline: 'The digital home for an experiential events agency — built to show, not just tell, what 15 years of concerts and corporate events looks like.',
-    problem: 'Event U Rox is an experiential events agency that plans and runs large-scale corporate events, conferences, trade shows, brand activations, and concerts for enterprise clients like TCS, Oracle, Amazon, Airbus, and Bosch. But their website didn\'t reflect any of that. There was no clean, credible online front door for a prospective client to land on and immediately understand the scale and quality of work the agency actually delivers.',
-    approach: 'I designed and built the site to lead with visual proof over claims. The homepage opens with a bold, editorial "Featured" section that puts real event photography front and center, backed by a scrollable showcase of past work, concerts, brand activations, corporate events, so a visitor sees the caliber of execution before reading a single line of copy. Services are organised into clear categories (MICE, exhibitions, brand activations, artist management) so enterprise buyers can quickly find the offering relevant to them. Built with React on the frontend and Node.js on the backend, so the event showcase stays easy to update as new work ships.',
+    overview: 'Event U Rox is an experiential events agency that plans and runs large-scale corporate events, conferences, trade shows, brand activations, and concerts for enterprise clients like TCS, Oracle, Amazon, Airbus, and Bosch — but their old website didn\'t reflect any of that. I designed and built a new site that leads with visual proof over claims: a bold, editorial "Featured" section puts real event photography front and center, backed by a scrollable showcase of past work, with services organised into clear categories (MICE, exhibitions, brand activations, artist management) so enterprise buyers can quickly find what\'s relevant to them. Built with React on the frontend and Node.js on the backend, so the event showcase stays easy to update as new work ships.',
     outcome: 'Eventurox.in is live and now serves as the agency\'s primary digital presence, representing 15 years in the industry, 75+ brands served, and 3,500+ experiences delivered.',
     metrics: [
       { value: '15 yrs', label: 'Agency track record showcased' },
@@ -810,25 +809,41 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
 
       <Divider />
 
-      {/* Challenge */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
-        <SectionLabel text="The Challenge" accent={project.accent} />
-        <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9, maxWidth: '820px' }}>
-          {project.problem}
-        </p>
-      </div>
+      {project.overview ? (
+        <>
+          {/* Overview */}
+          <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
+            <SectionLabel text="The Project" accent={project.accent} />
+            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9, maxWidth: '820px' }}>
+              {project.overview}
+            </p>
+          </div>
 
-      <Divider />
+          <Divider />
+        </>
+      ) : (
+        <>
+          {/* Challenge */}
+          <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
+            <SectionLabel text="The Challenge" accent={project.accent} />
+            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9, maxWidth: '820px' }}>
+              {project.problem}
+            </p>
+          </div>
 
-      {/* Approach */}
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
-        <SectionLabel text="The Approach" accent={project.accent} />
-        <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9, maxWidth: '820px' }}>
-          {project.approach}
-        </p>
-      </div>
+          <Divider />
 
-      <Divider />
+          {/* Approach */}
+          <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
+            <SectionLabel text="The Approach" accent={project.accent} />
+            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9, maxWidth: '820px' }}>
+              {project.approach}
+            </p>
+          </div>
+
+          <Divider />
+        </>
+      )}
 
       {/* Outcome */}
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
