@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
+import eventuroxPreview from '../assets/images/eventurox-preview.jpeg'
 
 /* ─── SVG Mockup Previews ───────────────────────────────────────── */
 
@@ -218,45 +219,11 @@ function MockupPlayConnect() {
 
 function MockupEventurox() {
   return (
-    <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
-      <defs>
-        <linearGradient id="evg" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.28"/>
-          <stop offset="100%" stopColor="transparent"/>
-        </linearGradient>
-      </defs>
-      {/* Page bg */}
-      <rect width="360" height="200" fill="#0c0c0e"/>
-      {/* Navbar */}
-      <rect width="360" height="30" fill="#141416"/>
-      <rect x="14" y="10" width="52" height="10" rx="3" fill="#f59e0b" opacity="0.85"/>
-      <rect x="220" y="12" width="26" height="6" rx="2" fill="white" opacity="0.22"/>
-      <rect x="254" y="12" width="26" height="6" rx="2" fill="white" opacity="0.22"/>
-      <rect x="292" y="9" width="54" height="12" rx="6" fill="#f59e0b" opacity="0.75"/>
-      {/* Hero banner */}
-      <rect x="10" y="36" width="340" height="66" rx="8" fill="#1a1506"/>
-      <rect x="10" y="36" width="340" height="66" rx="8" fill="url(#evg)"/>
-      <rect x="22" y="46" width="8" height="8" rx="1.5" fill="#f59e0b" opacity="0.8"/>
-      <rect x="36" y="46" width="72" height="8" rx="3" fill="white" opacity="0.72"/>
-      <rect x="22" y="60" width="115" height="5" rx="2" fill="white" opacity="0.3"/>
-      <rect x="22" y="72" width="46" height="14" rx="7" fill="#f59e0b" opacity="0.88"/>
-      <rect x="74" y="74" width="38" height="10" rx="2" fill="white" opacity="0.18"/>
-      {/* Event cards */}
-      {[0, 1, 2].map(i => (
-        <g key={i}>
-          <rect x={10 + i * 118} y="112" width="108" height="78" rx="8" fill="#161616"/>
-          <rect x={10 + i * 118} y="112" width="108" height="38" rx="8"
-            fill={['#1c1204','#04111c','#0c0418'][i]}/>
-          <rect x={10 + i * 118} y="138" width="108" height="12" fill={['#1c1204','#04111c','#0c0418'][i]}/>
-          <circle cx={30 + i * 118} cy={126} r={9}
-            fill={['#f59e0b','#0ea5e9','#8b5cf6'][i]} opacity="0.32"/>
-          <rect x={20 + i * 118} y="156" width="58" height="5" rx="2" fill="white" opacity="0.52"/>
-          <rect x={20 + i * 118} y="165" width="40" height="4" rx="2" fill="white" opacity="0.2"/>
-          <rect x={86 + i * 118} y="158" width="24" height="14" rx="4"
-            fill={['#f59e0b','#0ea5e9','#8b5cf6'][i]} opacity="0.68"/>
-        </g>
-      ))}
-    </svg>
+    <img
+      src={eventuroxPreview}
+      alt="Eventurox live site preview"
+      style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
+    />
   )
 }
 
