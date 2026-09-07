@@ -750,6 +750,17 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
         }}>
           {project.tagline}
         </p>
+        {project.video && (
+          <video
+            src={project.video}
+            autoPlay muted loop playsInline
+            style={{
+              width: '100%', display: 'block', borderRadius: '12px',
+              border: '1px solid rgba(255,255,255,0.08)',
+              marginBottom: '2rem',
+            }}
+          />
+        )}
         {project.url && (
           <a
             href={project.url} target="_blank" rel="noopener noreferrer"
@@ -817,16 +828,6 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
           {project.approach}
         </p>
       </div>
-
-      {project.video && (
-        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 clamp(1rem, 4vw, 2.5rem) clamp(2.5rem, 5vw, 5rem)' }}>
-          <video
-            src={project.video}
-            autoPlay muted loop playsInline
-            style={{ width: '100%', display: 'block', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}
-          />
-        </div>
-      )}
 
       <Divider />
 
