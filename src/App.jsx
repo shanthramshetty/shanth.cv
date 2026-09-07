@@ -5,7 +5,6 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Work from './components/Work'
 import AboutPage from './components/About'
-import FunSection from './components/FunSection'
 import ContactPage from './components/Contact'
 import Loader from './components/Loader'
 import './App.css'
@@ -15,7 +14,6 @@ const PAGE_BG = {
   home:    '#0f0f11',
   about:   '#f0eeea',
   work:    '#0a0a0a',
-  fun:     '#0a0a0a',
   contact: '#f0eeea',
 }
 
@@ -73,7 +71,6 @@ export default function App() {
               {page === 'home'    && <PageWrap key="home"><Hero setPage={setPage} /></PageWrap>}
               {page === 'about'   && <PageWrap key="about"><AboutPage /></PageWrap>}
               {page === 'work'    && <PageWrap key="work"><Work /></PageWrap>}
-              {page === 'fun'     && <PageWrap key="fun"><FunSection /></PageWrap>}
               {page === 'contact' && <PageWrap key="contact"><ContactPage /></PageWrap>}
             </AnimatePresence>
           </motion.div>

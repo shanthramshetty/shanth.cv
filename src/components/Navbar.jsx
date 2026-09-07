@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 const NAV_LINKS = [
   { label: 'About',   page: 'about'   },
   { label: 'Work',    page: 'work'    },
-  { label: 'Fun',     page: 'fun'     },
   { label: 'Contact', page: 'contact' },
 ]
 
@@ -12,11 +11,10 @@ export default function Navbar({ page, setPage }) {
   const active =
     page === 'about'   ? 'About'   :
     page === 'work'    ? 'Work'    :
-    page === 'fun'     ? 'Fun'     :
     page === 'contact' ? 'Contact' : ''
 
   /* Dark-mode navbar for dark-background pages */
-  const dark = page === 'home' || page === 'work' || page === 'fun'
+  const dark = page === 'home' || page === 'work'
 
   return (
     <header style={{

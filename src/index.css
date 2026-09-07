@@ -690,9 +690,4 @@ input, textarea, select, button {
   .work-grid {
     grid-template-columns: 1fr !important;
   }
-
-  /* ── Fun section photo grid: 1 col ── */
-  .fun-photo-grid {
-    grid-template-columns: 1fr 1fr !important;
-  }
 }
