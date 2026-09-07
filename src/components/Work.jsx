@@ -746,7 +746,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
           fontFamily: "'DM Serif Display', serif",
           fontSize: 'clamp(1.1rem, 2.4vw, 1.65rem)',
           color: 'rgba(255,255,255,0.38)', fontWeight: 400,
-          maxWidth: '680px', lineHeight: 1.45, marginBottom: project.url ? '2rem' : 0,
+          lineHeight: 1.45, marginBottom: project.url ? '2rem' : 0,
         }}>
           {project.tagline}
         </p>
