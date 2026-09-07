@@ -207,7 +207,7 @@ export default function Hero({ setPage }) {
               Experience
             </span>
             <TrueFocus
-              sentence="7EDGE NeST Luminar"
+              sentence="7EDGE NeST Freelancer"
               blurAmount={4}
               borderColor="#6366f1"
               glowColor="rgba(99,102,241,0.3)"
