@@ -804,12 +804,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
       {/* Challenge */}
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
         <SectionLabel text="The Challenge" accent={project.accent} />
-        <p style={{
-          fontFamily: "'DM Serif Display', serif",
-          fontSize: 'clamp(1.35rem, 2.8vw, 2.1rem)',
-          color: 'rgba(255,255,255,0.82)', fontWeight: 400,
-          lineHeight: 1.5, maxWidth: '820px',
-        }}>
+        <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9, maxWidth: '820px' }}>
           {project.problem}
         </p>
       </div>
