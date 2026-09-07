@@ -266,7 +266,28 @@ const MOCKUP_COMPONENTS = [MockupFintech, MockupPlayConnect, MockupAIDashboard, 
 
 const PROJECTS = [
   {
-    id: 0, number: '01',
+    id: 6, number: '01',
+    title: 'Eventurox',
+    category: 'Full-Stack Product · Live',
+    client: 'Personal Project',
+    year: '2024',
+    role: 'Designer & Developer',
+    tools: 'React · Node.js · Figma',
+    duration: 'Ongoing',
+    url: 'https://www.eventurox.in/',
+    tagline: 'A fully live event discovery and booking platform, designed and built end to end.',
+    problem: 'Discovering and booking local events was fragmented across Instagram, word of mouth, and outdated listing pages. Independent organisers had no clean, credible channel to reach their audience, and potential attendees had no reliable way to find what was happening nearby, especially for niche communities. The gap was clear, and no one had closed it well.',
+    approach: 'I treated this as a real product, not a portfolio piece. Started with user interviews across two sides of the marketplace, event-goers and organisers, to define the minimum viable flows for both. Designed the full product in Figma: IA, user flows, brand identity, and UI system. Then built it end to end. React on the frontend, Node.js on the backend, with a mobile-first responsive layout as the baseline. Shipping decisions were driven by real usage data, not assumptions.',
+    outcome: 'Eventurox is live at eventurox.in and actively used. The platform supports event creation, discovery, filtering, and registration. Built solo from zero to production, the clearest evidence I have of owning a product from first principles to final delivery.',
+    metrics: [
+      { value: '100%', label: 'Designed & built solo' },
+      { value: 'Live', label: 'Production deployment' },
+      { value: 'End-to-end', label: 'Design + Development' },
+    ],
+    accent: '#f59e0b',
+  },
+  {
+    id: 0, number: '02',
     title: 'FluxPay',
     category: 'Product Design · Fintech',
     client: '7EDGE',
@@ -287,7 +308,7 @@ const PROJECTS = [
     accent: '#2B7FFF',
   },
   {
-    id: 1, number: '02',
+    id: 1, number: '03',
     title: 'PlayConnect',
     category: 'Mobile App · Flutter',
     client: 'Personal Project',
@@ -307,7 +328,7 @@ const PROJECTS = [
     accent: '#22c55e',
   },
   {
-    id: 2, number: '03',
+    id: 2, number: '04',
     title: 'AI Analytics Dashboard',
     category: 'Product Design · AI',
     client: '7EDGE',
@@ -327,7 +348,7 @@ const PROJECTS = [
     accent: '#8b5cf6',
   },
   {
-    id: 3, number: '04',
+    id: 3, number: '05',
     title: 'Enterprise Design System',
     category: 'System Design',
     client: '7EDGE',
@@ -347,7 +368,7 @@ const PROJECTS = [
     accent: '#22c55e',
   },
   {
-    id: 4, number: '05',
+    id: 4, number: '06',
     title: 'E-Commerce Redesign',
     category: 'Product Redesign · Audit',
     client: 'Freelance',
@@ -367,7 +388,7 @@ const PROJECTS = [
     accent: '#ec4899',
   },
   {
-    id: 5, number: '06',
+    id: 5, number: '07',
     title: 'Flutter App — NeST',
     category: 'Mobile · Shipped',
     client: 'NeST Digital',
@@ -385,27 +406,6 @@ const PROJECTS = [
       { value: '#1', label: 'Internal tooling award' },
     ],
     accent: '#0ea5e9',
-  },
-  {
-    id: 6, number: '07',
-    title: 'Eventurox',
-    category: 'Full-Stack Product · Live',
-    client: 'Personal Project',
-    year: '2024',
-    role: 'Designer & Developer',
-    tools: 'React · Node.js · Figma',
-    duration: 'Ongoing',
-    url: 'https://www.eventurox.in/',
-    tagline: 'A fully live event discovery and booking platform, designed and built end to end.',
-    problem: 'Discovering and booking local events was fragmented across Instagram, word of mouth, and outdated listing pages. Independent organisers had no clean, credible channel to reach their audience, and potential attendees had no reliable way to find what was happening nearby, especially for niche communities. The gap was clear, and no one had closed it well.',
-    approach: 'I treated this as a real product, not a portfolio piece. Started with user interviews across two sides of the marketplace, event-goers and organisers, to define the minimum viable flows for both. Designed the full product in Figma: IA, user flows, brand identity, and UI system. Then built it end to end. React on the frontend, Node.js on the backend, with a mobile-first responsive layout as the baseline. Shipping decisions were driven by real usage data, not assumptions.',
-    outcome: 'Eventurox is live at eventurox.in and actively used. The platform supports event creation, discovery, filtering, and registration. Built solo from zero to production, the clearest evidence I have of owning a product from first principles to final delivery.',
-    metrics: [
-      { value: '100%', label: 'Designed & built solo' },
-      { value: 'Live', label: 'Production deployment' },
-      { value: 'End-to-end', label: 'Design + Development' },
-    ],
-    accent: '#f59e0b',
   },
 ]
 
