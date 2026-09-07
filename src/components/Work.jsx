@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 import eventuroxPreview from '../assets/images/eventurox-preview.jpeg'
+import eventuroxDemo from '../assets/videos/eventurox-demo.mp4'
 
 /* ─── SVG Mockup Previews ───────────────────────────────────────── */
 
@@ -243,6 +244,7 @@ const PROJECTS = [
     duration: 'Live',
     url: 'https://www.eventurox.in/',
     screenshot: eventuroxPreview,
+    video: eventuroxDemo,
     tagline: 'The digital home for an experiential events agency — built to show, not just tell, what 15 years of concerts and corporate events looks like.',
     problem: 'Event U Rox is an experiential events agency that plans and runs large-scale corporate events, conferences, trade shows, brand activations, and concerts for enterprise clients like TCS, Oracle, Amazon, Airbus, and Bosch. But their website didn\'t reflect any of that. There was no clean, credible online front door for a prospective client to land on and immediately understand the scale and quality of work the agency actually delivers.',
     approach: 'I designed and built the site to lead with visual proof over claims. The homepage opens with a bold, editorial "Featured" section that puts real event photography front and center, backed by a scrollable showcase of past work, concerts, brand activations, corporate events, so a visitor sees the caliber of execution before reading a single line of copy. Services are organised into clear categories (MICE, exhibitions, brand activations, artist management) so enterprise buyers can quickly find the offering relevant to them. Built with React on the frontend and Node.js on the backend, so the event showcase stays easy to update as new work ships.',
@@ -827,6 +829,16 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
           <img
             src={project.screenshot}
             alt={`${project.title} live site screenshot`}
+            style={{ width: '100%', display: 'block', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}
+          />
+        </div>
+      )}
+
+      {project.video && (
+        <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 clamp(1rem, 4vw, 2.5rem) clamp(2.5rem, 5vw, 5rem)' }}>
+          <video
+            src={project.video}
+            autoPlay muted loop playsInline
             style={{ width: '100%', display: 'block', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)' }}
           />
         </div>
