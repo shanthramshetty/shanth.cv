@@ -816,7 +816,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
           {/* Overview */}
           <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
             <SectionLabel text="The Project" accent={project.accent} />
-            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9, maxWidth: '820px' }}>
+            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9 }}>
               {project.overview}
             </p>
           </div>
@@ -828,7 +828,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
           {/* Challenge */}
           <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
             <SectionLabel text="The Challenge" accent={project.accent} />
-            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9, maxWidth: '820px' }}>
+            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9 }}>
               {project.problem}
             </p>
           </div>
@@ -838,7 +838,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
           {/* Approach */}
           <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
             <SectionLabel text="The Approach" accent={project.accent} />
-            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9, maxWidth: '820px' }}>
+            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9 }}>
               {project.approach}
             </p>
           </div>
@@ -863,7 +863,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
             </div>
           ))}
         </div>
-        <p style={{ fontSize: '0.975rem', color: 'rgba(255,255,255,0.45)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9, maxWidth: '640px' }}>
+        <p style={{ fontSize: '0.975rem', color: 'rgba(255,255,255,0.45)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9 }}>
           {project.outcome}
         </p>
       </div>
