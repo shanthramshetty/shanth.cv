@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import ThemeToggle from './ThemeToggle'
 
 const NAV_LINKS = [
   { label: 'About',   page: 'about'   },
@@ -13,19 +14,13 @@ export default function Navbar({ page, setPage }) {
     page === 'work'    ? 'Work'    :
     page === 'contact' ? 'Contact' : ''
 
-  /* Dark-mode navbar for dark-background pages */
-  const dark = page === 'home' || page === 'work'
-
   return (
     <header style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-      backgroundColor: dark ? 'rgba(10,10,11,0.88)' : 'rgba(250,250,248,0.92)',
+      backgroundColor: 'var(--color-header-bg)',
       backdropFilter: 'blur(14px)',
       WebkitBackdropFilter: 'blur(14px)',
-      borderBottom: dark
-        ? '1px solid rgba(255,255,255,0.06)'
-        : '1px solid rgba(0,0,0,0.06)',
-      transition: 'background-color 0.4s, border-color 0.4s',
+      borderBottom: '1px solid var(--color-header-border)',
       willChange: 'background-color',
       WebkitTransform: 'translateZ(0)',
       transform: 'translateZ(0)',
@@ -46,14 +41,13 @@ export default function Navbar({ page, setPage }) {
           aria-label="Go to home"
           style={{
             width: '36px', height: '36px', borderRadius: '50%',
-            background: dark ? '#ffffff' : '#111',
-            color: dark ? '#000' : '#fff',
+            background: 'var(--color-invert-bg)',
+            color: 'var(--color-invert-text)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             fontSize: '12px', fontWeight: 700,
             fontFamily: "'Inter', sans-serif",
             border: 'none', cursor: 'pointer',
             userSelect: 'none', flexShrink: 0,
-            transition: 'background 0.4s, color 0.4s',
             touchAction: 'manipulation',
             WebkitTapHighlightColor: 'transparent',
             outline: 'none',
@@ -63,22 +57,18 @@ export default function Navbar({ page, setPage }) {
         </motion.button>
 
         {/* ── Navigation pills ──────────────────────────────────── */}
+        <div className="navbar-controls" style={{ display: 'flex', alignItems: 'center', gap: 'clamp(0.5rem, 2vw, 0.85rem)' }}>
         <nav
           role="navigation"
           aria-label="Main navigation"
           style={{
             display: 'flex', alignItems: 'center', gap: '2px',
-            background: dark
-              ? 'rgba(255,255,255,0.07)'
-              : 'rgba(255,255,255,0.6)',
+            background: 'var(--color-nav-pill-bg)',
             backdropFilter: 'blur(8px)',
             WebkitBackdropFilter: 'blur(8px)',
             borderRadius: '999px',
-            border: dark
-              ? '1px solid rgba(255,255,255,0.1)'
-              : '1px solid rgba(0,0,0,0.07)',
+            border: '1px solid var(--color-nav-pill-border)',
             padding: '0.24rem',
-            transition: 'background 0.4s, border-color 0.4s',
           }}
         >
           {NAV_LINKS.map(link => {
@@ -99,9 +89,7 @@ export default function Navbar({ page, setPage }) {
                   fontFamily: "'Inter', sans-serif",
                   background: 'none', border: 'none',
                   cursor: 'pointer',
-                  color: isActive
-                    ? (dark ? '#000' : '#fff')
-                    : (dark ? 'rgba(255,255,255,0.45)' : '#666'),
+                  color: isActive ? 'var(--color-invert-text)' : 'var(--color-nav-inactive)',
                   transition: 'color 0.2s',
                   zIndex: 1,
                   touchAction: 'manipulation',
@@ -120,7 +108,7 @@ export default function Navbar({ page, setPage }) {
                     transition={{ type: 'spring', stiffness: 380, damping: 34 }}
                     style={{
                       position: 'absolute', inset: 0,
-                      background: dark ? '#ffffff' : '#111',
+                      background: 'var(--color-invert-bg)',
                       borderRadius: '999px',
                       zIndex: -1,
                     }}
@@ -131,6 +119,9 @@ export default function Navbar({ page, setPage }) {
             )
           })}
         </nav>
+
+        <ThemeToggle />
+        </div>
       </div>
     </header>
   )

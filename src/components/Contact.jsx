@@ -10,7 +10,7 @@ const fade = (delay = 0) => ({
 export default function Contact() {
   return (
     <main style={{
-      minHeight: '100vh', background: '#f0eeea',
+      minHeight: '100vh', background: 'var(--color-bg)',
       paddingTop: '64px', paddingLeft: 'clamp(1.25rem, 5vw, 2.5rem)', paddingRight: 'clamp(1.25rem, 5vw, 2.5rem)', paddingBottom: '4rem',
       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative',
     }}>
@@ -20,22 +20,22 @@ export default function Contact() {
           <span style={{
             fontFamily: "'Caveat', cursive",
             fontSize: 'clamp(52px, 7vw, 80px)',
-            color: '#111', display: 'block', lineHeight: 1,
+            color: 'var(--color-text-primary)', display: 'block', lineHeight: 1,
           }}>
             Say hello,
           </span>
           <span style={{
             fontFamily: "'DM Serif Display', serif",
             fontSize: 'clamp(1.6rem, 3.5vw, 2.6rem)',
-            fontWeight: 700, color: '#111', display: 'block',
+            fontWeight: 700, color: 'var(--color-text-primary)', display: 'block',
             letterSpacing: '-0.02em', lineHeight: 1.15,
           }}>
-            let's create something <FlipWords words={["meaningful","impactful","beautiful","powerful"]} color="#111" interval={2600} />
+            let's create something <FlipWords words={["meaningful","impactful","beautiful","powerful"]} color="var(--color-text-primary)" interval={2600} />
           </span>
         </motion.h1>
 
         <motion.p {...fade(0.2)} style={{
-          fontSize: '0.925rem', color: '#888', lineHeight: 1.8,
+          fontSize: '0.925rem', color: 'var(--color-text-secondary)', lineHeight: 1.8,
           marginBottom: '2.5rem', fontFamily: "'Inter', sans-serif",
         }}>
           Open to new opportunities in product design — especially complex,
@@ -52,7 +52,7 @@ export default function Contact() {
               style={{
                 display: 'inline-block',
                 padding: '0.875rem 2.5rem',
-                background: '#111', color: '#fff',
+                background: 'var(--color-invert-bg)', color: 'var(--color-invert-text)',
                 borderRadius: '100px', textDecoration: 'none',
                 fontSize: '0.9rem', fontWeight: 500,
                 fontFamily: "'Inter', sans-serif",
@@ -71,12 +71,12 @@ export default function Contact() {
           ].map(s => (
             <a key={s.label} href={s.href} target={s.target} rel={s.target ? 'noopener noreferrer' : undefined}
               style={{
-                fontSize: '0.875rem', color: '#aaa', textDecoration: 'none',
+                fontSize: '0.875rem', color: 'var(--color-text-tertiary)', textDecoration: 'none',
                 letterSpacing: '0.04em', fontFamily: "'Inter', sans-serif",
                 transition: 'color 0.2s',
               }}
-              onMouseEnter={e => e.target.style.color = '#111'}
-              onMouseLeave={e => e.target.style.color = '#aaa'}
+              onMouseEnter={e => e.target.style.color = 'var(--color-text-primary)'}
+              onMouseLeave={e => e.target.style.color = 'var(--color-text-tertiary)'}
             >
               {s.label}
             </a>
@@ -88,7 +88,7 @@ export default function Contact() {
       <motion.div {...fade(0.5)} style={{
         marginTop: '3rem',
         display: 'flex', justifyContent: 'center', gap: '1rem',
-        fontSize: '0.72rem', color: '#ccc', fontFamily: "'Inter', sans-serif",
+        fontSize: '0.72rem', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif",
       }}>
         <span>© {new Date().getFullYear()} Shanthram Shetty</span>
         <span>·</span>

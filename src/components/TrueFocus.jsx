@@ -83,7 +83,7 @@ export default function TrueFocus({
               fontWeight: 400,
               lineHeight: 1.15,
               filter:  focused ? 'blur(0px)' : `blur(${blurAmount}px)`,
-              opacity: focused ? 1 : 0.28,
+              opacity: focused ? 1 : 0.5,
               /* Smooth, slightly springy easing on the words themselves */
               transition: `filter ${animDuration * 0.9}s cubic-bezier(0.25,0.46,0.45,0.94),
                            opacity ${animDuration * 0.9}s cubic-bezier(0.25,0.46,0.45,0.94)`,

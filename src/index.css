@@ -87,8 +87,8 @@
     display: none !important;
   }
   .project-row {
-    background: rgba(255,255,255,0.025) !important;
-    border: 1px solid rgba(255,255,255,0.07) !important;
+    background: var(--color-bg-subtle) !important;
+    border: 1px solid var(--color-border) !important;
     border-radius: 18px !important;
     padding: 1.25rem 1.1rem !important;
     margin-bottom: 0.85rem !important;
@@ -104,7 +104,7 @@
   .project-row-number {
     display: inline-flex !important;
     color: var(--pr-accent) !important;
-    background: rgba(255,255,255,0.06) !important;
+    background: var(--color-bg-subtle) !important;
     border-radius: 999px !important;
     padding: 0.22rem 0.6rem !important;
     font-size: 0.62rem !important;
@@ -112,10 +112,10 @@
   }
   .project-row-title {
     font-size: clamp(1.35rem, 7vw, 1.75rem) !important;
-    color: #ffffff !important;
+    color: var(--color-text-primary) !important;
   }
   .project-row-meta {
-    color: rgba(255,255,255,0.42) !important;
+    color: var(--color-text-tertiary) !important;
     margin-left: 0 !important;
     margin-top: 0.5rem !important;
   }
@@ -252,19 +252,20 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-y: scroll;
   scrollbar-gutter: stable;
 }
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background-color: #EDEAE4;
-  color: #000000;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(0, 0, 0, 0.12);
+  background: rgba(128, 128, 128, 0.25);
 }
 
 ::-webkit-scrollbar {
@@ -272,11 +273,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #EDEAE4;
+  background: var(--color-scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ccc9c0;
+  background: var(--color-scrollbar-thumb);
   border-radius: 3px;
 }
 
@@ -423,12 +424,108 @@ body {
   --font-serif:  'DM Serif Display', serif;
   --font-sans:   'Inter', system-ui, sans-serif;
   --font-hand:   'Caveat', cursive;
-  --color-bg:    #fafaf8;
-  --color-dark:  #0a0a0a;
   --radius-card: 14px;
   --radius-sm:   10px;
   --transition:  0.25s ease;
   --nav-h:       64px;
+
+  /* ── Theme tokens — light (default) ──────────────────────────── */
+  /* Text tiers are WCAG-audited against both surfaces below (min case shown):
+     primary 16.3:1 · secondary 7.3:1 · muted 5.4:1+ across page/elevated/subtle surfaces.
+     "disabled" intentionally sits under 4.5:1 — WCAG 1.4.3 exempts inactive
+     controls, and it is only ever applied to non-interactive/disabled UI. */
+  --color-bg:              #f0eeea;
+  --color-bg-elevated:     #ffffff;
+  --color-bg-subtle:       rgba(0, 0, 0, 0.035);
+  --color-text-primary:    #111111;
+  --color-text-secondary:  #4d4d4d;
+  --color-text-muted:      #5c5c5c;
+  --color-text-tertiary:   var(--color-text-muted);  /* legacy alias, same audited value */
+  --color-text-disabled:   #a8a8a8;
+  --color-border:          rgba(0, 0, 0, 0.08);
+  --color-border-strong:   rgba(0, 0, 0, 0.16);
+  --color-border-default:  var(--color-border);
+  --color-invert-bg:       #111111;
+  --color-invert-text:     #ffffff;
+  --color-shadow:          rgba(0, 0, 0, 0.12);
+  --color-shadow-strong:   rgba(0, 0, 0, 0.22);
+  --color-scrollbar-track: #EDEAE4;
+  --color-scrollbar-thumb: #ccc9c0;
+  --color-toggle-track:    rgba(0, 0, 0, 0.1);
+  --color-toggle-knob:     #ffffff;
+  --color-header-bg:       rgba(250, 250, 248, 0.92);
+  --color-header-border:   rgba(0, 0, 0, 0.06);
+  --color-nav-pill-bg:     rgba(255, 255, 255, 0.6);
+  --color-nav-pill-border: rgba(0, 0, 0, 0.07);
+  --color-nav-inactive:    var(--color-text-secondary);
+  --color-surface-primary:   var(--color-bg);
+  --color-surface-secondary: var(--color-bg-elevated);
+  --color-accent:          #6366f1;
+  --color-accent-text:     #4338ca; /* accent hue darkened for readable small text: 6.8:1+ */
+  --color-paint:           #6d6ff5;
+  --color-paint-highlight: #a5a6ff;
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  /* Text tiers vs. worst-case surface: primary 15.8:1 · secondary 9.5:1 ·
+     muted 5.9:1 · disabled intentionally low-contrast (see note above). */
+  --color-bg:              #0a0a0b;
+  --color-bg-elevated:     #17171a;
+  --color-bg-subtle:       rgba(255, 255, 255, 0.05);
+  --color-text-primary:    #f2f1ee;
+  --color-text-secondary:  #bdbdbd;
+  --color-text-muted:      #949494;
+  --color-text-tertiary:   var(--color-text-muted);
+  --color-text-disabled:   #5c5c5c;
+  --color-border:          rgba(255, 255, 255, 0.09);
+  --color-border-strong:   rgba(255, 255, 255, 0.18);
+  --color-border-default:  var(--color-border);
+  --color-invert-bg:       #ffffff;
+  --color-invert-text:     #0a0a0b;
+  --color-shadow:          rgba(0, 0, 0, 0.5);
+  --color-shadow-strong:   rgba(0, 0, 0, 0.65);
+  --color-scrollbar-track: #1b1b1d;
+  --color-scrollbar-thumb: #3c3c40;
+  --color-toggle-track:    rgba(255, 255, 255, 0.16);
+  --color-toggle-knob:     #f4f4f5;
+  --color-header-bg:       rgba(10, 10, 11, 0.88);
+  --color-header-border:   rgba(255, 255, 255, 0.06);
+  --color-nav-pill-bg:     rgba(255, 255, 255, 0.07);
+  --color-nav-pill-border: rgba(255, 255, 255, 0.1);
+  --color-nav-inactive:    var(--color-text-secondary);
+  --color-surface-primary:   var(--color-bg);
+  --color-surface-secondary: var(--color-bg-elevated);
+  --color-accent:          #7b7dff;
+  --color-accent-text:     #a5b4fc; /* accent hue lightened for readable small text: 9.2:1+ */
+  --color-paint:           #7b7dff;
+  --color-paint-highlight: #b4b5ff;
+
+  color-scheme: dark;
+}
+
+/* ── Smooth cross-fade for browsers without the View Transition API ──
+   (Chrome/Edge get the native document.startViewTransition dissolve;
+   this is the graceful fallback + covers any element the transition
+   API doesn't reach.) */
+*, *::before, *::after {
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              fill 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              stroke 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Smooth page-transition layering */
@@ -594,23 +691,24 @@ input, textarea, select, button {
   padding: 0.65rem 1.4rem;
   border-radius: 999px;
   background: transparent;
-  color: rgba(255,255,255,0.65);
+  color: var(--color-text-secondary);
   font-family: 'Inter', sans-serif;
   font-size: 0.85rem;
   font-weight: 500;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid var(--color-border-strong);
   cursor: pointer;
   letter-spacing: 0.01em;
   transition: transform 0.25s cubic-bezier(0.22,1,0.36,1),
               border-color 0.25s ease,
               color 0.25s ease,
-              background 0.25s ease;
+              background 0.25s ease,
+              background-color 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 .hero-btn-outline:hover {
   transform: translateY(-2px);
-  border-color: rgba(255,255,255,0.38);
-  color: #fff;
-  background: rgba(255,255,255,0.06);
+  border-color: var(--color-text-tertiary);
+  color: var(--color-text-primary);
+  background: var(--color-bg-subtle);
 }
 .hero-btn-outline:active { transform: translateY(0); }
 
@@ -621,7 +719,7 @@ input, textarea, select, button {
   gap: 0;
   align-items: center;
   padding: clamp(2rem, 4vw, 3rem) 0 0;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid var(--color-border);
   margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
@@ -704,6 +802,27 @@ input, textarea, select, button {
   /* ── Work page cards: full width ── */
   .work-grid {
     grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Ultra-narrow phones (≤380px): the navbar (logo + 3 pills + sound +
+   theme toggle) doesn't fit the 480px-breakpoint sizing without clipping
+   past the viewport edge, since the header is position:fixed and never
+   triggers a horizontal scrollbar to reveal the overflow. Tighten further
+   instead of hiding any control. ── */
+@media (max-width: 380px) {
+  header > div {
+    padding: 0 0.7rem !important;
+  }
+  header nav[aria-label='Main navigation'] {
+    padding: 0.18rem !important;
+  }
+  header nav button {
+    padding: 0.24rem 0.5rem !important;
+    font-size: 0.7rem !important;
+  }
+  .navbar-controls {
+    gap: 0.32rem !important;
   }
 }
 

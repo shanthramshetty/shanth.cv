@@ -25,7 +25,7 @@ export default function Hero({ setPage }) {
   }, [])
 
   return (
-    <main style={{ minHeight: '100vh', background: '#0f0f11', paddingTop: '64px' }}>
+    <main style={{ minHeight: '100vh', background: 'var(--color-bg)', paddingTop: '64px' }}>
       <div style={{
         maxWidth: '1100px', margin: '0 auto',
         padding: 'clamp(2rem, 4vw, 3.5rem) clamp(1.25rem, 4vw, 2.5rem) 4rem',
@@ -62,7 +62,7 @@ export default function Hero({ setPage }) {
               <span style={{
                 fontFamily: "'Inter', sans-serif",
                 fontSize: '0.72rem', fontWeight: 500,
-                color: '#a5b4fc', letterSpacing: '0.02em',
+                color: 'var(--color-accent-text)', letterSpacing: '0.02em',
               }}>
                 Open to work · Product Designer
               </span>
@@ -73,7 +73,7 @@ export default function Hero({ setPage }) {
               <span style={{
                 fontFamily: "'DM Serif Display', serif",
                 fontSize: 'clamp(40px, 6.5vw, 78px)',
-                fontWeight: 400, color: '#ffffff',
+                fontWeight: 400, color: 'var(--color-text-primary)',
                 display: 'block', letterSpacing: '-0.035em', lineHeight: 1,
               }}>
                 Product Designer
@@ -102,7 +102,7 @@ export default function Hero({ setPage }) {
               <span style={{
                 fontFamily: "'Caveat', cursive",
                 fontSize: 'clamp(22px, 3.2vw, 42px)',
-                color: 'rgba(255,255,255,0.4)',
+                color: 'var(--color-text-tertiary)',
                 display: 'block', lineHeight: 1.3,
                 marginTop: '0.35rem',
               }}>
@@ -122,7 +122,7 @@ export default function Hero({ setPage }) {
                   style={{
                     fontFamily: "'Inter', sans-serif",
                     fontSize: 'clamp(0.85rem, 1.4vw, 1rem)',
-                    color: 'rgba(255,255,255,0.38)',
+                    color: 'var(--color-text-tertiary)',
                     lineHeight: 1.5, margin: 0,
                   }}
                 >
@@ -168,7 +168,7 @@ export default function Hero({ setPage }) {
               style={{
                 borderRadius: '24px',
                 overflow: 'hidden',
-                boxShadow: '0 28px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.07)',
+                boxShadow: '0 28px 64px var(--color-shadow-strong), 0 0 0 1px var(--color-border)',
                 width: 'clamp(220px, 26vw, 300px)',
                 aspectRatio: '1 / 1',
                 padding: 0,
@@ -202,7 +202,7 @@ export default function Hero({ setPage }) {
               fontFamily: "'Inter', sans-serif",
               fontSize: '0.62rem', fontWeight: 700,
               letterSpacing: '0.14em', textTransform: 'uppercase',
-              color: '#6366f1', display: 'block', marginBottom: '0.85rem',
+              color: 'var(--color-accent-text)', display: 'block', marginBottom: '0.85rem',
             }}>
               Experience
             </span>
@@ -215,11 +215,11 @@ export default function Hero({ setPage }) {
               pauseBetween={1.4}
               fontSize="clamp(1.5rem, 3vw, 2.2rem)"
               fontFamily="'DM Serif Display', serif"
-              color="rgba(255,255,255,0.9)"
+              color="var(--color-text-primary)"
             />
             <p style={{
               fontFamily: "'Inter', sans-serif",
-              fontSize: '0.72rem', color: 'rgba(255,255,255,0.28)',
+              fontSize: '0.72rem', color: 'var(--color-text-tertiary)',
               marginTop: '0.75rem', lineHeight: 1.6,
             }}>
               Product Designer · UX Designer · UI/UX Designer

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion'
 import eventuroxDemo from '../assets/videos/eventurox-demo.mp4'
+import { useTheme } from '../useTheme.js'
+import { readableAccent } from '../utils/color.js'
 
 /* ─── SVG Mockup Previews ───────────────────────────────────────── */
 
@@ -63,21 +65,21 @@ function MockupAIDashboard() {
     <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
       <rect width="360" height="200" fill="#f8f7f4"/>
       <rect x="0" y="0" width="360" height="36" fill="white"/>
-      <rect x="16" y="13" width="60" height="10" rx="3" fill="#111" opacity="0.7"/>
+      <rect x="16" y="13" width="60" height="10" rx="3" fill="var(--color-text-primary)" opacity="0.7"/>
       <circle cx="328" cy="18" r="10" fill="#e5e3de"/>
       {[0,1,2].map(i => (
         <g key={i}>
-          <rect x={16+i*114} y="50" width="104" height="56" rx="8" fill="white" stroke="#eee" strokeWidth="1"/>
-          <rect x={28+i*114} y="62" width="36" height="5" rx="2" fill="#999"/>
-          <rect x={28+i*114} y="74" width={[52,44,60][i]} height="14" rx="3" fill={['#111','#3b82f6','#22c55e'][i]} opacity="0.85"/>
+          <rect x={16+i*114} y="50" width="104" height="56" rx="8" fill="white" stroke="var(--color-border)" strokeWidth="1"/>
+          <rect x={28+i*114} y="62" width="36" height="5" rx="2" fill="var(--color-text-tertiary)"/>
+          <rect x={28+i*114} y="74" width={[52,44,60][i]} height="14" rx="3" fill={['var(--color-text-primary)','#3b82f6','#22c55e'][i]} opacity="0.85"/>
         </g>
       ))}
-      <rect x="16" y="118" width="220" height="68" rx="8" fill="white" stroke="#eee" strokeWidth="1"/>
+      <rect x="16" y="118" width="220" height="68" rx="8" fill="white" stroke="var(--color-border)" strokeWidth="1"/>
       {[0,1,2,3,4,5,6,7].map(i => {
         const h=[28,40,22,50,34,44,38,30][i]
         return <rect key={i} x={30+i*24} y={175-h} width="14" height={h} rx="3" fill="#6366f1" opacity={i===5?1:0.25}/>
       })}
-      <rect x="248" y="118" width="96" height="68" rx="8" fill="white" stroke="#eee" strokeWidth="1"/>
+      <rect x="248" y="118" width="96" height="68" rx="8" fill="white" stroke="var(--color-border)" strokeWidth="1"/>
     </svg>
   )
 }
@@ -86,19 +88,19 @@ function MockupMobileApp() {
   return (
     <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
       <rect width="360" height="200" fill="#fdf4f0"/>
-      <rect x="60" y="10" width="88" height="180" rx="16" fill="#1a1a1a"/>
+      <rect x="60" y="10" width="88" height="180" rx="16" fill="var(--color-text-primary)"/>
       <rect x="66" y="22" width="76" height="156" rx="10" fill="#fff"/>
       <circle cx="104" cy="50" r="16" fill="#f97316" opacity="0.25"/>
       <circle cx="104" cy="50" r="8" fill="#f97316" opacity="0.8"/>
-      <rect x="76" y="74" width="56" height="6" rx="3" fill="#333" opacity="0.5"/>
-      {[0,1,2].map(i => <rect key={i} x="76" y={100+i*18} width="56" height="12" rx="6" fill={i===0?"#f97316":"#eee"} opacity={i===0?0.9:1}/>)}
-      <rect x="212" y="24" width="88" height="156" rx="16" fill="#1a1a1a"/>
+      <rect x="76" y="74" width="56" height="6" rx="3" fill="var(--color-text-primary)" opacity="0.5"/>
+      {[0,1,2].map(i => <rect key={i} x="76" y={100+i*18} width="56" height="12" rx="6" fill={i===0?"#f97316":"var(--color-border)"} opacity={i===0?0.9:1}/>)}
+      <rect x="212" y="24" width="88" height="156" rx="16" fill="var(--color-text-primary)"/>
       <rect x="218" y="34" width="76" height="134" rx="10" fill="#fff"/>
       <rect x="228" y="44" width="56" height="28" rx="6" fill="#6366f1" opacity="0.15"/>
       <rect x="234" y="50" width="36" height="6" rx="3" fill="#6366f1" opacity="0.8"/>
       {[0,1,2,3].map(i => (
         <g key={i}>
-          <rect x="228" y={82+i*22} width="56" height="16" rx="4" fill="white" stroke="#eee" strokeWidth="1"/>
+          <rect x="228" y={82+i*22} width="56" height="16" rx="4" fill="white" stroke="var(--color-border)" strokeWidth="1"/>
           <circle cx="240" cy={90+i*22} r="5" fill={['#f97316','#6366f1','#22c55e','#f59e0b'][i]} opacity="0.8"/>
         </g>
       ))}
@@ -111,16 +113,16 @@ function MockupDesignSystem() {
     <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
       <rect width="360" height="200" fill="#fafaf8"/>
       <rect x="0" y="0" width="360" height="30" fill="white" stroke="#e5e5e5" strokeWidth="1"/>
-      <circle cx="20" cy="15" r="6" fill="#111"/>
+      <circle cx="20" cy="15" r="6" fill="var(--color-text-primary)"/>
       {[0,1,2,3,4,5].map(i => {
         const cols=i%3, row=Math.floor(i/3)
         const colors=['#6366f1','#f97316','#22c55e','#f59e0b','#ec4899','#14b8a6']
         return (
           <g key={i}>
-            <rect x={16+cols*114} y={44+row*78} width="104" height="64" rx="8" fill="white" stroke="#e8e8e8" strokeWidth="1.5"/>
+            <rect x={16+cols*114} y={44+row*78} width="104" height="64" rx="8" fill="white" stroke="var(--color-border)" strokeWidth="1.5"/>
             <rect x={28+cols*114} y={56+row*78} width="24" height="24" rx="4" fill={colors[i]} opacity="0.15"/>
             <rect x={32+cols*114} y={62+row*78} width="16" height="12" rx="2" fill={colors[i]} opacity="0.7"/>
-            <rect x={60+cols*114} y={60+row*78} width={[44,36,50,40,38,46][i]} height="6" rx="2" fill="#333" opacity="0.5"/>
+            <rect x={60+cols*114} y={60+row*78} width={[44,36,50,40,38,46][i]} height="6" rx="2" fill="var(--color-text-primary)" opacity="0.5"/>
           </g>
         )
       })}
@@ -133,17 +135,17 @@ function MockupEcommerce() {
     <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%', display: 'block' }}>
       <rect width="360" height="200" fill="#fff"/>
       <rect x="0" y="0" width="360" height="32" fill="white"/>
-      <rect x="16" y="11" width="48" height="10" rx="3" fill="#111" opacity="0.7"/>
+      <rect x="16" y="11" width="48" height="10" rx="3" fill="var(--color-text-primary)" opacity="0.7"/>
       <rect x="100" y="11" width="160" height="10" rx="5" fill="#f3f3f3"/>
       {[0,1,2].map(i => (
         <g key={i}>
           <rect x={16+i*114} y="66" width="104" height="80" rx="8" fill={['#fef3ec','#eff6ff','#f0fdf4'][i]}/>
           <rect x={28+i*114} y="78" width="80" height="44" rx="4" fill={['#f97316','#6366f1','#22c55e'][i]} opacity="0.15"/>
           <rect x={44+i*114} y="90" width="48" height="8" rx="3" fill={['#f97316','#6366f1','#22c55e'][i]} opacity="0.6"/>
-          <rect x={28+i*114} y="130" width="44" height="7" rx="2" fill="#333" opacity="0.5"/>
+          <rect x={28+i*114} y="130" width="44" height="7" rx="2" fill="var(--color-text-primary)" opacity="0.5"/>
         </g>
       ))}
-      <rect x="16" y="154" width="328" height="36" rx="8" fill="#111"/>
+      <rect x="16" y="154" width="328" height="36" rx="8" fill="var(--color-text-primary)"/>
     </svg>
   )
 }
@@ -421,7 +423,7 @@ function FloatingPreview({ hoveredProject }) {
                 borderRadius: '14px', overflow: 'hidden',
                 border: `1px solid ${hoveredProject.accent}33`,
                 boxShadow: '0 24px 64px rgba(0,0,0,0.85), 0 4px 16px rgba(0,0,0,0.5)',
-                background: '#0f0f11',
+                background: 'var(--color-bg)',
                 position: 'relative',
               }}
             >
@@ -467,7 +469,7 @@ function ProjectRow({ project, index, onClick, onHover }) {
         position: 'relative',
         padding: '2.25rem 0',
         cursor: 'pointer',
-        borderBottom: '1px solid rgba(255,255,255,0.05)',
+        borderBottom: '1px solid var(--color-border)',
         '--pr-accent': project.accent,
       }}
     >
@@ -489,7 +491,7 @@ function ProjectRow({ project, index, onClick, onHover }) {
             <span className="project-row-number" style={{
               fontSize: '0.6rem', letterSpacing: '0.12em',
               fontFamily: "'Inter', sans-serif", fontWeight: 500, flexShrink: 0,
-              color: hovered ? project.accent : 'rgba(255,255,255,0.18)',
+              color: hovered ? project.accent : 'var(--color-text-tertiary)',
               transition: 'color 0.3s',
             }}>
               {project.number}
@@ -502,7 +504,7 @@ function ProjectRow({ project, index, onClick, onHover }) {
                 fontFamily: "'DM Serif Display', serif",
                 fontSize: 'clamp(1.35rem, 5vw, 3rem)',
                 fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1,
-                color: hovered ? '#ffffff' : 'rgba(255,255,255,0.7)',
+                color: hovered ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
                 transition: 'color 0.3s',
               }}
             >
@@ -512,7 +514,7 @@ function ProjectRow({ project, index, onClick, onHover }) {
           <p className="project-row-meta" style={{
             marginLeft: 'calc(1.75rem + 2.25rem)',
             fontSize: '0.75rem', fontFamily: "'Inter', sans-serif", letterSpacing: '0.02em',
-            color: hovered ? 'rgba(255,255,255,0.45)' : 'rgba(255,255,255,0.25)',
+            color: hovered ? 'var(--color-text-secondary)' : 'var(--color-text-tertiary)',
             transition: 'color 0.3s',
           }}>
             {project.category} &nbsp;·&nbsp; {project.client} &nbsp;·&nbsp; {project.year}
@@ -521,16 +523,16 @@ function ProjectRow({ project, index, onClick, onHover }) {
 
         <motion.div
           className="project-row-arrow"
-          animate={{ x: hovered ? 5 : 0, borderColor: hovered ? project.accent : 'rgba(255,255,255,0.1)' }}
+          animate={{ x: hovered ? 5 : 0, borderColor: hovered ? project.accent : 'var(--color-border)' }}
           transition={{ duration: 0.35 }}
           style={{
             flexShrink: 0, width: '42px', height: '42px',
-            border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%',
+            border: '1px solid var(--color-border)', borderRadius: '50%',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-            stroke={hovered ? project.accent : 'rgba(255,255,255,0.4)'}
+            stroke={hovered ? project.accent : 'var(--color-text-tertiary)'}
             strokeWidth="2" style={{ transition: 'stroke 0.3s' }}
           >
             <path d="M7 17L17 7M17 7H7M17 7v10"/>
@@ -564,7 +566,7 @@ function WorkListing({ onSelect }) {
               transition={{ duration: 0.5 }}
               style={{
                 fontSize: '0.62rem', letterSpacing: '0.16em', textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.2)', fontFamily: "'Inter', sans-serif",
+                color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif",
                 fontWeight: 600, marginBottom: '0.75rem',
               }}
             >
@@ -577,7 +579,7 @@ function WorkListing({ onSelect }) {
               style={{
                 fontFamily: "'Caveat', cursive",
                 fontSize: 'clamp(2.75rem, 6vw, 5rem)',
-                color: '#ffffff', lineHeight: 0.95, margin: 0,
+                color: 'var(--color-text-primary)', lineHeight: 0.95, margin: 0,
               }}
             >
               Case Studies
@@ -589,7 +591,7 @@ function WorkListing({ onSelect }) {
               style={{
                 fontFamily: "'DM Serif Display', serif",
                 fontSize: 'clamp(1rem, 2vw, 1.4rem)',
-                color: 'rgba(255,255,255,0.35)',
+                color: 'var(--color-text-secondary)',
                 marginTop: '0.4rem', fontWeight: 400,
               }}
             >
@@ -601,7 +603,7 @@ function WorkListing({ onSelect }) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.25, duration: 0.5 }}
             style={{
-              fontSize: '0.7rem', color: 'rgba(255,255,255,0.15)',
+              fontSize: '0.7rem', color: 'var(--color-text-tertiary)',
               fontFamily: "'Inter', sans-serif", letterSpacing: '0.06em',
               paddingBottom: '0.4rem',
             }}
@@ -610,7 +612,7 @@ function WorkListing({ onSelect }) {
           </motion.span>
         </div>
 
-        <div className="work-list-divider" style={{ height: '1px', background: 'rgba(255,255,255,0.05)' }} />
+        <div className="work-list-divider" style={{ height: '1px', background: 'var(--color-border)' }} />
 
         {PROJECTS.map((project, i) => (
           <ProjectRow
@@ -629,14 +631,15 @@ function WorkListing({ onSelect }) {
 /* ─── Case Study ────────────────────────────────────────────────── */
 
 function Divider() {
-  return <div style={{ height: '1px', background: 'rgba(255,255,255,0.05)', margin: '0 2.5rem' }} />
+  return <div style={{ height: '1px', background: 'var(--color-border)', margin: '0 2.5rem' }} />
 }
 
 function SectionLabel({ text, accent }) {
+  const { theme } = useTheme()
   return (
     <p style={{
       fontSize: '0.58rem', letterSpacing: '0.16em', textTransform: 'uppercase',
-      color: accent, fontWeight: 600, marginBottom: '2rem',
+      color: readableAccent(accent, theme), fontWeight: 600, marginBottom: '2rem',
       fontFamily: "'Inter', sans-serif",
     }}>
       {text}
@@ -655,14 +658,14 @@ function NextProjectBanner({ project, onClick }) {
     >
       <p style={{
         fontSize: '0.58rem', letterSpacing: '0.16em', textTransform: 'uppercase',
-        color: 'rgba(255,255,255,0.18)', fontWeight: 600, marginBottom: '1.25rem',
+        color: 'var(--color-text-tertiary)', fontWeight: 600, marginBottom: '1.25rem',
         fontFamily: "'Inter', sans-serif",
       }}>
         Next Project
       </p>
       <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
         <motion.h3
-          animate={{ x: hovered ? 10 : 0, color: hovered ? '#ffffff' : 'rgba(255,255,255,0.4)' }}
+          animate={{ x: hovered ? 10 : 0, color: hovered ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)' }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           style={{
             fontFamily: "'DM Serif Display', serif",
@@ -673,16 +676,16 @@ function NextProjectBanner({ project, onClick }) {
           {project.title}
         </motion.h3>
         <motion.div
-          animate={{ x: hovered ? 6 : 0, borderColor: hovered ? project.accent : 'rgba(255,255,255,0.08)' }}
+          animate={{ x: hovered ? 6 : 0, borderColor: hovered ? project.accent : 'var(--color-border)' }}
           transition={{ duration: 0.35 }}
           style={{
             flexShrink: 0, width: '48px', height: '48px',
-            border: '1px solid rgba(255,255,255,0.08)', borderRadius: '50%',
+            border: '1px solid var(--color-border)', borderRadius: '50%',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-            stroke={hovered ? project.accent : 'rgba(255,255,255,0.3)'}
+            stroke={hovered ? project.accent : 'var(--color-text-tertiary)'}
             strokeWidth="1.75" style={{ transition: 'stroke 0.3s' }}
           >
             <path d="M7 17L17 7M17 7H7M17 7v10"/>
@@ -694,6 +697,8 @@ function NextProjectBanner({ project, onClick }) {
 }
 
 function CaseStudyView({ project, onBack, onNext, nextProject }) {
+  const { theme } = useTheme()
+  const accentText = readableAccent(project.accent, theme)
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [project.id])
 
   return (
@@ -711,11 +716,11 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
           style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
             background: 'none', border: 'none', cursor: 'pointer', padding: 0,
-            color: 'rgba(255,255,255,0.35)', fontFamily: "'Inter', sans-serif",
+            color: 'var(--color-text-secondary)', fontFamily: "'Inter', sans-serif",
             fontSize: '0.78rem', letterSpacing: '0.04em', transition: 'color 0.2s',
           }}
-          onMouseEnter={e => e.currentTarget.style.color = '#fff'}
-          onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.35)'}
+          onMouseEnter={e => e.currentTarget.style.color = 'var(--color-text-primary)'}
+          onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text-secondary)'}
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M19 12H5M5 12l7 7M5 12l7-7"/>
@@ -727,17 +732,17 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
       {/* Hero */}
       <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2rem, 4.5vw, 4.5rem) clamp(1rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 4rem)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '2rem' }}>
-          <span style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: project.accent, fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>
+          <span style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: accentText, fontFamily: "'Inter', sans-serif", fontWeight: 600 }}>
             {project.number} / 0{PROJECTS.length}
           </span>
-          <span style={{ fontSize: '0.6rem', color: 'rgba(255,255,255,0.18)', fontFamily: "'Inter', sans-serif", letterSpacing: '0.06em' }}>
+          <span style={{ fontSize: '0.6rem', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", letterSpacing: '0.06em' }}>
             {project.year}
           </span>
         </div>
         <h1 style={{
           fontFamily: "'DM Serif Display', serif",
           fontSize: 'clamp(3rem, 8vw, 7rem)',
-          fontWeight: 400, color: '#ffffff',
+          fontWeight: 400, color: 'var(--color-text-primary)',
           letterSpacing: '-0.03em', lineHeight: 0.92, marginBottom: '2.5rem',
         }}>
           {project.title}
@@ -745,7 +750,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
         <p style={{
           fontFamily: "'DM Serif Display', serif",
           fontSize: 'clamp(1.1rem, 2.4vw, 1.65rem)',
-          color: 'rgba(255,255,255,0.38)', fontWeight: 400,
+          color: 'var(--color-text-secondary)', fontWeight: 400,
           lineHeight: 1.45, marginBottom: project.url ? '2rem' : 0,
         }}>
           {project.tagline}
@@ -756,7 +761,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
             autoPlay muted loop playsInline
             style={{
               width: '100%', display: 'block', borderRadius: '12px',
-              border: '1px solid rgba(255,255,255,0.08)',
+              border: '1px solid var(--color-border)',
               marginBottom: '2rem',
             }}
           />
@@ -771,7 +776,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
                 background: `${project.accent}18`,
                 border: `1px solid ${project.accent}55`,
                 borderRadius: '6px',
-                color: project.accent,
+                color: accentText,
                 fontFamily: "'Inter', sans-serif",
                 fontSize: '0.78rem', fontWeight: 500,
                 letterSpacing: '0.04em',
@@ -804,8 +809,8 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
             { label: 'Tools', value: project.tools },
           ].filter(({ label }) => !(project.hideFields || []).includes(label)).map(({ label, value }) => (
             <div key={label}>
-              <p style={{ fontSize: '0.58rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.18)', fontWeight: 600, marginBottom: '0.65rem', fontFamily: "'Inter', sans-serif" }}>{label}</p>
-              <p style={{ fontSize: '0.875rem', color: 'rgba(255,255,255,0.7)', fontFamily: "'Inter', sans-serif", lineHeight: 1.55 }}>{value}</p>
+              <p style={{ fontSize: '0.58rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-text-tertiary)', fontWeight: 600, marginBottom: '0.65rem', fontFamily: "'Inter', sans-serif" }}>{label}</p>
+              <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', fontFamily: "'Inter', sans-serif", lineHeight: 1.55 }}>{value}</p>
             </div>
           ))}
         </div>
@@ -818,7 +823,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
           {/* Overview */}
           <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
             <SectionLabel text="The Project" accent={project.accent} />
-            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9 }}>
+            <p style={{ fontSize: '1rem', color: 'var(--color-text-secondary)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9 }}>
               {project.overview}
             </p>
           </div>
@@ -830,7 +835,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
           {/* Challenge */}
           <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
             <SectionLabel text="The Challenge" accent={project.accent} />
-            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9 }}>
+            <p style={{ fontSize: '1rem', color: 'var(--color-text-secondary)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9 }}>
               {project.problem}
             </p>
           </div>
@@ -840,7 +845,7 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
           {/* Approach */}
           <div style={{ maxWidth: '1100px', margin: '0 auto', padding: 'clamp(2.5rem, 5vw, 5rem) clamp(1rem, 4vw, 2.5rem)' }}>
             <SectionLabel text="The Approach" accent={project.accent} />
-            <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.55)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9 }}>
+            <p style={{ fontSize: '1rem', color: 'var(--color-text-secondary)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9 }}>
               {project.approach}
             </p>
           </div>
@@ -856,16 +861,16 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
           {project.metrics.map(({ value, label }) => (
             <div key={label} style={{
               padding: '2.25rem 2rem',
-              border: '1px solid rgba(255,255,255,0.06)',
+              border: '1px solid var(--color-border)',
               borderRadius: '14px',
-              background: 'rgba(255,255,255,0.015)',
+              background: 'var(--color-bg-subtle)',
             }}>
-              <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2rem, 4.5vw, 3.25rem)', color: project.accent, fontWeight: 400, lineHeight: 1, marginBottom: '0.85rem' }}>{value}</p>
-              <p style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.3)', fontFamily: "'Inter', sans-serif", lineHeight: 1.5 }}>{label}</p>
+              <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2rem, 4.5vw, 3.25rem)', color: accentText, fontWeight: 400, lineHeight: 1, marginBottom: '0.85rem' }}>{value}</p>
+              <p style={{ fontSize: '0.78rem', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", lineHeight: 1.5 }}>{label}</p>
             </div>
           ))}
         </div>
-        <p style={{ fontSize: '0.975rem', color: 'rgba(255,255,255,0.45)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9 }}>
+        <p style={{ fontSize: '0.975rem', color: 'var(--color-text-secondary)', fontFamily: "'Inter', sans-serif", lineHeight: 1.9 }}>
           {project.outcome}
         </p>
       </div>
@@ -881,28 +886,31 @@ function CaseStudyView({ project, onBack, onNext, nextProject }) {
 
 function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
   const [nextHovered, setNextHovered] = useState(false)
+  const { theme } = useTheme()
+  const brand = readableAccent('#3b82f6', theme)
+  const brandAmber = readableAccent('#f59e0b', theme)
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [])
 
   const WRAP = { maxWidth: '1040px', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 3.2rem)' }
-  const SEC_DARK = { background: '#fafafa', borderBottom: '1px solid #dddddd' }
-  const SEC_LIGHT = { background: '#ffffff', borderBottom: '1px solid #dddddd' }
-  const H2 = { fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1.9rem, 3.2vw, 2.6rem)', fontWeight: 400, color: '#1a1a1a', letterSpacing: '-0.025em', lineHeight: 1.15, marginBottom: '1.1rem' }
-  const BODY = { fontFamily: "'Inter', sans-serif", fontSize: '1.05rem', color: '#555555', lineHeight: 1.9, marginBottom: '1.4rem' }
-  const LABEL = { fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: '#3b82f6', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1rem' }
+  const SEC_DARK = { background: 'var(--color-bg-subtle)', borderBottom: '1px solid var(--color-border)' }
+  const SEC_LIGHT = { background: 'var(--color-bg-elevated)', borderBottom: '1px solid var(--color-border)' }
+  const H2 = { fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1.9rem, 3.2vw, 2.6rem)', fontWeight: 400, color: 'var(--color-text-primary)', letterSpacing: '-0.025em', lineHeight: 1.15, marginBottom: '1.1rem' }
+  const BODY = { fontFamily: "'Inter', sans-serif", fontSize: '1.05rem', color: 'var(--color-text-secondary)', lineHeight: 1.9, marginBottom: '1.4rem' }
+  const LABEL = { fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: brand, fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1rem' }
   const CENTER = { maxWidth: '660px', margin: '0 auto', textAlign: 'center' }
 
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       transition={{ duration: 0.45 }}
-      style={{ background: '#ffffff', minHeight: '100vh', paddingTop: '64px' }}
+      style={{ background: 'var(--color-bg)', minHeight: '100vh', paddingTop: '64px' }}
     >
 
       {/* ── Back nav ── */}
-      <div style={{ background: '#fafafa', borderBottom: '1px solid #dddddd', padding: '0.9rem clamp(1rem, 5vw, 3.2rem)' }}>
+      <div style={{ background: 'var(--color-bg-subtle)', borderBottom: '1px solid var(--color-border)', padding: '0.9rem clamp(1rem, 5vw, 3.2rem)' }}>
         <div style={{ maxWidth: '1040px', margin: '0 auto' }}>
-          <button onClick={onBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: '#999', fontSize: '0.8rem', fontFamily: "'Inter', sans-serif", letterSpacing: '0.03em', transition: 'color 0.2s' }}
-            onMouseEnter={e => e.currentTarget.style.color = '#1a1a1a'} onMouseLeave={e => e.currentTarget.style.color = '#999'}>
+          <button onClick={onBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: 'var(--color-text-tertiary)', fontSize: '0.8rem', fontFamily: "'Inter', sans-serif", letterSpacing: '0.03em', transition: 'color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--color-text-primary)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text-tertiary)'}>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
             All Work
           </button>
@@ -910,15 +918,15 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
       </div>
 
       {/* ── HERO ── */}
-      <section style={{ background: '#ffffff', borderBottom: '1px solid #dddddd', padding: 'clamp(3rem, 6vw, 6rem) 0 0' }}>
+      <section style={{ background: 'var(--color-bg-elevated)', borderBottom: '1px solid var(--color-border)', padding: 'clamp(3rem, 6vw, 6rem) 0 0' }}>
         <div style={WRAP}>
           <div className="cs-hero-grid" style={{ display: 'grid', alignItems: 'center' }}>
             <div>
               <p style={LABEL}>{project.number} / 07 · {project.category}</p>
-              <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(3.8rem, 8vw, 6.2rem)', fontWeight: 400, color: '#1a1a1a', letterSpacing: '-0.04em', lineHeight: 0.95, marginBottom: '1rem' }}>
+              <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(3.8rem, 8vw, 6.2rem)', fontWeight: 400, color: 'var(--color-text-primary)', letterSpacing: '-0.04em', lineHeight: 0.95, marginBottom: '1rem' }}>
                 {project.title}
               </h1>
-              <p style={{ fontSize: '0.9rem', color: '#aaa', fontFamily: "'Inter', sans-serif", marginBottom: '2rem', letterSpacing: '0.01em' }}>
+              <p style={{ fontSize: '0.9rem', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", marginBottom: '2rem', letterSpacing: '0.01em' }}>
                 {project.year} · {project.duration}
               </p>
               <p style={{ ...BODY, textAlign: 'left', maxWidth: '420px', marginBottom: '2.5rem', fontSize: '1.05rem' }}>
@@ -927,21 +935,21 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
               <div style={{ display: 'flex', gap: '2.5rem' }}>
                 {[{ label: 'Duration', value: project.duration }, { label: 'Tools', value: project.tools }].map(({ label, value }) => (
                   <div key={label}>
-                    <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#ccc', fontWeight: 600, marginBottom: '0.3rem', fontFamily: "'Inter', sans-serif" }}>{label}</p>
-                    <p style={{ fontSize: '0.85rem', color: '#333', fontFamily: "'Inter', sans-serif" }}>{value}</p>
+                    <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-text-tertiary)', fontWeight: 600, marginBottom: '0.3rem', fontFamily: "'Inter', sans-serif" }}>{label}</p>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--color-text-primary)', fontFamily: "'Inter', sans-serif" }}>{value}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <div style={{ borderRadius: '14px', overflow: 'hidden', border: '1px solid #e8e8e8', boxShadow: '0 24px 72px rgba(0,0,0,0.08)' }}>
+            <div style={{ borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--color-border)', boxShadow: '0 24px 72px var(--color-shadow)' }}>
               <MockupFintech />
             </div>
           </div>
         </div>
         {/* Full-width mockup strip */}
-        <div className="cs-mockup-strip" style={{ marginTop: '5rem', background: '#f5f5f3', borderTop: '1px solid #e8e8e8', padding: '3rem clamp(1rem, 4vw, 3.2rem)', display: 'flex', gap: '1.5rem', justifyContent: 'center', overflowX: 'auto' }}>
+        <div className="cs-mockup-strip" style={{ marginTop: '5rem', background: 'var(--color-bg-subtle)', borderTop: '1px solid var(--color-border)', padding: '3rem clamp(1rem, 4vw, 3.2rem)', display: 'flex', gap: '1.5rem', justifyContent: 'center', overflowX: 'auto' }}>
           {[MockupFintech, MockupAIDashboard, MockupDesignSystem].map((Comp, i) => (
-            <div key={i} style={{ width: '340px', flexShrink: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid #e0e0e0', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+            <div key={i} style={{ width: '340px', flexShrink: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', boxShadow: '0 4px 20px var(--color-shadow)' }}>
               <Comp />
             </div>
           ))}
@@ -955,7 +963,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
             <p style={LABEL}>The Problem</p>
             <h2 style={H2}>Fragmented systems, high stakes, zero clarity</h2>
             <p style={BODY}>Finance teams at mid-market companies typically operate across three to five disconnected tools: an ERP for records, a separate approval system, spreadsheets for reconciliation, and email for exceptions. Critical information lives everywhere, approval bottlenecks go undetected until they become emergencies, and nobody has a reliable view of where anything stands.</p>
-            <p style={{ ...BODY, marginBottom: 0 }}>The product had all the data. It just couldn't communicate it. The problem wasn't missing features. It was missing <strong style={{ color: '#1a1a1a', fontWeight: 600 }}>clarity, hierarchy, and trust</strong>.</p>
+            <p style={{ ...BODY, marginBottom: 0 }}>The product had all the data. It just couldn't communicate it. The problem wasn't missing features. It was missing <strong style={{ color: 'var(--color-text-primary)', fontWeight: 600 }}>clarity, hierarchy, and trust</strong>.</p>
           </div>
           <div className="cs-three-col" style={{ display: 'grid', gap: '1.25rem', marginTop: '3.5rem' }}>
             {[
@@ -963,9 +971,9 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
               { value: '6+ steps', desc: 'required to complete a single payment request or approval action' },
               { value: 'No single view', desc: 'of transaction status, pending approvals, or financial position' },
             ].map(({ value, desc }) => (
-              <div key={value} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
-                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '2.2rem', color: '#3b82f6', marginBottom: '0.75rem', lineHeight: 1 }}>{value}</p>
-                <p style={{ fontSize: '0.875rem', color: '#888', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{desc}</p>
+              <div key={value} style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-border)', borderRadius: '10px', padding: '2rem 1.75rem' }}>
+                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '2.2rem', color: brand, marginBottom: '0.75rem', lineHeight: 1 }}>{value}</p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{desc}</p>
               </div>
             ))}
           </div>
@@ -986,10 +994,10 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
               { role: 'Operations Leads', goal: 'Submit, track, and escalate requests without chasing email threads.', pain: 'The approval process was a black box. Requests disappeared with no status update.', color: '#8b5cf6' },
               { role: 'Administrators', goal: 'Configure workflows, manage permissions, and generate compliance reports.', pain: 'Every configuration change required IT involvement. No recovery path for mistakes.', color: '#0ea5e9' },
             ].map(({ role, goal, pain, color }) => (
-              <div key={role} style={{ background: '#fafafa', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
-                <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color, fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.65rem' }}>{role}</p>
-                <p style={{ fontSize: '0.875rem', color: '#333', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", marginBottom: '1.1rem' }}><strong style={{ fontWeight: 600 }}>Goal —</strong> {goal}</p>
-                <p style={{ fontSize: '0.875rem', color: '#888', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}><strong style={{ color: '#666', fontWeight: 600 }}>Pain —</strong> {pain}</p>
+              <div key={role} style={{ background: 'var(--color-bg-subtle)', border: '1px solid var(--color-border)', borderRadius: '10px', padding: '2rem 1.75rem' }}>
+                <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: readableAccent(color, theme), fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.65rem' }}>{role}</p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-primary)', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", marginBottom: '1.1rem' }}><strong style={{ fontWeight: 600 }}>Goal —</strong> {goal}</p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}><strong style={{ color: 'var(--color-text-secondary)', fontWeight: 600 }}>Pain —</strong> {pain}</p>
               </div>
             ))}
           </div>
@@ -1001,7 +1009,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
         <div style={WRAP}>
           <div className="cs-two-col" style={{ display: 'grid', gap: '1.25rem', marginBottom: '4.5rem' }}>
             {[MockupFintech, MockupDesignSystem].map((Comp, i) => (
-              <div key={i} style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid #e0e0e0', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}><Comp /></div>
+              <div key={i} style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', boxShadow: '0 4px 16px var(--color-shadow)' }}><Comp /></div>
             ))}
           </div>
           <div style={CENTER}>
@@ -1014,10 +1022,10 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
             {['User Shadowing', 'Service Blueprint', 'IA Rebuild', 'Component System', 'Prototype & Test', 'Ship'].map((step, i, arr) => (
               <div key={step} style={{ display: 'flex', alignItems: 'center' }}>
                 <div style={{ textAlign: 'center', padding: '0 0.75rem' }}>
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: i === 0 ? '#3b82f6' : '#d5d5d5', margin: '0 auto 0.5rem' }} />
-                  <p style={{ fontSize: '0.68rem', color: i === 0 ? '#3b82f6' : '#aaa', fontFamily: "'Inter', sans-serif", letterSpacing: '0.04em', whiteSpace: 'nowrap', margin: 0 }}>{step}</p>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: i === 0 ? '#3b82f6' : 'var(--color-border-strong)', margin: '0 auto 0.5rem' }} />
+                  <p style={{ fontSize: '0.68rem', color: i === 0 ? brand : 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", letterSpacing: '0.04em', whiteSpace: 'nowrap', margin: 0 }}>{step}</p>
                 </div>
-                {i < arr.length - 1 && <div style={{ width: '2rem', height: '1px', background: '#ddd', flexShrink: 0, marginBottom: '1.1rem' }} />}
+                {i < arr.length - 1 && <div style={{ width: '2rem', height: '1px', background: 'var(--color-border)', flexShrink: 0, marginBottom: '1.1rem' }} />}
               </div>
             ))}
           </div>
@@ -1031,35 +1039,35 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
             <p style={LABEL}>Workflow Simplification</p>
             <h2 style={H2}>From six steps to two</h2>
             <p style={BODY}>The most impactful change was restructuring the payment request and approval flow. In the original system, submitting a request required navigating three separate screens, manually cross-referencing a budget code in a separate module, and awaiting email confirmation before an approver could even begin their process.</p>
-            <p style={{ ...BODY, marginBottom: '3.5rem' }}>The redesigned flow consolidates everything into a single progressive form. Budget data surfaces inline, smart validation catches errors before submission, and the approval interface presents all necessary context at the point of decision. The guiding principle: <em style={{ color: '#1a1a1a', fontStyle: 'italic' }}>reduce the distance between intent and action</em>.</p>
+            <p style={{ ...BODY, marginBottom: '3.5rem' }}>The redesigned flow consolidates everything into a single progressive form. Budget data surfaces inline, smart validation catches errors before submission, and the approval interface presents all necessary context at the point of decision. The guiding principle: <em style={{ color: 'var(--color-text-primary)', fontStyle: 'italic' }}>reduce the distance between intent and action</em>.</p>
           </div>
           <div className="cs-two-col" style={{ display: 'grid', gap: '1.25rem' }}>
             <div style={{ background: '#fff5f5', border: '1px solid #fecdd3', borderRadius: '10px', padding: '2rem 1.75rem' }}>
-              <p style={{ fontSize: '0.6rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#e11d48', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1.25rem' }}>Before</p>
+              <p style={{ fontSize: '0.6rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#7c1028', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1.25rem' }}>Before</p>
               {['Navigate to the correct module', 'Locate the right form', 'Open budget tool in a separate tab', 'Cross-reference and fill manually', 'Submit, await email confirmation', 'Approver re-logs in separately to action'].map((s, i) => (
                 <div key={s} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.7rem' }}>
                   <div style={{ minWidth: '20px', height: '20px', borderRadius: '50%', background: '#fee2e2', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '1px' }}>
-                    <span style={{ fontSize: '0.58rem', color: '#e11d48', fontWeight: 700 }}>{i + 1}</span>
+                    <span style={{ fontSize: '0.58rem', color: '#7c1028', fontWeight: 700 }}>{i + 1}</span>
                   </div>
-                  <p style={{ fontSize: '0.85rem', color: '#666', fontFamily: "'Inter', sans-serif", lineHeight: 1.55, margin: 0 }}>{s}</p>
+                  <p style={{ fontSize: '0.85rem', color: '#3a3a3a', fontFamily: "'Inter', sans-serif", lineHeight: 1.55, margin: 0 }}>{s}</p>
                 </div>
               ))}
               <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid #fecdd3' }}>
-                <p style={{ fontSize: '0.85rem', color: '#e11d48', fontWeight: 600, fontFamily: "'Inter', sans-serif", margin: 0 }}>6+ steps · High cognitive load</p>
+                <p style={{ fontSize: '0.85rem', color: '#7c1028', fontWeight: 600, fontFamily: "'Inter', sans-serif", margin: 0 }}>6+ steps · High cognitive load</p>
               </div>
             </div>
             <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '10px', padding: '2rem 1.75rem' }}>
-              <p style={{ fontSize: '0.6rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#16a34a', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1.25rem' }}>After</p>
+              <p style={{ fontSize: '0.6rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: '#0c5a29', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1.25rem' }}>After</p>
               {['Open progressive form, budget data surfaces inline', 'Review summary & confirm'].map((s, i) => (
                 <div key={s} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '0.7rem' }}>
                   <div style={{ minWidth: '20px', height: '20px', borderRadius: '50%', background: '#dcfce7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '1px' }}>
-                    <span style={{ fontSize: '0.58rem', color: '#16a34a', fontWeight: 700 }}>{i + 1}</span>
+                    <span style={{ fontSize: '0.58rem', color: '#0c5a29', fontWeight: 700 }}>{i + 1}</span>
                   </div>
-                  <p style={{ fontSize: '0.85rem', color: '#333', fontFamily: "'Inter', sans-serif", lineHeight: 1.55, margin: 0 }}>{s}</p>
+                  <p style={{ fontSize: '0.85rem', color: '#3a3a3a', fontFamily: "'Inter', sans-serif", lineHeight: 1.55, margin: 0 }}>{s}</p>
                 </div>
               ))}
               <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px solid #bbf7d0' }}>
-                <p style={{ fontSize: '0.85rem', color: '#16a34a', fontWeight: 600, fontFamily: "'Inter', sans-serif", margin: 0 }}>2 steps · Intent → action</p>
+                <p style={{ fontSize: '0.85rem', color: '#0c5a29', fontWeight: 600, fontFamily: "'Inter', sans-serif", margin: 0 }}>2 steps · Intent → action</p>
               </div>
             </div>
           </div>
@@ -1080,12 +1088,12 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
               { title: 'Navigation Model', body: 'Persistent left-rail replaced a top-nav/breadcrumb hybrid with no clear hierarchy. Finance tools are used in extended sessions, so persistent nav reduces reorientation cost across a long working day.', tradeoff: 'Mobile collapses to a drawer pattern. Optimised explicitly for the approval flow on mobile, not full feature parity.' },
               { title: 'Data Presentation', body: 'Strict hierarchy: primary metrics in large high-contrast type, supporting context in secondary weight. Tables show only the most task-relevant columns by default.', tradeoff: 'Power users wanted more data visible by default. Saved views were introduced, with individual column configurations persisted per user, rather than increasing default density.' },
             ].map(({ title, body, tradeoff }) => (
-              <div key={title} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
-                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.25rem', color: '#1a1a1a', marginBottom: '0.85rem', lineHeight: 1.2 }}>{title}</p>
-                <p style={{ fontSize: '0.875rem', color: '#555', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", marginBottom: '1.25rem' }}>{body}</p>
-                <div style={{ borderTop: '1px solid #eee', paddingTop: '1rem' }}>
-                  <p style={{ fontSize: '0.58rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#f59e0b', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.45rem' }}>Trade-off</p>
-                  <p style={{ fontSize: '0.82rem', color: '#999', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{tradeoff}</p>
+              <div key={title} style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-border)', borderRadius: '10px', padding: '2rem 1.75rem' }}>
+                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.25rem', color: 'var(--color-text-primary)', marginBottom: '0.85rem', lineHeight: 1.2 }}>{title}</p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", marginBottom: '1.25rem' }}>{body}</p>
+                <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1rem' }}>
+                  <p style={{ fontSize: '0.58rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: brandAmber, fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.45rem' }}>Trade-off</p>
+                  <p style={{ fontSize: '0.82rem', color: 'var(--color-text-tertiary)', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{tradeoff}</p>
                 </div>
               </div>
             ))}
@@ -1096,7 +1104,7 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
       {/* ── TRUST & CLARITY ── */}
       <section style={SEC_LIGHT} className="cs-section">
         <div style={WRAP}>
-          <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e8e8e8', boxShadow: '0 8px 40px rgba(0,0,0,0.05)', marginBottom: '4.5rem' }}>
+          <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', boxShadow: '0 8px 40px var(--color-shadow)', marginBottom: '4.5rem' }}>
             <MockupEcommerce />
           </div>
           <div style={CENTER}>
@@ -1111,12 +1119,12 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
               { title: 'Error Prevention First', body: 'Budget codes are selectable from a pre-validated list, not free-text. Date ranges auto-constrain to valid periods. The system prevents errors rather than asking users to recover from them.' },
               { title: 'Summary Checkpoints', body: 'For bulk actions and large transactions, a plain-language summary screen acts as a final checkpoint before execution — with an explicit undo window for reversible actions.' },
             ].map(({ title, body }) => (
-              <div key={title} style={{ background: '#fafafa', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '1.75rem' }}>
+              <div key={title} style={{ background: 'var(--color-bg-subtle)', border: '1px solid var(--color-border)', borderRadius: '10px', padding: '1.75rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.7rem' }}>
                   <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#3b82f6', flexShrink: 0 }} />
-                  <p style={{ fontSize: '0.875rem', fontWeight: 600, color: '#1a1a1a', fontFamily: "'Inter', sans-serif", margin: 0 }}>{title}</p>
+                  <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-text-primary)', fontFamily: "'Inter', sans-serif", margin: 0 }}>{title}</p>
                 </div>
-                <p style={{ fontSize: '0.875rem', color: '#777', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}>{body}</p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}>{body}</p>
               </div>
             ))}
           </div>
@@ -1133,9 +1141,9 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
           </div>
           <div className="cs-metrics" style={{ display: 'grid', gap: '1.25rem', marginBottom: '3.5rem' }}>
             {project.metrics.map(({ value, label }) => (
-              <div key={label} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '12px', padding: '2.5rem 2rem', textAlign: 'center' }}>
-                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2.6rem, 5vw, 3.4rem)', color: '#3b82f6', fontWeight: 400, lineHeight: 1, marginBottom: '0.8rem' }}>{value}</p>
-                <p style={{ fontSize: '0.82rem', color: '#aaa', fontFamily: "'Inter', sans-serif", lineHeight: 1.55, margin: 0 }}>{label}</p>
+              <div key={label} style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '2.5rem 2rem', textAlign: 'center' }}>
+                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2.6rem, 5vw, 3.4rem)', color: brand, fontWeight: 400, lineHeight: 1, marginBottom: '0.8rem' }}>{value}</p>
+                <p style={{ fontSize: '0.82rem', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", lineHeight: 1.55, margin: 0 }}>{label}</p>
               </div>
             ))}
           </div>
@@ -1160,9 +1168,9 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
               { title: 'Constraints produce better design', body: 'Technical and timeline limitations forced prioritisation that resulted in a more focused, coherent product. Real constraints are the closest proxy to the conditions under which great products are actually built.' },
               { title: 'Design systems are product decisions', body: 'Building the component system before high-fidelity work began meant every screen was consistent by default. The engineering handoff had near-zero ambiguity, which compounds directly into shipping velocity.' },
             ].map(({ title, body }, i) => (
-              <div key={title} style={{ padding: '2.25rem', borderBottom: i < 2 ? '1px solid #eee' : 'none', borderRight: i % 2 === 0 ? '1px solid #eee' : 'none' }}>
-                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.2rem', color: '#1a1a1a', marginBottom: '0.65rem', lineHeight: 1.25 }}>{title}</p>
-                <p style={{ fontSize: '0.9rem', color: '#777', lineHeight: 1.8, fontFamily: "'Inter', sans-serif", margin: 0 }}>{body}</p>
+              <div key={title} style={{ padding: '2.25rem', borderBottom: i < 2 ? '1px solid var(--color-border)' : 'none', borderRight: i % 2 === 0 ? '1px solid var(--color-border)' : 'none' }}>
+                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.2rem', color: 'var(--color-text-primary)', marginBottom: '0.65rem', lineHeight: 1.25 }}>{title}</p>
+                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', lineHeight: 1.8, fontFamily: "'Inter', sans-serif", margin: 0 }}>{body}</p>
               </div>
             ))}
           </div>
@@ -1171,21 +1179,21 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
 
       {/* ── NEXT PROJECT ── */}
       {nextProject && (
-        <section style={{ background: '#fafafa', borderTop: '1px solid #dddddd', padding: '5rem 0 6rem' }}>
+        <section style={{ background: 'var(--color-bg-subtle)', borderTop: '1px solid var(--color-border)', padding: '5rem 0 6rem' }}>
           <div style={WRAP}>
-            <div style={{ position: 'relative', height: '1px', background: '#dddddd', marginBottom: '3.5rem' }}>
-              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', background: '#fafafa', padding: '0 1.5rem' }}>
-                <p style={{ fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#bbb', fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: 'nowrap', margin: 0 }}>More case studies</p>
+            <div style={{ position: 'relative', height: '1px', background: 'var(--color-border)', marginBottom: '3.5rem' }}>
+              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', background: 'var(--color-bg-subtle)', padding: '0 1.5rem' }}>
+                <p style={{ fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: 'nowrap', margin: 0 }}>More case studies</p>
               </div>
             </div>
             <div onClick={onNext} onMouseEnter={() => setNextHovered(true)} onMouseLeave={() => setNextHovered(false)}
               style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '2rem', padding: '1.5rem 0' }}>
               <div>
-                <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#ccc', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.5rem' }}>Next Project</p>
-                <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 400, letterSpacing: '-0.025em', color: nextHovered ? '#1a1a1a' : '#bbb', transition: 'color 0.3s', margin: 0 }}>{nextProject.title}</h3>
+                <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.5rem' }}>Next Project</p>
+                <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 400, letterSpacing: '-0.025em', color: nextHovered ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)', transition: 'color 0.3s', margin: 0 }}>{nextProject.title}</h3>
               </div>
-              <div style={{ width: '52px', height: '52px', borderRadius: '50%', border: `1px solid ${nextHovered ? '#1a1a1a' : '#ddd'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'border-color 0.3s' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={nextHovered ? '#1a1a1a' : '#ccc'} strokeWidth="1.75" style={{ transition: 'stroke 0.3s' }}>
+              <div style={{ width: '52px', height: '52px', borderRadius: '50%', border: `1px solid ${nextHovered ? 'var(--color-text-primary)' : 'var(--color-border)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'border-color 0.3s' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={nextHovered ? 'var(--color-text-primary)' : 'var(--color-border-strong)'} strokeWidth="1.75" style={{ transition: 'stroke 0.3s' }}>
                   <path d="M7 17L17 7M17 7H7M17 7v10"/>
                 </svg>
               </div>
@@ -1202,29 +1210,32 @@ function FluxPayCaseStudy({ project, onBack, nextProject, onNext }) {
 
 function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
   const [nextHovered, setNextHovered] = useState(false)
+  const { theme } = useTheme()
   useEffect(() => { window.scrollTo({ top: 0, behavior: 'instant' }) }, [])
 
   const WRAP = { maxWidth: '1040px', margin: '0 auto', padding: '0 clamp(1rem, 5vw, 3.2rem)' }
-  const SEC_DARK = { background: '#fafafa', borderBottom: '1px solid #dddddd' }
-  const SEC_LIGHT = { background: '#ffffff', borderBottom: '1px solid #dddddd' }
-  const H2 = { fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1.9rem, 3.2vw, 2.6rem)', fontWeight: 400, color: '#1a1a1a', letterSpacing: '-0.025em', lineHeight: 1.15, marginBottom: '1.1rem' }
-  const BODY = { fontFamily: "'Inter', sans-serif", fontSize: '1.05rem', color: '#555555', lineHeight: 1.9, marginBottom: '1.4rem' }
-  const LABEL = { fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: '#22c55e', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1rem' }
+  const SEC_DARK = { background: 'var(--color-bg-subtle)', borderBottom: '1px solid var(--color-border)' }
+  const SEC_LIGHT = { background: 'var(--color-bg-elevated)', borderBottom: '1px solid var(--color-border)' }
+  const H2 = { fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(1.9rem, 3.2vw, 2.6rem)', fontWeight: 400, color: 'var(--color-text-primary)', letterSpacing: '-0.025em', lineHeight: 1.15, marginBottom: '1.1rem' }
+  const BODY = { fontFamily: "'Inter', sans-serif", fontSize: '1.05rem', color: 'var(--color-text-secondary)', lineHeight: 1.9, marginBottom: '1.4rem' }
+  /* Readable, theme-adapted variant used for text; the raw hue stays available
+     for the small decorative dots below, where full saturation is fine. */
+  const accent = readableAccent('#22c55e', theme)
+  const LABEL = { fontSize: '0.62rem', letterSpacing: '0.18em', textTransform: 'uppercase', color: accent, fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1rem' }
   const CENTER = { maxWidth: '660px', margin: '0 auto', textAlign: 'center' }
-  const accent = '#22c55e'
 
   return (
     <motion.div
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       transition={{ duration: 0.45 }}
-      style={{ background: '#ffffff', minHeight: '100vh', paddingTop: '64px' }}
+      style={{ background: 'var(--color-bg)', minHeight: '100vh', paddingTop: '64px' }}
     >
 
       {/* ── Back nav ── */}
-      <div style={{ background: '#fafafa', borderBottom: '1px solid #dddddd', padding: '0.9rem clamp(1rem, 5vw, 3.2rem)' }}>
+      <div style={{ background: 'var(--color-bg-subtle)', borderBottom: '1px solid var(--color-border)', padding: '0.9rem clamp(1rem, 5vw, 3.2rem)' }}>
         <div style={{ maxWidth: '1040px', margin: '0 auto' }}>
-          <button onClick={onBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: '#999', fontSize: '0.8rem', fontFamily: "'Inter', sans-serif", letterSpacing: '0.03em', transition: 'color 0.2s' }}
-            onMouseEnter={e => e.currentTarget.style.color = '#1a1a1a'} onMouseLeave={e => e.currentTarget.style.color = '#999'}>
+          <button onClick={onBack} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, display: 'inline-flex', alignItems: 'center', gap: '0.45rem', color: 'var(--color-text-tertiary)', fontSize: '0.8rem', fontFamily: "'Inter', sans-serif", letterSpacing: '0.03em', transition: 'color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--color-text-primary)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--color-text-tertiary)'}>
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 12H5M5 12l7 7M5 12l7-7"/></svg>
             All Work
           </button>
@@ -1232,15 +1243,15 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       </div>
 
       {/* ── HERO ── */}
-      <section style={{ background: '#ffffff', borderBottom: '1px solid #dddddd', padding: 'clamp(3rem, 6vw, 6rem) 0 0' }}>
+      <section style={{ background: 'var(--color-bg-elevated)', borderBottom: '1px solid var(--color-border)', padding: 'clamp(3rem, 6vw, 6rem) 0 0' }}>
         <div style={WRAP}>
           <div className="cs-hero-grid" style={{ display: 'grid', alignItems: 'center' }}>
             <div>
               <p style={LABEL}>{project.number} / 07 · {project.category}</p>
-              <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(3.8rem, 8vw, 6.2rem)', fontWeight: 400, color: '#1a1a1a', letterSpacing: '-0.04em', lineHeight: 0.95, marginBottom: '1rem' }}>
+              <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(3.8rem, 8vw, 6.2rem)', fontWeight: 400, color: 'var(--color-text-primary)', letterSpacing: '-0.04em', lineHeight: 0.95, marginBottom: '1rem' }}>
                 {project.title}
               </h1>
-              <p style={{ fontSize: '0.9rem', color: '#aaa', fontFamily: "'Inter', sans-serif", marginBottom: '2rem', letterSpacing: '0.01em' }}>
+              <p style={{ fontSize: '0.9rem', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", marginBottom: '2rem', letterSpacing: '0.01em' }}>
                 {project.year} · {project.duration}
               </p>
               <p style={{ ...BODY, textAlign: 'left', maxWidth: '420px', marginBottom: '2.5rem', fontSize: '1.05rem' }}>
@@ -1249,21 +1260,21 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
               <div style={{ display: 'flex', gap: '2.5rem' }}>
                 {[{ label: 'Duration', value: project.duration }, { label: 'Tools', value: project.tools }].map(({ label, value }) => (
                   <div key={label}>
-                    <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#ccc', fontWeight: 600, marginBottom: '0.3rem', fontFamily: "'Inter', sans-serif" }}>{label}</p>
-                    <p style={{ fontSize: '0.85rem', color: '#333', fontFamily: "'Inter', sans-serif" }}>{value}</p>
+                    <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-text-tertiary)', fontWeight: 600, marginBottom: '0.3rem', fontFamily: "'Inter', sans-serif" }}>{label}</p>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--color-text-primary)', fontFamily: "'Inter', sans-serif" }}>{value}</p>
                   </div>
                 ))}
               </div>
             </div>
-            <div style={{ borderRadius: '14px', overflow: 'hidden', border: '1px solid #e8e8e8', boxShadow: '0 24px 72px rgba(0,0,0,0.08)' }}>
+            <div style={{ borderRadius: '14px', overflow: 'hidden', border: '1px solid var(--color-border)', boxShadow: '0 24px 72px var(--color-shadow)' }}>
               <MockupPlayConnect />
             </div>
           </div>
         </div>
         {/* Full-width mockup strip */}
-        <div className="cs-mockup-strip" style={{ marginTop: '5rem', background: '#f5f5f3', borderTop: '1px solid #e8e8e8', padding: '3rem clamp(1rem, 4vw, 3.2rem)', display: 'flex', gap: '1.5rem', justifyContent: 'center', overflowX: 'auto' }}>
+        <div className="cs-mockup-strip" style={{ marginTop: '5rem', background: 'var(--color-bg-subtle)', borderTop: '1px solid var(--color-border)', padding: '3rem clamp(1rem, 4vw, 3.2rem)', display: 'flex', gap: '1.5rem', justifyContent: 'center', overflowX: 'auto' }}>
           {[MockupPlayConnect, MockupFlutterApp, MockupMobileApp].map((Comp, i) => (
-            <div key={i} style={{ width: '340px', flexShrink: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid #e0e0e0', boxShadow: '0 4px 20px rgba(0,0,0,0.05)' }}>
+            <div key={i} style={{ width: '340px', flexShrink: 0, borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', boxShadow: '0 4px 20px var(--color-shadow)' }}>
               <Comp />
             </div>
           ))}
@@ -1277,7 +1288,7 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
             <p style={LABEL}>The Problem</p>
             <h2 style={H2}>Booking a turf should not require a phone call</h2>
             <p style={BODY}>Sports and recreational infrastructure is abundant, but booking it is broken. Players looking for turf time face a fragmented reality: venues share availability via WhatsApp groups, manually updated social posts, or not at all. There is no reliable way to know whether a slot is free, what it costs, or whether a booking is confirmed.</p>
-            <p style={{ ...BODY, marginBottom: 0 }}>For turf owners, the problem exists in reverse: no visibility into real-time occupancy, no structured payment flow, and high no-show rates because there is no formal confirmation system. The booking experience is not just inconvenient. It is <strong style={{ color: '#1a1a1a', fontWeight: 600 }}>fundamentally untrustworthy</strong>.</p>
+            <p style={{ ...BODY, marginBottom: 0 }}>For turf owners, the problem exists in reverse: no visibility into real-time occupancy, no structured payment flow, and high no-show rates because there is no formal confirmation system. The booking experience is not just inconvenient. It is <strong style={{ color: 'var(--color-text-primary)', fontWeight: 600 }}>fundamentally untrustworthy</strong>.</p>
           </div>
           <div className="cs-three-col" style={{ display: 'grid', gap: '1.25rem', marginTop: '3.5rem' }}>
             {[
@@ -1285,9 +1296,9 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
               { value: 'High drop-off', desc: 'Confusing multi-step booking flows and unclear pricing caused players to abandon before completing a reservation' },
               { value: 'Zero trust', desc: 'No digital confirmation system meant players could not verify that their booking was real or guaranteed' },
             ].map(({ value, desc }) => (
-              <div key={value} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
+              <div key={value} style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-border)', borderRadius: '10px', padding: '2rem 1.75rem' }}>
                 <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.75rem', color: accent, marginBottom: '0.75rem', lineHeight: 1.2 }}>{value}</p>
-                <p style={{ fontSize: '0.875rem', color: '#888', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{desc}</p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{desc}</p>
               </div>
             ))}
           </div>
@@ -1315,23 +1326,23 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
                 pains: ['Manual booking tracking led to double-bookings and lost revenue', 'No way to enforce prepayment or communicate cancellation policy', 'Could not push real-time availability updates to potential players'],
               },
             ].map(({ role, color, goals, pains }) => (
-              <div key={role} style={{ background: '#fafafa', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
-                <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color, fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1.25rem' }}>{role}</p>
+              <div key={role} style={{ background: 'var(--color-bg-subtle)', border: '1px solid var(--color-border)', borderRadius: '10px', padding: '2rem 1.75rem' }}>
+                <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: readableAccent(color, theme), fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '1.25rem' }}>{role}</p>
                 <div style={{ marginBottom: '1.25rem' }}>
-                  <p style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#aaa', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.6rem' }}>Goals</p>
+                  <p style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.6rem' }}>Goals</p>
                   {goals.map(g => (
                     <div key={g} style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.45rem' }}>
                       <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: color, flexShrink: 0, marginTop: '0.6rem' }} />
-                      <p style={{ fontSize: '0.875rem', color: '#333', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{g}</p>
+                      <p style={{ fontSize: '0.875rem', color: 'var(--color-text-primary)', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{g}</p>
                     </div>
                   ))}
                 </div>
-                <div style={{ borderTop: '1px solid #eee', paddingTop: '1.25rem' }}>
-                  <p style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#aaa', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.6rem' }}>Pain Points</p>
+                <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1.25rem' }}>
+                  <p style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.6rem' }}>Pain Points</p>
                   {pains.map(p => (
                     <div key={p} style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.45rem' }}>
                       <div style={{ width: '4px', height: '4px', borderRadius: '50%', background: '#e11d48', flexShrink: 0, marginTop: '0.6rem' }} />
-                      <p style={{ fontSize: '0.875rem', color: '#888', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{p}</p>
+                      <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{p}</p>
                     </div>
                   ))}
                 </div>
@@ -1346,7 +1357,7 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
         <div style={WRAP}>
           <div className="cs-two-col" style={{ display: 'grid', gap: '1.25rem', marginBottom: '4.5rem' }}>
             {[MockupPlayConnect, MockupFlutterApp].map((Comp, i) => (
-              <div key={i} style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid #e0e0e0', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}><Comp /></div>
+              <div key={i} style={{ borderRadius: '10px', overflow: 'hidden', border: '1px solid var(--color-border)', boxShadow: '0 4px 16px var(--color-shadow)' }}><Comp /></div>
             ))}
           </div>
           <div style={CENTER}>
@@ -1360,10 +1371,10 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
             {['Discovery', 'Turf Detail', 'Slot Selection', 'Booking & Payment', 'Confirmation'].map((step, i, arr) => (
               <div key={step} style={{ display: 'flex', alignItems: 'center' }}>
                 <div style={{ textAlign: 'center', padding: '0 0.75rem' }}>
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: i === 0 ? accent : '#d5d5d5', margin: '0 auto 0.5rem' }} />
-                  <p style={{ fontSize: '0.68rem', color: i === 0 ? accent : '#aaa', fontFamily: "'Inter', sans-serif", letterSpacing: '0.04em', whiteSpace: 'nowrap', margin: 0 }}>{step}</p>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: i === 0 ? accent : 'var(--color-border-strong)', margin: '0 auto 0.5rem' }} />
+                  <p style={{ fontSize: '0.68rem', color: i === 0 ? accent : 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", letterSpacing: '0.04em', whiteSpace: 'nowrap', margin: 0 }}>{step}</p>
                 </div>
-                {i < arr.length - 1 && <div style={{ width: '2rem', height: '1px', background: '#ddd', flexShrink: 0, marginBottom: '1.1rem' }} />}
+                {i < arr.length - 1 && <div style={{ width: '2rem', height: '1px', background: 'var(--color-border)', flexShrink: 0, marginBottom: '1.1rem' }} />}
               </div>
             ))}
           </div>
@@ -1385,12 +1396,12 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
               { title: 'Mobile-First, Flutter-Built', body: 'Designed and built with mobile as the primary context. Flutter\'s single codebase ensured pixel-level design consistency across iOS and Android without duplicating any design or engineering decisions.', why: 'Players book on mobile, in the field, often with one hand. The UI was optimised for thumb reach, glanceability, and fast recovery from errors.' },
               { title: 'Transparent, Fixed Pricing', body: 'Slot prices are displayed on the discovery screen and never change during checkout. No hidden fees, no price reveal at payment. The number the player sees at the start is the number they pay.', why: 'Trust collapses when prices change between screens. Transparent pricing removed the final reason for checkout abandonment.' },
             ].map(({ title, body, why }) => (
-              <div key={title} style={{ background: '#fafafa', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
-                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.25rem', color: '#1a1a1a', marginBottom: '0.85rem', lineHeight: 1.2 }}>{title}</p>
-                <p style={{ fontSize: '0.875rem', color: '#555', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", marginBottom: '1.25rem' }}>{body}</p>
-                <div style={{ borderTop: '1px solid #eee', paddingTop: '1rem' }}>
+              <div key={title} style={{ background: 'var(--color-bg-subtle)', border: '1px solid var(--color-border)', borderRadius: '10px', padding: '2rem 1.75rem' }}>
+                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.25rem', color: 'var(--color-text-primary)', marginBottom: '0.85rem', lineHeight: 1.2 }}>{title}</p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", marginBottom: '1.25rem' }}>{body}</p>
+                <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1rem' }}>
                   <p style={{ fontSize: '0.58rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: accent, fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.45rem' }}>Why</p>
-                  <p style={{ fontSize: '0.82rem', color: '#999', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{why}</p>
+                  <p style={{ fontSize: '0.82rem', color: 'var(--color-text-tertiary)', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", margin: 0 }}>{why}</p>
                 </div>
               </div>
             ))}
@@ -1414,10 +1425,10 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
               { screen: 'Booking & Payment', purpose: 'Single-screen checkout. Player details pre-filled from profile. One payment action completes the booking.', impact: 'Minimum viable friction — no form fatigue, no multi-step checkout, no second-guessing.' },
               { screen: 'Confirmation', purpose: 'Immediate booking confirmation with reference number, venue details, slot time, directions link, and add-to-calendar action.', impact: 'Closes the trust loop — players have verifiable proof of booking before leaving the app.' },
             ].map(({ screen, purpose, impact }) => (
-              <div key={screen} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '1.5rem 1.25rem' }}>
+              <div key={screen} style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-border)', borderRadius: '10px', padding: '1.5rem 1.25rem' }}>
                 <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: accent, marginBottom: '0.75rem' }} />
-                <p style={{ fontSize: '0.78rem', fontWeight: 600, color: '#1a1a1a', fontFamily: "'Inter', sans-serif", marginBottom: '0.6rem', lineHeight: 1.3 }}>{screen}</p>
-                <p style={{ fontSize: '0.78rem', color: '#777', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", marginBottom: '0.75rem' }}>{purpose}</p>
+                <p style={{ fontSize: '0.78rem', fontWeight: 600, color: 'var(--color-text-primary)', fontFamily: "'Inter', sans-serif", marginBottom: '0.6rem', lineHeight: 1.3 }}>{screen}</p>
+                <p style={{ fontSize: '0.78rem', color: 'var(--color-text-secondary)', lineHeight: 1.65, fontFamily: "'Inter', sans-serif", marginBottom: '0.75rem' }}>{purpose}</p>
                 <p style={{ fontSize: '0.72rem', color: accent, lineHeight: 1.55, fontFamily: "'Inter', sans-serif", margin: 0, fontStyle: 'italic' }}>{impact}</p>
               </div>
             ))}
@@ -1441,17 +1452,17 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
               { state: 'Network Loss', handling: 'Booking progress is preserved locally. A persistent banner indicates offline state. Confirmation only sends once connectivity is restored — no silent failures, no data loss.' },
               { state: 'Booking Cancellation', handling: 'Cancellation policy is shown at the slot selection stage — before payment. Refund timeline is communicated immediately on cancellation. No support ticket required.' },
             ].map(({ state, handling }) => (
-              <div key={state} style={{ background: '#fafafa', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '1.75rem' }}>
+              <div key={state} style={{ background: 'var(--color-bg-subtle)', border: '1px solid var(--color-border)', borderRadius: '10px', padding: '1.75rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.7rem' }}>
                   <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#f59e0b', flexShrink: 0 }} />
-                  <p style={{ fontSize: '0.875rem', fontWeight: 600, color: '#1a1a1a', fontFamily: "'Inter', sans-serif", margin: 0 }}>{state}</p>
+                  <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-text-primary)', fontFamily: "'Inter', sans-serif", margin: 0 }}>{state}</p>
                 </div>
-                <p style={{ fontSize: '0.875rem', color: '#777', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}>{handling}</p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}>{handling}</p>
               </div>
             ))}
             <div style={{ background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '10px', padding: '1.75rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
               <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.4rem', color: '#14532d', marginBottom: '0.5rem', lineHeight: 1.25 }}>Every failure has a recovery path.</p>
-              <p style={{ fontSize: '0.875rem', color: '#555', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}>No dead ends. No silent errors. No broken states that require a support call to resolve.</p>
+              <p style={{ fontSize: '0.875rem', color: '#3a3a3a', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}>No dead ends. No silent errors. No broken states that require a support call to resolve.</p>
             </div>
           </div>
         </div>
@@ -1472,12 +1483,12 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
               { title: 'Consistent System Feedback', body: 'Every action — slot selection, form completion, payment submission — receives immediate visual feedback. Loading states are never empty; they communicate exactly what\'s happening.' },
               { title: 'Clear Cancellation Rules', body: 'Cancellation policy is surfaced at slot selection, before payment. Users understand the terms before they commit — removing the need to dispute after the fact.' },
             ].map(({ title, body }) => (
-              <div key={title} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '1.75rem' }}>
+              <div key={title} style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-border)', borderRadius: '10px', padding: '1.75rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.7rem' }}>
                   <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: accent, flexShrink: 0 }} />
-                  <p style={{ fontSize: '0.875rem', fontWeight: 600, color: '#1a1a1a', fontFamily: "'Inter', sans-serif", margin: 0 }}>{title}</p>
+                  <p style={{ fontSize: '0.875rem', fontWeight: 600, color: 'var(--color-text-primary)', fontFamily: "'Inter', sans-serif", margin: 0 }}>{title}</p>
                 </div>
-                <p style={{ fontSize: '0.875rem', color: '#777', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}>{body}</p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}>{body}</p>
               </div>
             ))}
           </div>
@@ -1487,7 +1498,7 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
       {/* ── DEVELOPMENT — FLUTTER ── */}
       <section style={SEC_LIGHT} className="cs-section">
         <div style={WRAP}>
-          <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid #e8e8e8', boxShadow: '0 8px 40px rgba(0,0,0,0.05)', marginBottom: '4.5rem' }}>
+          <div style={{ borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--color-border)', boxShadow: '0 8px 40px var(--color-shadow)', marginBottom: '4.5rem' }}>
             <MockupPlayConnect />
           </div>
           <div style={CENTER}>
@@ -1502,9 +1513,9 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
               { title: 'Firebase', desc: 'Real-time database for live slot availability. Firestore listeners update the slot grid without requiring a manual refresh or polling loop.' },
               { title: 'Figma → Flutter', desc: 'Components designed in Figma were implemented directly as Flutter widgets with matching constraints — zero translation loss between design intent and shipped UI.' },
             ].map(({ title, desc }) => (
-              <div key={title} style={{ background: '#fafafa', border: '1px solid #e8e8e8', borderRadius: '10px', padding: '2rem 1.75rem' }}>
-                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.3rem', color: '#1a1a1a', marginBottom: '0.65rem' }}>{title}</p>
-                <p style={{ fontSize: '0.875rem', color: '#777', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}>{desc}</p>
+              <div key={title} style={{ background: 'var(--color-bg-subtle)', border: '1px solid var(--color-border)', borderRadius: '10px', padding: '2rem 1.75rem' }}>
+                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.3rem', color: 'var(--color-text-primary)', marginBottom: '0.65rem' }}>{title}</p>
+                <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', lineHeight: 1.75, fontFamily: "'Inter', sans-serif", margin: 0 }}>{desc}</p>
               </div>
             ))}
           </div>
@@ -1521,9 +1532,9 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
           </div>
           <div className="cs-metrics" style={{ display: 'grid', gap: '1.25rem', marginBottom: '3.5rem' }}>
             {project.metrics.map(({ value, label }) => (
-              <div key={label} style={{ background: '#ffffff', border: '1px solid #e8e8e8', borderRadius: '12px', padding: '2.5rem 2rem', textAlign: 'center' }}>
+              <div key={label} style={{ background: 'var(--color-bg-elevated)', border: '1px solid var(--color-border)', borderRadius: '12px', padding: '2.5rem 2rem', textAlign: 'center' }}>
                 <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2.6rem, 5vw, 3.4rem)', color: accent, fontWeight: 400, lineHeight: 1, marginBottom: '0.8rem' }}>{value}</p>
-                <p style={{ fontSize: '0.82rem', color: '#aaa', fontFamily: "'Inter', sans-serif", lineHeight: 1.55, margin: 0 }}>{label}</p>
+                <p style={{ fontSize: '0.82rem', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", lineHeight: 1.55, margin: 0 }}>{label}</p>
               </div>
             ))}
           </div>
@@ -1548,9 +1559,9 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
               { title: 'Design + development is a force multiplier', body: 'Building what I designed eliminated weeks of ambiguity that typically live in handoff. Decisions about animations, state handling, and edge cases were made once, with full context of both what was ideal and what was implementable.' },
               { title: 'Trust is the product', body: 'In a booking product, the design\'s primary job is to make users confident enough to commit. Every layout decision, every confirmation message, every error state either builds or erodes that confidence. The visible UI is the smallest part of what creates trust.' },
             ].map(({ title, body }, i) => (
-              <div key={title} style={{ padding: '2.25rem', borderBottom: i < 2 ? '1px solid #eee' : 'none', borderRight: i % 2 === 0 ? '1px solid #eee' : 'none' }}>
-                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.2rem', color: '#1a1a1a', marginBottom: '0.65rem', lineHeight: 1.25 }}>{title}</p>
-                <p style={{ fontSize: '0.9rem', color: '#777', lineHeight: 1.8, fontFamily: "'Inter', sans-serif", margin: 0 }}>{body}</p>
+              <div key={title} style={{ padding: '2.25rem', borderBottom: i < 2 ? '1px solid var(--color-border)' : 'none', borderRight: i % 2 === 0 ? '1px solid var(--color-border)' : 'none' }}>
+                <p style={{ fontFamily: "'DM Serif Display', serif", fontSize: '1.2rem', color: 'var(--color-text-primary)', marginBottom: '0.65rem', lineHeight: 1.25 }}>{title}</p>
+                <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', lineHeight: 1.8, fontFamily: "'Inter', sans-serif", margin: 0 }}>{body}</p>
               </div>
             ))}
           </div>
@@ -1559,21 +1570,21 @@ function PlayConnectCaseStudy({ project, onBack, nextProject, onNext }) {
 
       {/* ── NEXT PROJECT ── */}
       {nextProject && (
-        <section style={{ background: '#fafafa', borderTop: '1px solid #dddddd', padding: '5rem 0 6rem' }}>
+        <section style={{ background: 'var(--color-bg-subtle)', borderTop: '1px solid var(--color-border)', padding: '5rem 0 6rem' }}>
           <div style={WRAP}>
-            <div style={{ position: 'relative', height: '1px', background: '#dddddd', marginBottom: '3.5rem' }}>
-              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', background: '#fafafa', padding: '0 1.5rem' }}>
-                <p style={{ fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#bbb', fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: 'nowrap', margin: 0 }}>More case studies</p>
+            <div style={{ position: 'relative', height: '1px', background: 'var(--color-border)', marginBottom: '3.5rem' }}>
+              <div style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', background: 'var(--color-bg-subtle)', padding: '0 1.5rem' }}>
+                <p style={{ fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", fontWeight: 600, whiteSpace: 'nowrap', margin: 0 }}>More case studies</p>
               </div>
             </div>
             <div onClick={onNext} onMouseEnter={() => setNextHovered(true)} onMouseLeave={() => setNextHovered(false)}
               style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '2rem', padding: '1.5rem 0' }}>
               <div>
-                <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: '#ccc', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.5rem' }}>Next Project</p>
-                <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 400, letterSpacing: '-0.025em', color: nextHovered ? '#1a1a1a' : '#bbb', transition: 'color 0.3s', margin: 0 }}>{nextProject.title}</h3>
+                <p style={{ fontSize: '0.6rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-text-tertiary)', fontFamily: "'Inter', sans-serif", fontWeight: 600, marginBottom: '0.5rem' }}>Next Project</p>
+                <h3 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 400, letterSpacing: '-0.025em', color: nextHovered ? 'var(--color-text-primary)' : 'var(--color-text-tertiary)', transition: 'color 0.3s', margin: 0 }}>{nextProject.title}</h3>
               </div>
-              <div style={{ width: '52px', height: '52px', borderRadius: '50%', border: `1px solid ${nextHovered ? '#1a1a1a' : '#ddd'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'border-color 0.3s' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={nextHovered ? '#1a1a1a' : '#ccc'} strokeWidth="1.75" style={{ transition: 'stroke 0.3s' }}>
+              <div style={{ width: '52px', height: '52px', borderRadius: '50%', border: `1px solid ${nextHovered ? 'var(--color-text-primary)' : 'var(--color-border)'}`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'border-color 0.3s' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={nextHovered ? 'var(--color-text-primary)' : 'var(--color-border-strong)'} strokeWidth="1.75" style={{ transition: 'stroke 0.3s' }}>
                   <path d="M7 17L17 7M17 7H7M17 7v10"/>
                 </svg>
               </div>
@@ -1601,7 +1612,7 @@ export default function Work() {
   return (
     <AnimatePresence mode="wait">
       {!active ? (
-        <main key="listing" style={{ minHeight: '100vh', background: '#0f0f11', paddingTop: '64px' }}>
+        <main key="listing" style={{ minHeight: '100vh', background: 'var(--color-bg)', paddingTop: '64px' }}>
           <WorkListing onSelect={handleSelect} />
         </main>
       ) : active.id === 0 ? (
@@ -1621,7 +1632,7 @@ export default function Work() {
           onNext={() => handleSelect(next.id)}
         />
       ) : (
-        <main key={active.id} style={{ minHeight: '100vh', background: '#0f0f11', paddingTop: '64px' }}>
+        <main key={active.id} style={{ minHeight: '100vh', background: 'var(--color-bg)', paddingTop: '64px' }}>
           <CaseStudyView
             project={active}
             onBack={handleBack}

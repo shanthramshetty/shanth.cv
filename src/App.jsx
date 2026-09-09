@@ -9,14 +9,6 @@ import ContactPage from './components/Contact'
 import Loader from './components/Loader'
 import './App.css'
 
-/* Background color per page — drives the wrapper bg transition */
-const PAGE_BG = {
-  home:    '#0f0f11',
-  about:   '#f0eeea',
-  work:    '#0a0a0a',
-  contact: '#f0eeea',
-}
-
 function PageWrap({ children }) {
   return (
     <motion.div
@@ -60,9 +52,8 @@ export default function App() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
             style={{
-              background: PAGE_BG[page] ?? '#fafaf8',
+              background: 'var(--color-bg)',
               minHeight: '100vh',
-              transition: 'background 0.5s ease',
             }}
           >
             <Navbar page={page} setPage={setPage} />
